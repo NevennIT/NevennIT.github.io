@@ -1,24 +1,33 @@
-const numParticles = 60;
+ const words = [
+      "SAP", "SAP-IM", "SAP-WM", "MICROSOFT", "EXCEL", "WORD", "VBA", "GOOGLE", "DRIVE", "ONEDRIVE", "IMPORTRANGE", "POWER QUERY", "DATA", "ANALYSE",
+      "SEEQ", "GSHEET", "PI VISION", "VISUAL BASIC", "JAVASCRIPT", "OUTLOOK", "MICROSOFT 365", "BUREAUTIQUE"
+    ];
 
-for (let i = 0; i < numParticles; i++) {
-    let particle = document.createElement("div");
-    particle.classList.add("particle");
+    const numWords = 50;
 
-    let size = Math.random() * 5 + 100;
-    particle.style.width = size + "px";
-    particle.style.height = size + "px";
+    for (let i = 0; i < numWords; i++) {
+      let el = document.createElement("div");
+      el.classList.add("word");
 
-    // Position X aléatoire
-    particle.style.left = Math.random() * 100 + "vw";
+      // mot aléatoire
+      el.textContent = words[Math.floor(Math.random() * words.length)*2];
 
-    // IMPORTANT FIX : position Y aléatoire au départ
-    particle.style.top = Math.random() * 100 + "vh";
+      // position
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.top = Math.random() * 100 + "vh";
 
-    // Durée
-    particle.style.animationDuration = (Math.random() * 15 + 10) + "s";
+      // ✅ taille vraiment aléatoire (petit → grand)
+      const size = Math.random() * 30 + 10; // 10px → 40px
+      el.style.fontSize = size + "px";
 
-    // Décalage négatif pour éviter l'effet ligne au chargement
-    particle.style.animationDelay = -(Math.random() * 20) + "s";
+      // opacité liée à la taille (plus grand = plus visible)
+      el.style.color = `rgba(255,255,255,${size / 100})`;
 
-    document.body.appendChild(particle);
-}
+      // durée
+      el.style.animationDuration = (Math.random() * 10 + 1) + "s";
+
+      // décalage négatif
+      el.style.animationDelay = -(Math.random() * 100) + "s";
+
+      document.body.appendChild(el);
+    }

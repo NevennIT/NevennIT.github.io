@@ -59,31 +59,41 @@ h1 {
 
 h2 {
     margin-top: 15px;
-    color: #00d4ff;
+    color: #e48f20;
     letter-spacing: 2px;
     font-weight: lighter;
+    animation: blink 2s infinite;
 }
 
-.particle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 16px rgba(255, 255, 255, 0.1);
-    animation: float linear infinite;
-}
+@keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
 
-@keyframes float {
-    from {
-        transform: translateY(100vh) scale(0.5);
+.word {
+      position: absolute;
+      color: rgba(255,255,255,0.15);
+      font-size: 14px;
+      font-weight: 500;
+      animation: float linear infinite;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh);
         opacity: 0;
+      }
+      20% { opacity: 1; }
+      to {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
     }
-
-    20% {
-        opacity: 1;
-    }
-
-    to {
+      20% { opacity: 1; }
+      to {
         transform: translateY(-10vh) scale(1);
         opacity: 0;
-    }
-}
+      }
+    
