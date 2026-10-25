@@ -1,0 +1,89 @@
+/* NevennIT — généré depuis tokens.json du design system. Ne pas éditer à la main : modifier le système puis régénérer. */
+:root, [data-theme="dark"] {
+  --void: #08090b;
+  --surface: #101216;
+  --surface-raised: #181b21;
+  --surface-sunken: #0c0d10;
+  --glass: #1012169e;
+  --line: #23262d;
+  --line-strong: #646a74;
+  --ink: #f2f1ee;
+  --ink-muted: #a3a7ae;
+  --ink-faint: #5c6068;
+  --flare: #ff5a1f;
+  --flare-text: #ff7a45;
+  --flare-soft: #2a140b;
+  --on-flare: #0b0c0f;
+  --ion: #3ad6ff;
+  --ion-soft: #0a2530;
+  --success: var(--ion);
+  --danger: #ff6b81;
+  --shadow-sm: 0 1px 2px #00000080;
+  --shadow-lg: 0 32px 64px -24px #000000d9, 0 12px 24px -12px #00000099;
+  --glow-flare: 0 0 0 1px #ff5a1f66, 0 12px 40px -8px #ff5a1f8c;
+  --glow-ion: 0 0 0 1px #3ad6ff4d, 0 12px 40px -12px #3ad6ff73;
+  --focus-ring: 0 0 0 2px #08090b, 0 0 0 4px #3ad6ff;
+}
+[data-theme="light"] {
+  --void: #f3f1ec;
+  --surface: #fbfaf7;
+  --surface-raised: #ffffff;
+  --surface-sunken: #ebe8e1;
+  --glass: #fbfaf7a8;
+  --line: #dedad2;
+  --line-strong: #85827b;
+  --ink: #0b0c0f;
+  --ink-muted: #55575d;
+  --ink-faint: #a3a09a;
+  --flare: #f04a0f;
+  --flare-text: #b93a08;
+  --flare-soft: #ffe3d6;
+  --on-flare: #0b0c0f;
+  --ion: #066a8e;
+  --ion-soft: #d6f3fc;
+  --success: var(--ion);
+  --danger: #c0263f;
+  --shadow-sm: 0 1px 2px #0b0c0f14, 0 2px 6px #0b0c0f0f;
+  --shadow-lg: 0 32px 64px -28px #0b0c0f40, 0 12px 24px -12px #0b0c0f26;
+  --glow-flare: 0 0 0 1px #f04a0f4d, 0 12px 32px -10px #f04a0f73;
+  --glow-ion: 0 0 0 1px #066a8e40, 0 12px 32px -12px #066a8e4d;
+  --focus-ring: 0 0 0 2px #f3f1ec, 0 0 0 4px #066a8e;
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-40: 160px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+  --perspective: 1200px;
+  --tilt-max: 10deg;
+  --lift-1: 24px;
+  --lift-2: 60px;
+  --lift-3: 120px;
+  --blur-glass: 16px;
+  --z-scene: 0;
+  --z-content: 10;
+  --z-nav: 50;
+  --font-display: "Syne", "Manrope", system-ui, sans-serif;
+  --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+.display-xxl { font-family: var(--font-display); font-size: 160px; line-height: 0.88; font-weight: 800; letter-spacing: -0.045em; }
+.display-xl { font-family: var(--font-display); font-size: 96px; line-height: 0.94; font-weight: 700; letter-spacing: -0.035em; }
+.display-l { font-family: var(--font-display); font-size: 56px; line-height: 1; font-weight: 700; letter-spacing: -0.025em; }
+.title { font-family: var(--font-sans); font-size: 24px; line-height: 30px; font-weight: 700; letter-spacing: -0.015em; }
+.lead { font-family: var(--font-sans); font-size: 19px; line-height: 30px; font-weight: 500; }
+.body { font-family: var(--font-sans); font-size: 16px; line-height: 26px; font-weight: 400; }
+.small { font-family: var(--font-sans); font-size: 14px; line-height: 21px; font-weight: 500; }
+.label { font-family: var(--font-mono); font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 0.14em; }
+.code { font-family: var(--font-mono); font-size: 14px; line-height: 22px; font-weight: 400; }
