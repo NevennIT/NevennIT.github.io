@@ -14,6 +14,12 @@ export const num = (name, fallback, el) => {
   const v = parseFloat(cssVar(name, el))
   return isNaN(v) ? fallback : v
 }
+// Durée CSS en millisecondes : accepte « 700ms » comme « .7s » (forme que le minifieur produit au build).
+export const ms = (name, fallback, el) => {
+  const raw = cssVar(name, el), v = parseFloat(raw)
+  if (isNaN(v)) return fallback
+  return /ms$/.test(raw) ? v : /s$/.test(raw) ? v * 1000 : v
+}
 export function onThemeChange(fn) {
   const mo = new MutationObserver(fn)
   mo.observe(root, { attributes: true, attributeFilter: ['data-theme'] })

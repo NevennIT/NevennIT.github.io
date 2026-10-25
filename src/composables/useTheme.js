@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { reducedMotion, cssVar, num } from '../lib/motion'
+import { reducedMotion, cssVar, ms } from '../lib/motion'
 
 // Thème partagé : data-theme sur <html> (posé avant le rendu par index.html), mémorisé dans localStorage.
 const KEY = 'nv-theme'
@@ -22,7 +22,7 @@ function setTheme(id, origin) {
   t.ready.then(() => {
     root.animate(
       { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${end}px at ${x}px ${y}px)`] },
-      { duration: num('--dur-3', 700), easing: cssVar('--ease-out') || 'ease-out', pseudoElement: '::view-transition-new(root)' },
+      { duration: ms('--dur-3', 700), easing: cssVar('--ease-out') || 'ease-out', pseudoElement: '::view-transition-new(root)' },
     )
   }).catch(() => {})
 }
