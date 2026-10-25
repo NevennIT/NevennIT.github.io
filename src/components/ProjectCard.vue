@@ -1,17 +1,22 @@
 <script setup>
 import AppIcon from './AppIcon.vue'
+import ProjectCarousel from './ProjectCarousel.vue'
 
-// Fiche projet inclinable : capture, méta, titre, une phrase, stack. Toute la carte est cliquable.
-const props = defineProps({ project: { type: Object, required: true } })
+// Fiche projet inclinable : captures, méta, titre, une phrase, stack. Toute la carte est cliquable.
+const props = defineProps({
+  project: { type: Object, required: true },
+  // Rang dans la grille : décale le défilement des captures d'une carte à l'autre.
+  index: { type: Number, default: 0 },
+})
 const external = /^https?:/.test(props.project.href)
+// `image` : tableau de chemins (une chaîne seule reste acceptée).
+const img = props.project.image
+const images = (Array.isArray(img) ? img : img ? [img] : []).filter(Boolean)
 </script>
 
 <template>
   <article v-tilt class="nv-card" :class="{ 'nv-card--feature': project.feature }">
-    <div class="nv-card__media">
-      <img v-if="project.image" :src="project.image" alt="" loading="lazy" width="1600" height="1000" />
-      <div v-else class="nv-card__placeholder"><span class="label">Capture 16:10</span></div>
-    </div>
+    <ProjectCarousel :images="images" :title="project.title" :index="index" />
     <div class="nv-card__body">
       <p class="nv-card__meta label"><b>{{ project.year }}</b><span>{{ project.kind }}</span></p>
       <h3 class="nv-card__title title">

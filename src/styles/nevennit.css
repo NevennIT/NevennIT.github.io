@@ -389,7 +389,7 @@ textarea.nv-field__input { height: auto; min-height: 168px; padding: var(--space
 @keyframes nv-spin { to { transform: rotate(1turn); } }
 
 /* ---------- Footer ---------- */
-.nv-footer { position: relative; overflow: clip; padding-top: var(--space-16); border-top: 1px solid var(--line); }
+.nv-footer { position: relative; z-index: var(--z-content); overflow: clip; padding-top: var(--space-16); border-top: 1px solid var(--line); }
 .nv-footer__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-6); }
 .nv-footer__links { display: flex; flex-wrap: wrap; gap: var(--space-6); }
 .nv-footer__meta { margin: 0; color: var(--ink-muted); }

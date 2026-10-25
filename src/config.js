@@ -8,7 +8,7 @@ export const site = {
   // GitHub Pages est statique : le formulaire poste vers un service tiers.
   // Formspree : créer un formulaire sur formspree.io et coller son URL, ex. 'https://formspree.io/f/abcdwxyz'.
   // Vide = le formulaire affiche qu'il n'est pas encore relié, rien n'est envoyé.
-  formEndpoint: '',
+  formEndpoint: 'https://formspree.io/f/xkjjjwaa',
 }
 
 export const navLinks = [
