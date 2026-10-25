@@ -47,7 +47,7 @@ export function shatter(count = 22, seed = 7) {
     const len = Math.hypot(dx, dy)
     // Direction : vers l'extérieur depuis le centre de symétrie, un peu déviée.
     const dir = Math.atan2(dy, dx) + (random() - 0.5) * 0.7
-    const dist = (0.12 + random() * 0.22) * (0.7 + len)
+    const dist = (0.28 + random() * 0.5) * (0.7 + len)
     // Axe de rotation surtout hors du plan… mais pas trop : l'éclat ne doit jamais se présenter par la tranche.
     let ax = (random() * 2 - 1) * 0.55, ay = (random() * 2 - 1) * 0.55, az = random() < 0.5 ? -1 : 1
     const al = Math.hypot(ax, ay, az) || 1
@@ -58,9 +58,9 @@ export function shatter(count = 22, seed = 7) {
       oy: (((gy - BOX.y) / BOX.h) * 100).toFixed(2) + '%',
       vx: Math.cos(dir) * dist,
       vy: Math.sin(dir) * dist,
-      vz: random() * 0.6 - 0.2,
+      vz: random() * 1.4 - 0.5,
       ax: +(ax / al).toFixed(3), ay: +(ay / al).toFixed(3), az: +(az / al).toFixed(3),
-      turn: (random() < 0.5 ? -1 : 1) * (30 + random() * 50),
+      turn: (random() < 0.5 ? -1 : 1) * (60 + random() * 120),
       ph: random() * Math.PI * 2,
       sp: 0.6 + random() * 0.8,
     }

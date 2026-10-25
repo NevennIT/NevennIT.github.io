@@ -1,18 +1,27 @@
-/* Triskell qui suit la page (TriskellFlight) : couche fixe, derrière les sections (z 1 < --z-content), jamais cliquable.
+/* Triskell qui suit la page (TriskellFlight) : couche fixe qui traverse la page devant les sections
+   (--z-content < 20 < --z-nav), jamais cliquable. Rendu à 192px pour rester net : l'accueil le réduit à 128px.
    Positions, angles et opacités sont écrits par la boucle du composant ; ici, uniquement des tokens. */
 
 /* Emplacement dans l'accueil : même boîte que .nv-triskell. */
 .nv-triskell-slot { width: 128px; height: 128px; }
 
 .nv-flight {
-  position: fixed; z-index: 1; top: 0; left: 0;
-  width: 128px; height: 128px;
+  position: fixed; z-index: 20; top: 0; left: 0;
+  width: 192px; height: 192px;
   perspective: var(--perspective);
   pointer-events: none; user-select: none;
   opacity: 0;
   will-change: transform; /* l'échelle change à chaque image : pas de re-rastérisation */
 }
 .nv-flight * { pointer-events: none; }
+.nv-flight .nv-flight__body { width: 100%; height: 100%; }
+
+/* Onde de choc de l'explosion : un anneau flare qui s'élargit et s'éteint. */
+.nv-flight__ring {
+  position: absolute; inset: 0; border-radius: 50%; opacity: 0;
+  border: 2px solid var(--flare);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--flare) 55%, transparent), inset 0 0 18px color-mix(in srgb, var(--ion) 35%, transparent);
+}
 .nv-flight__defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 
 /* Éclat de lumière à l'explosion et à la recomposition. */
@@ -72,11 +81,12 @@
 }
 
 /* Mouvement réduit : pas d'animation, un logo statique rangé à droite qui apparaît hors de l'accueil. */
-.nv-flight.is-static { top: 50%; left: auto; right: 56px; transform: translateY(-50%) scale(0.66); }
+.nv-flight.is-static { top: 50%; left: auto; right: 56px; transform: translateY(-50%) scale(0.5); }
 .nv-flight.is-static.is-shown { opacity: 1; }
 
 @media (max-width: 767px) {
-  .nv-triskell-slot, .nv-flight { width: 96px; height: 96px; }
+  .nv-triskell-slot { width: 96px; height: 96px; }
+  .nv-flight { width: 112px; height: 112px; }
   .nv-flight.is-static { top: auto; right: 16px; bottom: 24px; transform: scale(0.55); transform-origin: right bottom; }
   .nv-flight.is-static.is-shown { opacity: 0.6; }
 }

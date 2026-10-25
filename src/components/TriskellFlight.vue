@@ -9,10 +9,11 @@ import '../styles/triskell-flight.css'
 /* Triskell qui suit la page : une seule couche fixe, pilotée par une seule boucle rAF lisant scrollY.
    Chronologie (positions des sections, mesurées au redimensionnement seulement) :
    - accueil        : logo plein en volume posé sur son emplacement, tilt souris, tiers de tour à la sortie ;
-   - accueil→projets : il se range à droite (plus petit) et explose en éclats de Voronoï, avec un éclat flare/ion ;
-   - projets        : les éclats flottent en orbite lente, puis se recomposent avant la fin de la section ;
+   - toute la page  : il traverse l'écran de gauche à droite sur une courbe en huit, penché dans les virages ;
+   - entrée projets : explosion brève et violente en éclats de Voronoï (souffle, onde de choc, secousse),
+                      puis recomposition un écran plus loin ;
    - projets→contact : court glitch VHS, au creux duquel le logo passe en fil de fer (contour + maillage) ;
-   - pied de page   : le pied de page le repousse vers le haut, il se remplit à nouveau et fait un dernier tiers de tour. */
+   - pied de page   : il se pose au centre, au-dessus des liens, se remplit à nouveau et fait un dernier tiers de tour. */
 
 const WIRES = [0, 1, 2, 3]
 const SLICES = [0, 1, 2]
@@ -64,10 +65,10 @@ function measure() {
 
   // Repères de la chronologie, en scrollY, toujours dans l'ordre même si une section est courte.
   const vh = M.vh, H = M.heroH
-  K.d0 = 0.03 * H; K.d1 = 0.55 * H
-  K.e0 = 0.3 * H; K.e1 = 0.85 * H
-  K.r0 = Math.max(M.projBottom - 1.25 * vh, K.e1 + 0.25 * vh)
-  K.r1 = Math.max(M.projBottom - 0.8 * vh, K.r0 + 0.3 * vh)
+  K.d0 = 0.03 * H; K.d1 = 0.6 * H
+  // Explosion courte : éclatement sur 0,22 écran, brisé ~0,5 écran, recomposé sur 0,3 écran.
+  K.e0 = 0.45 * H; K.e1 = K.e0 + 0.22 * vh
+  K.r0 = K.e1 + 0.5 * vh; K.r1 = K.r0 + 0.3 * vh
   K.g0 = Math.max(M.contactTop - 0.85 * vh, K.r1 + 0.05 * vh)
   K.g1 = K.g0 + 0.56 * vh
   K.gm = (K.g0 + K.g1) / 2
@@ -75,15 +76,27 @@ function measure() {
   K.f1 = Math.max(lerp(K.f0, M.maxScroll, 0.7), K.f0 + 1)
 }
 
-// Place de repos sur le côté : à droite (dans la marge des grands écrans), en bas à droite sur mobile.
-function dock(y) {
+// Trajectoire à travers la page : courbe en huit (Lissajous 1:2) de bord à bord, ~1,25 écran par traversée.
+// Renvoie aussi l'inclinaison (bank, deg) liée à la vitesse horizontale et un léger zoom quand il revient vers nous.
+function course(S, y, fp) {
   const { vw, vh, base, compact } = M
-  const size = compact ? 52 : 96
-  const x = compact ? vw - 16 - size / 2 : vw - Math.max(76, Math.min(200, (vw - 1200) / 4 + 70))
-  let yy = compact ? vh - 28 - size / 2 : vh * 0.52
-  // Le pied de page le repousse vers le haut : jamais par-dessus ses liens.
-  yy = Math.min(yy, M.footTop - y - 32 - size * 0.6)
-  return { x, y: yy, s: size / base }
+  const size = base * (compact ? 0.8 : 1)
+  const margin = size / 2 + (compact ? 8 : 32)
+  const t = (Math.max(0, S - K.d0) / vh) * Math.PI * 0.8
+  let x = vw / 2 + (vw / 2 - margin) * Math.sin(t)
+  let yy = vh * 0.5 + vh * (compact ? 0.24 : 0.2) * Math.sin(2 * t)
+  let s = (size / base) * (1 + 0.1 * Math.cos(2 * t))
+  let bank = Math.cos(t) * 26
+  // Pied de page : il se pose au centre, plus petit, juste au-dessus du filet du pied de page.
+  if (fp > 0) {
+    const rest = 0.66
+    x = lerp(x, vw / 2, fp)
+    yy = lerp(yy, M.footTop - y - 36 - (size * rest) / 2, fp)
+    s = lerp(s, rest, fp)
+    bank *= 1 - fp
+  }
+  yy = Math.min(yy, M.footTop - y - 32 - (size * s) / 2)
+  return { x, y: yy, s, bank }
 }
 
 // État animé (lissé)
@@ -92,7 +105,11 @@ const st = {
   tx: 0, ty: 0, cx: 0, cy: 0,
   gNext: 0, gj: 0, gy: 0, gm: 0, slices: SLICES.map(() => ({ on: false, clip: '', shift: 0 })),
   shardsLive: false,
+  // Souffle de l'explosion et claquement de la recomposition : déclenchés au franchissement, puis amortis dans le temps.
+  eWas: 0, burst: -1e9, snap: -1e9, sx: 0, sy: 0,
 }
+const BURST_MS = 950, SNAP_MS = 520
+const decay = (now, at, dur) => { const k = (now - at) / dur; return k >= 0 && k < 1 ? (1 - k) * (1 - k) : 0 }
 
 function reroll() {
   st.gj = Math.random()
@@ -119,6 +136,7 @@ function collect() {
     glitch: [...root.querySelectorAll('.nv-flight__glitch')],
     ghostIon: q('.nv-glitch__ghost--ion'),
     ghostFlare: q('.nv-glitch__ghost--flare'),
+    ring: q('.nv-flight__ring'),
     slices: [...root.querySelectorAll('.nv-glitch__slice')],
     imgs: [...root.querySelectorAll('.nv-glitch__img')],
     scan: q('.nv-glitch__scan'),
@@ -148,28 +166,42 @@ function frame(now) {
   const fp = smooth(K.f0, K.f1, S)
   const w = wUp * (1 - fp)
 
-  // Position : de l'emplacement de l'accueil (lu en direct tant qu'il compte) vers la place de repos.
-  const to = dock(y)
+  // Explosion : souffle au franchissement du seuil, claquement quand les éclats se ressoudent.
+  if (e > 0.02 && st.eWas <= 0.02) st.burst = now
+  if (e <= 0.02 && st.eWas > 0.02) st.snap = now
+  st.eWas = e
+  const b = decay(now, st.burst, BURST_MS), sn = decay(now, st.snap, SNAP_MS)
+  if (b > 0.02) { st.sx = (Math.random() - 0.5) * 14 * b; st.sy = (Math.random() - 0.5) * 14 * b } else { st.sx = st.sy = 0 }
+
+  // Position : de l'emplacement de l'accueil (lu en direct tant qu'il compte) vers la courbe qui traverse la page.
+  const to = course(S, y, fp)
   let x = to.x, yy = to.y, s = to.s
   if (d < 1 && slot) {
     const r = slot.getBoundingClientRect()
     const as = r.width / M.base
-    // Trajectoire en arc : vers la droite d'abord, puis la descente.
-    x = lerp(r.left + r.width / 2, to.x, Math.pow(d, 0.7))
-    yy = lerp(r.top + r.height / 2, to.y, Math.pow(d, 1.5))
+    x = lerp(r.left + r.width / 2, to.x, Math.pow(d, 0.8))
+    yy = lerp(r.top + r.height / 2, to.y, Math.pow(d, 1.3))
     s = lerp(as, to.s, d)
   }
   const half = M.base / 2
-  put(el.value, 'transform', `translate3d(${(x - half).toFixed(1)}px,${(yy - half).toFixed(1)}px,0) scale(${s.toFixed(4)})`)
-  put(el.value, 'opacity', (M.compact ? lerp(1, 0.6, d) : 1).toFixed(3))
+  put(el.value, 'transform', `translate3d(${(x - half + st.sx).toFixed(1)}px,${(yy - half + st.sy).toFixed(1)}px,0) scale(${s.toFixed(4)})`)
+  put(el.value, 'opacity', (M.compact ? lerp(1, 0.8, d) : 1).toFixed(3))
 
-  // Orientation : rotation lente (40 s par tour), tiers de tour en quittant l'accueil puis dans le pied de page.
-  const tiltMax = lerp(28, 12, d)
-  const rx = -st.cy * tiltMax, ry = st.cx * tiltMax
+  // Orientation : rotation lente (40 s par tour), tiers de tour en quittant l'accueil puis dans le pied de page,
+  // et inclinaison dans les virages de la courbe.
+  const tiltMax = lerp(28, 14, d)
+  const rx = -st.cy * tiltMax, ry = st.cx * tiltMax + to.bank * d
   const angle = (now * 0.009) % 360 + heroExit * 120 + fp * 120
   const orient = `translateZ(var(--lift-2)) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) rotateZ(${angle.toFixed(2)}deg)`
   const jx = g > 0 ? st.gm * g * 3 : 0
   put(nodes.body, 'transform', `translate3d(${jx.toFixed(2)}px,0,0) ${orient}`)
+
+  // Onde de choc : un anneau flare qui s'élargit et s'éteint au moment de l'explosion.
+  if (nodes.ring) {
+    const k = clamp((now - st.burst) / BURST_MS)
+    put(nodes.ring, 'opacity', (b * 0.9).toFixed(3))
+    put(nodes.ring, 'transform', `scale(${(0.35 + (1 - Math.pow(1 - k, 3)) * 2.6).toFixed(3)})`)
+  }
 
   // Volume plein ↔ éclats ↔ fil de fer
   put(nodes.vol, '--nv-vol', ((1 - smooth(0, 0.05, e)) * (1 - w)).toFixed(3))
@@ -177,15 +209,16 @@ function frame(now) {
   flag(nodes.wire, 'is-on', w > 0.001)
 
   // Éclat de lumière : au début de l'explosion, à la fin de la recomposition, et au retour au plein.
-  const flash = Math.max(e < 0.35 ? Math.sin((e / 0.35) * Math.PI) * 0.8 : 0, Math.sin(fp * Math.PI) * 0.5 * wUp)
+  const flash = Math.max(b, sn * 0.75, e < 0.35 ? Math.sin((e / 0.35) * Math.PI) * 0.6 : 0, Math.sin(fp * Math.PI) * 0.5 * wUp)
   put(nodes.flash, 'opacity', flash.toFixed(3))
-  put(nodes.flash, 'transform', `scale(${(0.7 + flash * 0.5).toFixed(3)})`)
+  put(nodes.flash, 'transform', `scale(${(0.7 + flash * 0.5 + b * 0.9).toFixed(3)})`)
 
   // Éclats de Voronoï : translation + rotation 3D par éclat, orbite lente autour de l'axe vertical du logo.
   if (nodes.shards.length && (e > 0.0005 || st.shardsLive)) {
     st.shardsLive = e > 0.0005
     put(nodes.shardsBox, '--nv-shard', smooth(0, 0.02, e).toFixed(3))
-    const B = M.base, sp = e * (2 - e)
+    // Le souffle projette les éclats au-delà de leur position, puis ils retombent sur leur orbite.
+    const B = M.base, sp = e * (2 - e) * (1 + b * 0.9)
     const th = now * 0.00015 + S * 0.0005, c = Math.cos(th), sn = Math.sin(th)
     for (const sh of nodes.shards) {
       const p = sh.d
@@ -198,9 +231,9 @@ function frame(now) {
       const X = (ox * c - oz * sn) * sp
       const Z = (ox * sn + oz * c) * sp
       const Y = p.vy * B * sp + Math.sin(now * 0.0011 * p.sp + p.ph) * B * 0.025 * e
-      const turn = p.turn * sp + Math.sin(now * 0.0007 * p.sp + p.ph) * 14 * e
+      const turn = p.turn * sp + p.turn * b * 1.4 + Math.sin(now * 0.0007 * p.sp + p.ph) * 14 * e
       put(sh.n, 'transform', `translate3d(${X.toFixed(1)}px,${Y.toFixed(1)}px,${Z.toFixed(1)}px) rotate3d(${p.ax},${p.ay},${p.az},${turn.toFixed(1)}deg)`)
-      put(sh.edge, 'opacity', (e * (0.25 + 0.75 * Math.abs(Math.sin(turn * DEG + p.ph)))).toFixed(3))
+      put(sh.edge, 'opacity', Math.min(1, e * (0.25 + 0.75 * Math.abs(Math.sin(turn * DEG + p.ph))) + b * 0.8).toFixed(3))
     }
   }
 
@@ -241,7 +274,7 @@ function onStatic() {
 }
 
 function buildShards() {
-  const list = shatter(M.compact || !finePointer ? 10 : 16)
+  const list = shatter(M.compact || !finePointer ? 12 : 22)
   shards.value = list
   mesh.value = meshPath(list)
   nextTick(collect)
@@ -301,6 +334,7 @@ onBeforeUnmount(() => {
     </svg>
 
     <div v-if="!reducedMotion" class="nv-flight__flash" />
+    <div v-if="!reducedMotion" class="nv-flight__ring" />
 
     <!-- Glitch, dessous : copies teintées décalées, visibles seulement en liseré autour du logo (décalage RGB). -->
     <div v-if="!reducedMotion" class="nv-flight__glitch">
