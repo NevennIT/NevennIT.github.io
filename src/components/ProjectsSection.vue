@@ -21,7 +21,7 @@ import { projects } from '../data/projects'
           v-reveal:rise="project.feature ? 0 : (i % 2) * 90"
           :class="{ 'nv-grid__wide': project.feature }"
         >
-          <ProjectCard :project="project" />
+          <ProjectCard :project="project" :index="i" />
         </li>
       </ul>
     </div>

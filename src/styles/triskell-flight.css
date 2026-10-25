@@ -1,0 +1,82 @@
+/* Triskell qui suit la page (TriskellFlight) : couche fixe, derrière les sections (z 1 < --z-content), jamais cliquable.
+   Positions, angles et opacités sont écrits par la boucle du composant ; ici, uniquement des tokens. */
+
+/* Emplacement dans l'accueil : même boîte que .nv-triskell. */
+.nv-triskell-slot { width: 128px; height: 128px; }
+
+.nv-flight {
+  position: fixed; z-index: 1; top: 0; left: 0;
+  width: 128px; height: 128px;
+  perspective: var(--perspective);
+  pointer-events: none; user-select: none;
+  opacity: 0;
+  will-change: transform; /* l'échelle change à chaque image : pas de re-rastérisation */
+}
+.nv-flight * { pointer-events: none; }
+.nv-flight__defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* Éclat de lumière à l'explosion et à la recomposition. */
+.nv-flight__flash {
+  position: absolute; inset: -60%; border-radius: 50%; opacity: 0;
+  background: radial-gradient(closest-side,
+    color-mix(in srgb, var(--flare) 42%, transparent),
+    color-mix(in srgb, var(--ion) 14%, transparent) 58%,
+    transparent);
+}
+
+.nv-flight__vol, .nv-flight__shards, .nv-flight__wire { position: absolute; inset: 0; transform-style: preserve-3d; }
+.nv-flight__vol > svg { opacity: var(--nv-vol, 1); }
+.nv-flight__wire { visibility: hidden; }
+.nv-flight__wire.is-on { visibility: visible; }
+
+/* Éclats : un plan par cellule, découpé dans le tracé ; la facette ion capte la lumière en tournant. */
+.nv-shard { position: absolute; inset: 0; opacity: var(--nv-shard, 0); transform-style: flat; will-change: transform; }
+.nv-shard svg { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; overflow: visible; }
+.nv-shard__fill { fill: var(--flare); }
+.nv-shard__edge { opacity: 0; will-change: opacity; }
+.nv-shard__edge polygon {
+  fill: var(--ion); fill-opacity: 0.16;
+  stroke: var(--ion); stroke-width: 1; stroke-linejoin: round; vector-effect: non-scaling-stroke;
+}
+
+/* Fil de fer : le contour du tracé empilé en profondeur, et le maillage de Voronoï en fil fin sur la face avant. */
+.nv-wire {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; overflow: visible; fill: none;
+  transform: translateZ(calc(var(--k) * -6px));
+  opacity: calc(var(--nv-wire, 0) * (1 - var(--k) * 0.24));
+}
+.nv-wire__line { stroke: var(--ion); stroke-width: 1.3; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.nv-wire__mesh { stroke: var(--ion); stroke-opacity: 0.55; stroke-width: 0.8; vector-effect: non-scaling-stroke; }
+.nv-wire:first-child { filter: drop-shadow(0 0 6px color-mix(in srgb, var(--ion) 45%, transparent)); }
+
+/* Glitch VHS : copies teintées décalées sous le logo (liseré RGB), tranches qui glissent par-dessus,
+   lignes de balayage couleur fond (invisibles sur le fond, elles ne rayent que le logo). */
+.nv-flight__glitch { position: absolute; inset: 0; visibility: hidden; }
+.nv-flight__glitch.is-on { visibility: visible; }
+.nv-glitch__ghost, .nv-glitch__slice { position: absolute; inset: 0; perspective: var(--perspective); opacity: 0; }
+.nv-glitch__ghost--ion { color: var(--ion); }
+.nv-glitch__ghost--flare { color: var(--flare-text); }
+.nv-glitch__slice { color: var(--flare); clip-path: inset(0 -40% 100% -40%); }
+.nv-glitch__img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; overflow: visible; }
+.nv-glitch__fill { fill: currentColor; fill-opacity: calc(1 - var(--nv-w, 0)); }
+.nv-glitch__line {
+  fill: none; stroke: var(--ion); stroke-opacity: var(--nv-w, 0);
+  stroke-width: 1.3; stroke-linejoin: round; vector-effect: non-scaling-stroke;
+}
+.nv-glitch__ghost .nv-glitch__line { stroke: currentColor; }
+.nv-glitch__scan {
+  position: absolute; inset: -12%; opacity: 0;
+  background: repeating-linear-gradient(to bottom, transparent 0 2px, var(--void) 2px 3px);
+  -webkit-mask: radial-gradient(closest-side, #000 62%, transparent);
+  mask: radial-gradient(closest-side, #000 62%, transparent);
+}
+
+/* Mouvement réduit : pas d'animation, un logo statique rangé à droite qui apparaît hors de l'accueil. */
+.nv-flight.is-static { top: 50%; left: auto; right: 56px; transform: translateY(-50%) scale(0.66); }
+.nv-flight.is-static.is-shown { opacity: 1; }
+
+@media (max-width: 767px) {
+  .nv-triskell-slot, .nv-flight { width: 96px; height: 96px; }
+  .nv-flight.is-static { top: auto; right: 16px; bottom: 24px; transform: scale(0.55); transform-origin: right bottom; }
+  .nv-flight.is-static.is-shown { opacity: 0.6; }
+}
