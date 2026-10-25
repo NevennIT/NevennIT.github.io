@@ -1,26 +1,36 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel HAMET</title>
-
-    <!-- Police moderne -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@500&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> 
-</head>
-
-<body>
-
-    <div class="bg-glow"></div>
-
-    <div class="content">
-        <h1>Daniel HAMET</h1>
-        <h2>En développement</h2>
-    </div>
-</body>
-<script src="script.js"></script>
-
+<!doctype html>
+<html lang="fr" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NevennIT — Portfolio</title>
+    <meta name="description" content="NevennIT : portfolio de projets informatiques réalisés, de l'idée à la mise en ligne." />
+    <meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f3f1ec" media="(prefers-color-scheme: light)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="NevennIT — Portfolio" />
+    <meta property="og:description" content="Projets informatiques réalisés, de l'idée à la mise en ligne." />
+    <meta property="og:url" content="https://nevennit.github.io/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Thème posé avant le premier rendu : pas de flash clair en sombre, ni l'inverse. -->
+    <script>
+      (function () {
+        var d = document.documentElement;
+        try {
+          d.dataset.theme = localStorage.getItem('nv-theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        } catch (e) {}
+        d.classList.add('nv-js');
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400..800&family=Syne:wght@600..800&display=swap" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <noscript>
+      <p style="padding: 24px; font-family: system-ui, sans-serif">Ce portfolio a besoin de JavaScript pour s'afficher.</p>
+    </noscript>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
