@@ -1,6 +1,7 @@
 import { onMounted, onBeforeUnmount } from 'vue'
 import Lenis from 'lenis'
 import { reducedMotion } from '../lib/motion'
+import { pageReady } from '../lib/loader'
 
 // Défilement fluide Lenis (natif au tactile et en mouvement réduit), ancres internes, --nv-scroll (0 → 1) sur <html>.
 export function useSmoothScroll(options = {}) {
@@ -33,6 +34,9 @@ export function useSmoothScroll(options = {}) {
       const tick = (t) => { lenis.raf(t); raf = requestAnimationFrame(tick) }
       raf = requestAnimationFrame(tick)
       lenis.on('scroll', onScroll)
+      // Pas de défilement sous l'écran de chargement.
+      lenis.stop()
+      pageReady.then(() => lenis && lenis.start())
     } else {
       addEventListener('scroll', onScroll, { passive: true })
     }

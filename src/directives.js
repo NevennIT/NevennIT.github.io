@@ -4,6 +4,7 @@
 //   v-reveal          apparition à l'entrée dans l'écran  v-reveal:rise="90"  mode (fade, rise, rule, split) et délai en ms
 //   v-progress        --p de 0 à 1 au défilement         v-progress:enter    mode (exit, enter, through)
 import { tilt, magnetic, progress, reducedMotion } from './lib/motion'
+import { pageReady } from './lib/loader'
 
 const off = new WeakMap()
 const stop = (el) => { const fn = off.get(el); if (fn) fn(); off.delete(el) }
@@ -47,7 +48,8 @@ export const vReveal = {
     el.setAttribute('data-nv-reveal', arg || '')
     if (value) el.style.setProperty('--delay', value + 'ms')
     if (reducedMotion || !('IntersectionObserver' in window)) { el.classList.add('is-in'); return }
-    revealObserver().observe(el)
+    // Rien n'apparaît sous l'écran de chargement : l'observation commence quand il se lève.
+    pageReady.then(() => { if (el.isConnected) revealObserver().observe(el) })
   },
   unmounted(el) { if (io) io.unobserve(el) },
 }
