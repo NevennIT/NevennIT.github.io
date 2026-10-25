@@ -12,7 +12,7 @@ const props = defineProps({
   index: { type: Number, default: 0 },
 })
 
-const INTERVAL = 2000
+const INTERVAL = 5000
 // Phase propre à chaque carte (pas d'or) : les carrousels ne glissent jamais ensemble.
 const phase = ((props.index * 0.618034) % 1) * INTERVAL
 

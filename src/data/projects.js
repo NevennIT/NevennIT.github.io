@@ -13,7 +13,7 @@ export const projects = [
     description: 'Application Windows permettant la gestion des fenêtres d\'application sur multiécrans.',
     tags: ['Rust', 'Vue.js', 'Tauri', 'Win32'],
     href: 'https://github.com/NevennIT/lost-desktop',
-    image: ['./projects/lost-desktop-1.png'],
+    image: ['./projects/lost-desktop-1.png','./projects/lost-desktop-2.png'],
     feature: true,
   },
   {
@@ -24,7 +24,7 @@ export const projects = [
     description: "Ce site : une page en Vue 3, une scène de particules en Canvas et un défilement Lenis, déployée sur GitHub Pages.",
     tags: ['Vue.js', 'Vite', 'Canvas', 'GitHub Pages'],
     href: 'https://github.com/NevennIT/NevennIT.github.io',
-    image: ['./projects/portfolio-preview.png'],
+    image: ['./projects/portfolio-preview.png','./projects/portfolio-preview-project.png','./projects/portfolio-preview-contact.png'],
     feature: false,
   },
   {
