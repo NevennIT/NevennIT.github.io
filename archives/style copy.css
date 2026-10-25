@@ -1,0 +1,52 @@
+/* Reset global */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body{
+    background: black;
+    color: white;
+}
+
+/* toutes les balises H1 et H2 centrées*/
+h1,
+h2 {
+    text-align: center;
+}
+/* toutes les balises H1 en rouge*/
+h1 {
+    color: red;
+    transition: all 0.5s ease-in-out;
+}
+
+li{
+    background-color: gray;
+    width: fit-content;
+}
+
+.famille{
+    border: 2px red solid;
+    transition: all 1s ease-in-out;
+    /* animation: breathing 2s ease-in-out infinite; */
+}
+img:hover{
+    translate: 100px 4rem;
+    scale: 1.5;
+}
+
+@keyframes breathing {
+    0%,100%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.2;
+    }
+}
+
+
+#papa{
+    border-radius: 15px;
+}
