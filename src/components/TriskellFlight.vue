@@ -9,11 +9,12 @@ import '../styles/triskell-flight.css'
 /* Triskell qui suit la page : une seule couche fixe, pilotée par une seule boucle rAF lisant scrollY.
    Chronologie (positions des sections, mesurées au redimensionnement seulement) :
    - accueil        : logo plein en volume posé sur son emplacement, tilt souris, tiers de tour à la sortie ;
-   - toute la page  : il traverse l'écran de gauche à droite sur une courbe en huit, penché dans les virages ;
+   - toute la page  : derrière les sections, il traverse l'écran de gauche à droite sur une courbe en huit,
+                      pleine taille au centre, en culbutant sur les trois axes ;
    - entrée projets : explosion brève et violente en éclats de Voronoï (souffle, onde de choc, secousse),
                       puis recomposition un écran plus loin ;
    - projets→contact : court glitch VHS, au creux duquel le logo passe en fil de fer (contour + maillage) ;
-   - pied de page   : il se pose au centre, au-dessus des liens, se remplit à nouveau et fait un dernier tiers de tour. */
+   - pied de page   : il se pose au centre, à la taille de l'accueil, se remplit à nouveau et fait un dernier tiers de tour. */
 
 const WIRES = [0, 1, 2, 3]
 const SLICES = [0, 1, 2]
@@ -44,7 +45,7 @@ function flag(node, cls, on) {
   node.classList.toggle(cls, on)
 }
 
-const M = { vw: 0, vh: 0, base: 128, heroH: 1, projBottom: 0, contactTop: 0, footTop: 0, maxScroll: 1, compact: false }
+const M = { vw: 0, vh: 0, base: 128, home: 128, heroH: 1, projBottom: 0, contactTop: 0, contactEnd: 0, footTop: 0, maxScroll: 1, compact: false }
 const K = {}
 let nodes = null, slot = null, sections = {}
 let raf = 0, timer = 0, idle = 0, ro = null
@@ -57,10 +58,13 @@ function measure() {
   M.vw = innerWidth; M.vh = innerHeight
   M.compact = M.vw < 768
   M.base = el.value.offsetWidth || 128
+  M.home = (slot && slot.offsetWidth) || 128
   M.heroH = hero ? hero.offsetHeight || M.vh : M.vh
   M.projBottom = projets ? top(projets) + projets.offsetHeight : M.heroH + M.vh
   M.contactTop = contact ? top(contact) : M.projBottom
   M.footTop = footer ? top(footer) : de.scrollHeight
+  const form = contact && contact.querySelector('.nv-contact')
+  M.contactEnd = form ? top(form) + form.offsetHeight : M.footTop - 160
   M.maxScroll = Math.max(1, de.scrollHeight - M.vh)
 
   // Repères de la chronologie, en scrollY, toujours dans l'ordre même si une section est courte.
@@ -77,25 +81,26 @@ function measure() {
 }
 
 // Trajectoire à travers la page : courbe en huit (Lissajous 1:2) de bord à bord, ~1,25 écran par traversée.
-// Renvoie aussi l'inclinaison (bank, deg) liée à la vitesse horizontale et un léger zoom quand il revient vers nous.
+// Pleine taille au centre de l'écran, moitié sur les bords ; renvoie aussi l'inclinaison (bank, deg) dans les virages.
+const EDGE = 0.5
 function course(S, y, fp) {
   const { vw, vh, base, compact } = M
-  const size = base * (compact ? 0.8 : 1)
-  const margin = size / 2 + (compact ? 8 : 32)
   const t = (Math.max(0, S - K.d0) / vh) * Math.PI * 0.8
+  const margin = (base * EDGE) / 2 + (compact ? 8 : 32)
   let x = vw / 2 + (vw / 2 - margin) * Math.sin(t)
   let yy = vh * 0.5 + vh * (compact ? 0.24 : 0.2) * Math.sin(2 * t)
-  let s = (size / base) * (1 + 0.1 * Math.cos(2 * t))
+  let s = lerp(EDGE, 1, Math.cos(t) ** 2)
   let bank = Math.cos(t) * 26
-  // Pied de page : il se pose au centre, plus petit, juste au-dessus du filet du pied de page.
+  // Pied de page : il se pose au centre, à la taille de l'accueil, entre le formulaire et le filet du pied de page.
   if (fp > 0) {
-    const rest = 0.66
+    // Taille de l'accueil, réduite seulement si l'espace sous le formulaire est plus court (mobile).
+    const rest = Math.max(48, Math.min(M.home, M.footTop - M.contactEnd - 24)) / base
     x = lerp(x, vw / 2, fp)
-    yy = lerp(yy, M.footTop - y - 36 - (size * rest) / 2, fp)
+    yy = lerp(yy, (M.contactEnd + M.footTop) / 2 - y, fp)
     s = lerp(s, rest, fp)
     bank *= 1 - fp
   }
-  yy = Math.min(yy, M.footTop - y - 32 - (size * s) / 2)
+  yy = Math.min(yy, M.footTop - y - 32 - (base * s) / 2)
   return { x, y: yy, s, bank }
 }
 
@@ -185,13 +190,16 @@ function frame(now) {
   }
   const half = M.base / 2
   put(el.value, 'transform', `translate3d(${(x - half + st.sx).toFixed(1)}px,${(yy - half + st.sy).toFixed(1)}px,0) scale(${s.toFixed(4)})`)
-  put(el.value, 'opacity', (M.compact ? lerp(1, 0.8, d) : 1).toFixed(3))
+  put(el.value, 'opacity', '1')
 
   // Orientation : rotation lente (40 s par tour), tiers de tour en quittant l'accueil puis dans le pied de page,
-  // et inclinaison dans les virages de la courbe.
+  // inclinaison dans les virages et, pendant la traversée, culbute sur les trois axes (oscillations amples
+  // sans saut, qui s'éteignent dans l'accueil et au repos du pied de page ; le temps les fait dériver à l'arrêt).
   const tiltMax = lerp(28, 14, d)
-  const rx = -st.cy * tiltMax, ry = st.cx * tiltMax + to.bank * d
-  const angle = (now * 0.009) % 360 + heroExit * 120 + fp * 120
+  const m = d * (1 - fp), T = Math.max(0, S - K.d0) / vh
+  const rx = -st.cy * tiltMax + Math.sin(T * 1.9 + now * 0.0004) * 55 * m
+  const ry = st.cx * tiltMax + to.bank * d + Math.sin(T * 1.15 + 0.6 + now * 0.00027) * 165 * m
+  const angle = (now * 0.009) % 360 + heroExit * 120 + fp * 120 + Math.sin(T * 0.7) * 150 * m
   const orient = `translateZ(var(--lift-2)) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) rotateZ(${angle.toFixed(2)}deg)`
   const jx = g > 0 ? st.gm * g * 3 : 0
   put(nodes.body, 'transform', `translate3d(${jx.toFixed(2)}px,0,0) ${orient}`)

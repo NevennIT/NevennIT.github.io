@@ -1,13 +1,14 @@
-/* Triskell qui suit la page (TriskellFlight) : couche fixe qui traverse la page devant les sections
-   (--z-content < 20 < --z-nav), jamais cliquable. Rendu à 192px pour rester net : l'accueil le réduit à 128px.
+/* Triskell qui suit la page (TriskellFlight) : couche fixe qui traverse la page derrière les sections
+   (--z-scene < couche < --z-content), jamais cliquable. Rendu à 280px pour rester net au plus gros (centre de l'écran) :
+   l'accueil et le pied de page le ramènent à la taille de l'emplacement (128px).
    Positions, angles et opacités sont écrits par la boucle du composant ; ici, uniquement des tokens. */
 
 /* Emplacement dans l'accueil : même boîte que .nv-triskell. */
 .nv-triskell-slot { width: 128px; height: 128px; }
 
 .nv-flight {
-  position: fixed; z-index: 20; top: 0; left: 0;
-  width: 192px; height: 192px;
+  position: fixed; z-index: calc(var(--z-scene) + 1); top: 0; left: 0;
+  width: 280px; height: 280px;
   perspective: var(--perspective);
   pointer-events: none; user-select: none;
   opacity: 0;
@@ -81,12 +82,12 @@
 }
 
 /* Mouvement réduit : pas d'animation, un logo statique rangé à droite qui apparaît hors de l'accueil. */
-.nv-flight.is-static { top: 50%; left: auto; right: 56px; transform: translateY(-50%) scale(0.5); }
+.nv-flight.is-static { top: 50%; left: auto; right: 56px; transform: translateY(-50%) scale(0.35); }
 .nv-flight.is-static.is-shown { opacity: 1; }
 
 @media (max-width: 767px) {
   .nv-triskell-slot { width: 96px; height: 96px; }
-  .nv-flight { width: 112px; height: 112px; }
-  .nv-flight.is-static { top: auto; right: 16px; bottom: 24px; transform: scale(0.55); transform-origin: right bottom; }
+  .nv-flight { width: 168px; height: 168px; }
+  .nv-flight.is-static { top: auto; right: 16px; bottom: 24px; transform: scale(0.37); transform-origin: right bottom; }
   .nv-flight.is-static.is-shown { opacity: 0.6; }
 }
