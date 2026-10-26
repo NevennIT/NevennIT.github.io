@@ -30,7 +30,7 @@ export function useSmoothScroll(options = {}) {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
     if (!location.hash) scrollTo(0, 0)
     if (!reducedMotion) {
-      lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 0.9, smoothWheel: true, ...options })
+      lenis = new Lenis({ lerp: 0.05, wheelMultiplier: 0.4, smoothWheel: true, ...options })
       const tick = (t) => { lenis.raf(t); raf = requestAnimationFrame(tick) }
       raf = requestAnimationFrame(tick)
       lenis.on('scroll', onScroll)
