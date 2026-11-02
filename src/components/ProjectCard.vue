@@ -19,22 +19,31 @@ const images = (Array.isArray(img) ? img : img ? [img] : []).filter(Boolean)
     <ProjectCarousel :images="images" :title="project.title" :index="index" />
     <div class="nv-card__body">
       <p class="nv-card__meta label"><b>{{ project.year }}</b><span>{{ project.kind }}</span></p>
-      <h3 class="nv-card__title title">
-        <a :href="project.href" :target="external ? '_blank' : undefined" :rel="external ? 'noopener' : undefined">{{ project.title }}</a>
+      <h3 class="nv-card__title title" style="display: flex; align-items: center; gap: 0.5em;">
+        <a :href="project.href" :target="external ? '_blank' : undefined" :rel="external ? 'noopener' : undefined">{{
+          project.title }}</a>
+        <p v-if="project.inProgress" class="nv-tag label label-in-progress animate-breathing"
+          style="font-style: italic;">en cours
+        </p>
+
       </h3>
       <p class="nv-card__text body">{{ project.description }}</p>
       <ul class="nv-tags nv-card__tags">
         <li v-for="tag in project.tags" :key="tag" class="nv-tag label">{{ tag }}</li>
       </ul>
     </div>
-    <span class="nv-card__go" aria-hidden="true"><AppIcon name="arrow-up-right" /></span>
-    <a
-      class="nv-card__hit"
-      :href="project.href"
-      :target="external ? '_blank' : undefined"
-      :rel="external ? 'noopener' : undefined"
-      tabindex="-1"
-      aria-hidden="true"
-    />
+    <span class="nv-card__go" aria-hidden="true">
+      <AppIcon name="arrow-up-right" />
+    </span>
+    <a class="nv-card__hit" :href="project.href" :target="external ? '_blank' : undefined"
+      :rel="external ? 'noopener' : undefined" tabindex="-1" aria-hidden="true" />
   </article>
 </template>
+<style scoped>
+.label-in-progress {
+  margin: 0px;
+  color: var(--ion);
+  border: 1px solid var(--ion);
+  border-radius: var(--radius-sm);
+}
+</style>

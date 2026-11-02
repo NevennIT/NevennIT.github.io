@@ -38,6 +38,18 @@ img, svg, canvas { display: block; max-width: 100%; }
   .display-l { font-size: 38px; }
 }
 
+.animate-breathing{
+  animation: breath infinite 2s ease-in-out;
+}
+@keyframes breath {
+  0%,100%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0.5;
+  }
+}
+
 .nv-container { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: var(--space-4); }
 @media (min-width: 768px) { .nv-container { padding-inline: var(--space-8); } }
 @media (min-width: 1200px) { .nv-container { padding-inline: var(--space-12); } }
