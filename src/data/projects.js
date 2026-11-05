@@ -17,6 +17,18 @@ export const projects = [
     feature: true,
   },
   {
+    id: 'gantt-v', // exemple
+    title: 'Gantt-V',
+    year: '2026',
+    kind: 'Webapp',
+    description: 'Application plus poussé d\'Excel Schedule, avec une interface plus modulable et entièrement évolutif en fonction des données',
+    tags: ['Rust', 'Vue.js', 'Tauri'],
+    href: 'https://github.com/NevennIT/ScheduleExcel',
+    image: [],
+    feature: true,
+    inProgress: true,
+  },
+  {
     id: 'portfolio',
     title: 'Portfolio NevennIT',
     year: '2026',
@@ -37,5 +49,17 @@ export const projects = [
     tags: ['VBA', 'Excel', 'SAP'],
     href: 'https://github.com/NevennIT',
     image: ['./projects/Excel-Schedule-1.png'],
+  },
+  {
+    id: 'digitabulo', // exemple
+    title: 'Digitabulo',
+    year: '2026',
+    kind: 'Webapp',
+    description: 'Application gestion de collection de dés',
+    tags: ['Rust', 'Vue.js', 'Tauri'],
+    href: 'https://github.com/NevennIT/digitabulo',
+    image: [],
+    feature: true,
+    inProgress: true,
   },
 ]
