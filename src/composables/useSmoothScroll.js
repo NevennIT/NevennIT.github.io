@@ -3,6 +3,10 @@ import Lenis from 'lenis'
 import { reducedMotion } from '../lib/motion'
 import { pageReady } from '../lib/loader'
 
+// Instance Lenis active (null au tactile et en mouvement réduit) : la fiche projet l'arrête pendant son ouverture.
+let shared = null
+export const getLenis = () => shared
+
 // Défilement fluide Lenis (natif au tactile et en mouvement réduit), ancres internes, --nv-scroll (0 → 1) sur <html>.
 export function useSmoothScroll(options = {}) {
   const root = document.documentElement
@@ -18,7 +22,7 @@ export function useSmoothScroll(options = {}) {
     if (!a) return
     const id = a.getAttribute('href')
     // Ancres de section seulement (#projets) ; les routes (#/projet/…) sont laissées au routeur des fiches.
-    if (!/^#[w-]+$/.test(id)) return
+    if (!/^#[\w-]+$/.test(id)) return
     const target = document.getElementById(id.slice(1))
     if (!target) return
     e.preventDefault()
@@ -32,7 +36,7 @@ export function useSmoothScroll(options = {}) {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
     if (!location.hash || location.hash.startsWith('#/')) scrollTo(0, 0)
     if (!reducedMotion) {
-      lenis = new Lenis({ lerp: 0.05, wheelMultiplier: 0.4, smoothWheel: true, ...options })
+      lenis = shared = new Lenis({ lerp: 0.05, wheelMultiplier: 0.4, smoothWheel: true, ...options })
       const tick = (t) => { lenis.raf(t); raf = requestAnimationFrame(tick) }
       raf = requestAnimationFrame(tick)
       lenis.on('scroll', onScroll)
@@ -50,6 +54,7 @@ export function useSmoothScroll(options = {}) {
   onBeforeUnmount(() => {
     cancelAnimationFrame(raf)
     if (lenis) lenis.destroy()
+    shared = null
     removeEventListener('scroll', onScroll)
     removeEventListener('resize', onScroll)
     document.removeEventListener('click', onClick)

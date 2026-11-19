@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "images": "node scripts/optimize-images.mjs"
+    "images": "node scripts/optimize-images.mjs",
+    "releases": "node scripts/fetch-releases.mjs"
   },
   "dependencies": {
     "lenis": "1.1.13",
