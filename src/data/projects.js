@@ -27,7 +27,7 @@ export const projects = [
     tags: ['Rust', 'Tauri', 'Vue.js', 'TypeScript'],
     repo: 'NevennIT/MyLegArk',
     publicRepo: false,
-    image: [],
+    image: ['./projects/mylegark-1.webp', './projects/mylegark-2.webp', './projects/mylegark-3.webp', './projects/mylegark-4.webp'],
     download: { soon: true },
     feature: true,
   },
@@ -60,7 +60,7 @@ export const projects = [
     tags: ['Rust', 'Tauri', 'Vue.js', 'TypeScript'],
     repo: 'NevennIT/ScheduleExcel',
     publicRepo: false,
-    image: [],
+    image: ['./projects/gantt-v-1.webp', './projects/gantt-v-2.webp', './projects/gantt-v-3.webp', './projects/gantt-v-4.webp'],
     download: { soon: true },
   },
   {
@@ -76,7 +76,7 @@ export const projects = [
     tags: ['Rust', 'Tauri', 'Vue.js'],
     repo: 'NevennIT/digitabulo',
     publicRepo: false,
-    image: [],
+    image: ['./projects/digitabulo-1.webp', './projects/digitabulo-2.webp', './projects/digitabulo-3.webp', './projects/digitabulo-4.webp'],
     download: { soon: true },
   },
   {
