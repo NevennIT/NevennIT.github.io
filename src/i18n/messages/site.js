@@ -19,7 +19,7 @@ export default {
     projects: {
       label: 'Projets',
       title: 'Projets réalisés',
-      lead: 'Des applications pensées pour un vrai besoin, du prototype à la version publiée.',
+      lead: 'Des applications pensées pour un vrai besoin, du\u00a0prototype à la version publiée.',
       inProgress: 'en cours',
       open: 'Voir la fiche du projet {title}',
       empty: 'Aucun projet ne correspond à ces filtres.',
@@ -95,7 +95,7 @@ export default {
     projects: {
       label: 'Projects',
       title: 'Selected projects',
-      lead: 'Apps built for a real need, from prototype to published release.',
+      lead: 'Apps built for a real need, from\u00a0prototype to published release.',
       inProgress: 'in progress',
       open: 'Open the {title} project sheet',
       empty: 'No project matches these filters.',
