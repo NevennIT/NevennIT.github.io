@@ -5,6 +5,9 @@ import ProjectsSection from './components/ProjectsSection.vue'
 import ContactSection from './components/ContactSection.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import TriskellFlight from './components/TriskellFlight.vue'
+import ParcoursSection from './components/ParcoursSection.vue'
+import ProjectModal from './components/ProjectModal.vue'
+import { sections } from './config'
 import { useSmoothScroll } from './composables/useSmoothScroll'
 
 useSmoothScroll()
@@ -16,10 +19,13 @@ useSmoothScroll()
   <main>
     <HeroSection />
     <ProjectsSection />
-    <!-- #parcours : le CV complet viendra ici (02 — Parcours ; le contact passera à 03). -->
+    <!-- 02 — Parcours : masquable dans src/config.js (sections.parcours) ; le contact passe alors de 03 à 02. -->
+    <ParcoursSection v-if="sections.parcours" />
     <ContactSection />
   </main>
   <SiteFooter />
   <!-- Triskell qui suit la page : couche fixe, derrière les sections, jamais cliquable. -->
   <TriskellFlight />
+  <!-- Fiche projet détaillée : s'ouvre sur #/projet/<id>. -->
+  <ProjectModal />
 </template>

@@ -265,10 +265,10 @@ img, svg, canvas { display: block; max-width: 100%; }
 .nv-tag--ion { background: var(--ion-soft); border-color: transparent; color: var(--ion); }
 button.nv-tag { height: 32px; padding: 0 var(--space-3); border-color: var(--line-strong); border-radius: var(--radius-pill); cursor: pointer; transition: color var(--dur-1), background-color var(--dur-2), border-color var(--dur-2); }
 button.nv-tag:hover { color: var(--ink); border-color: var(--ink); }
-button.nv-tag[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--void); }
+button.nv-tag[aria-pressed="true"], button.nv-tag[aria-pressed="true"]:hover { background: var(--ink); border-color: var(--ink); color: var(--void); }
 
 /* ---------- ProjectCard ---------- */
-.nv-grid { display: grid; gap: var(--space-6); margin: 0; padding: 0; list-style: none; }
+.nv-grid { position: relative; display: grid; gap: var(--space-6); margin: 0; padding: 0; list-style: none; }
 @media (min-width: 768px) { .nv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .nv-grid > .nv-grid__wide { grid-column: 1 / -1; } }
 .nv-card {
   --rx: 0deg; --ry: 0deg; --gx: 50%; --gy: 50%;
@@ -344,6 +344,55 @@ button.nv-tag[aria-pressed="true"] { background: var(--ink); border-color: var(-
   .nv-card--feature .nv-card__media { flex: 0 0 58%; aspect-ratio: auto; min-height: 380px; margin: var(--space-2); }
   .nv-card--feature .nv-card__body { align-content: end; padding: var(--space-8); }
 }
+
+/* ---------- Filtres des projets ---------- */
+.nv-filters { display: grid; gap: var(--space-4); margin: calc(var(--space-8) * -1) 0 var(--space-12); }
+.nv-filters__group { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+.nv-filters__label { flex: 0 0 120px; color: var(--ink-muted); }
+.nv-filters__options { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+@media (max-width: 639px) {
+  .nv-filters__label { flex-basis: 100%; }
+  /* Sur mobile, chaque famille défile horizontalement plutôt que de s'empiler sur plusieurs lignes. */
+  .nv-filters__options { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--space-4) * -1); padding: 2px var(--space-4); scrollbar-width: none; }
+}
+.nv-filters__empty { display: grid; justify-items: start; gap: var(--space-4); padding: var(--space-8); border: 1px dashed var(--line-strong); border-radius: var(--radius-lg); color: var(--ink-muted); }
+.nv-filters__empty p { margin: 0; }
+/* Grille filtrée : les cartes qui restent glissent à leur place, les autres s'effacent. */
+.nv-grid-move { transition: transform var(--dur-3) var(--ease-out); }
+.nv-grid-enter-active { transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out); }
+.nv-grid-leave-active { position: absolute; opacity: 0; transition: opacity var(--dur-2) var(--ease-out); }
+.nv-grid-enter-from { opacity: 0; transform: scale(0.96); }
+
+/* ---------- Parcours ---------- */
+.nv-parcours { display: grid; gap: var(--space-16); }
+@media (min-width: 1024px) { .nv-parcours { grid-template-columns: 7fr 5fr; gap: var(--space-12); } }
+.nv-parcours__h { margin: 0 0 var(--space-6); color: var(--ink-muted); font-weight: 500; }
+.nv-parcours__side .nv-parcours__h:not(:first-child) { margin-top: var(--space-12); }
+/* Frise : un filet vertical, une pastille flare par expérience. */
+.nv-timeline { position: relative; display: grid; gap: var(--space-8); margin: 0; padding: 0 0 0 var(--space-8); list-style: none; }
+.nv-timeline::before { content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 1px; background: var(--line-strong); }
+.nv-timeline__item { position: relative; display: grid; gap: var(--space-2); }
+.nv-timeline__item::before {
+  content: ""; position: absolute; left: calc(var(--space-8) * -1); top: 4px; width: 11px; height: 11px; border-radius: 50%;
+  background: var(--void); border: 2px solid var(--flare);
+}
+.nv-timeline__item:first-child::before { background: var(--flare); box-shadow: var(--glow-flare); }
+.nv-timeline__period { margin: 0; color: var(--flare-text); }
+.nv-timeline__role { margin: 0; color: var(--ink); }
+.nv-timeline__org { margin: 0; color: var(--ink-muted); }
+.nv-timeline__text { margin: 0; color: var(--ink-muted); max-width: 60ch; }
+.nv-parcours__list { display: grid; gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+.nv-parcours__edu { position: relative; display: grid; gap: var(--space-1); padding: var(--space-4) var(--space-6); border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); }
+.nv-parcours__edu p { margin: 0; }
+.nv-parcours__edu-title { color: var(--ink); font-weight: 600; }
+.nv-skills { display: grid; gap: var(--space-6); margin: 0; }
+.nv-skills__group { display: grid; gap: var(--space-2); }
+.nv-skills dt { color: var(--ink); font-weight: 600; }
+.nv-skills dd { margin: 0; }
+/* Entrées d'exemple encore à remplacer (visibles seulement en développement, la section étant masquée en production). */
+.is-todo { outline: 1px dashed var(--ion); outline-offset: var(--space-2); border-radius: var(--radius-sm); }
+.nv-todo { justify-self: start; padding: 2px var(--space-2); border-radius: var(--radius-sm); background: var(--ion-soft); color: var(--ion); }
+.nv-parcours__edu .nv-todo { margin-top: var(--space-2); }
 
 /* ---------- TextField ---------- */
 .nv-field { display: grid; gap: var(--space-2); }

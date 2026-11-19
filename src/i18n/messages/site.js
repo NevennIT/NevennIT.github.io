@@ -24,7 +24,15 @@ export default {
       open: 'Voir la fiche du projet {title}',
       empty: 'Aucun projet ne correspond à ces filtres.',
       reset: 'Tout afficher',
-      count: '{n} projet | {n} projets',
+    },
+    parcours: {
+      label: 'Parcours',
+      title: 'Mon parcours',
+      lead: 'Expériences, formation et outils du quotidien.',
+      experience: 'Expérience',
+      education: 'Formation',
+      skills: 'Compétences',
+      todo: 'à compléter',
     },
     filters: {
       label: 'Filtrer les projets',
@@ -92,7 +100,15 @@ export default {
       open: 'Open the {title} project sheet',
       empty: 'No project matches these filters.',
       reset: 'Show all',
-      count: '{n} project | {n} projects',
+    },
+    parcours: {
+      label: 'Background',
+      title: 'My background',
+      lead: 'Experience, education and everyday tools.',
+      experience: 'Experience',
+      education: 'Education',
+      skills: 'Skills',
+      todo: 'to fill in',
     },
     filters: {
       label: 'Filter projects',
