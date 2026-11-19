@@ -22,7 +22,7 @@ export async function dismissLoader() {
   const fonts = document.fonts ? Promise.race([document.fonts.ready, wait(2500)]) : null
   await Promise.all([fonts, reducedMotion ? null : wait(FILL_END + HOLD - performance.now())])
 
-  if (!location.hash) scrollTo(0, 0)
+  if (!location.hash || location.hash.startsWith('#/')) scrollTo(0, 0)
   el.classList.add('is-out')
   root.classList.remove('nv-loading')
   // Les apparitions démarrent quand le bandeau dégage le haut de l'accueil.

@@ -1,10 +1,11 @@
 <script setup>
 import { computed } from 'vue'
 import { useTheme } from '../composables/useTheme'
+import { t } from '../i18n'
 
 // Lune en sombre, soleil en clair ; l'étiquette annonce l'action. Un seul par page (id du masque).
 const { theme, toggle } = useTheme()
-const label = computed(() => (theme.value === 'dark' ? 'Activer le thème clair' : 'Activer le thème sombre'))
+const label = computed(() => t(theme.value === 'dark' ? 'theme.toLight' : 'theme.toDark'))
 </script>
 
 <template>

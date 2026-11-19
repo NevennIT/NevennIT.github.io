@@ -17,7 +17,9 @@ export function useSmoothScroll(options = {}) {
     const a = e.target.closest && e.target.closest('a[href^="#"]')
     if (!a) return
     const id = a.getAttribute('href')
-    const target = id.length > 1 ? document.querySelector(id) : null
+    // Ancres de section seulement (#projets) ; les routes (#/projet/…) sont laissées au routeur des fiches.
+    if (!/^#[w-]+$/.test(id)) return
+    const target = document.getElementById(id.slice(1))
     if (!target) return
     e.preventDefault()
     if (lenis) lenis.scrollTo(target, { duration: 1.4 })
@@ -28,7 +30,7 @@ export function useSmoothScroll(options = {}) {
   onMounted(() => {
     // Chaque visite commence en haut, sur l'accueil (sauf lien direct vers une section).
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
-    if (!location.hash) scrollTo(0, 0)
+    if (!location.hash || location.hash.startsWith('#/')) scrollTo(0, 0)
     if (!reducedMotion) {
       lenis = new Lenis({ lerp: 0.05, wheelMultiplier: 0.4, smoothWheel: true, ...options })
       const tick = (t) => { lenis.raf(t); raf = requestAnimationFrame(tick) }

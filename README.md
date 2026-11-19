@@ -15,8 +15,10 @@ npm run dev
 
 | Quoi | Où |
 | --- | --- |
-| Projets (titre, phrase, stack, lien, capture) | `src/data/projects.js` — captures dans `public/projets/` |
-| Accroche, liens, service du formulaire | `src/config.js` |
+| Projets (titre, phrase, type, statut, stack, captures, téléchargement) | `src/data/projects.js` — captures dans `public/projects/` |
+| Captures : conversion en WebP 1600 × 1000 | `npm run images` (PNG/JPG de `public/projects/` → `.webp`) |
+| Textes de l'interface, en français et en anglais | `src/i18n/messages/` |
+| Liens, e-mail, service du formulaire, sections affichées | `src/config.js` |
 | Liens de la navigation | `navLinks` dans `src/config.js` |
 
 Le formulaire de contact poste vers un service tiers (GitHub Pages ne sait pas envoyer de mail) : créer un formulaire sur [Formspree](https://formspree.io), puis coller son URL dans `formEndpoint`. Tant que ce champ est vide, le formulaire indique qu'il n'est pas encore relié.

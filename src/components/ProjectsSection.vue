@@ -2,6 +2,7 @@
 import SectionHeader from './SectionHeader.vue'
 import ProjectCard from './ProjectCard.vue'
 import { projects } from '../data/projects'
+import { t } from '../i18n'
 </script>
 
 <template>
@@ -10,9 +11,9 @@ import { projects } from '../data/projects'
       <SectionHeader
         id="projets-title"
         index="01"
-        label="Projets"
-        title="Projets réalisés"
-        lead="Une sélection de projets informatiques, du prototype à la mise en ligne."
+        :label="t('projects.label')"
+        :title="t('projects.title')"
+        :lead="t('projects.lead')"
       />
       <ul class="nv-grid">
         <li

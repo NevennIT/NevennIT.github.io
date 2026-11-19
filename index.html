@@ -4,13 +4,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>NevennIT — Portfolio</title>
-    <meta name="description" content="NevennIT : portfolio de projets informatiques réalisés, de l'idée à la mise en ligne." />
+    <meta name="description" content="NevennIT : applications de bureau et projets informatiques, de l'idée à la mise en ligne." />
     <meta name="theme-color" content="#08090b" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#f3f1ec" media="(prefers-color-scheme: light)" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="NevennIT — Portfolio" />
-    <meta property="og:description" content="Projets informatiques réalisés, de l'idée à la mise en ligne." />
+    <meta property="og:description" content="Applications de bureau et outils sur mesure, de l'idée à la mise en ligne." />
     <meta property="og:url" content="https://nevennit.github.io/" />
+    <meta property="og:image" content="https://nevennit.github.io/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale:alternate" content="en_GB" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://nevennit.github.io/" />
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"WebSite","name":"NevennIT","url":"https://nevennit.github.io/","inLanguage":["fr","en"],
+       "publisher":{"@type":"Person","name":"NevennIT","url":"https://github.com/NevennIT","sameAs":["https://github.com/NevennIT"]}}
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <!-- Thème posé avant le premier rendu : pas de flash clair en sombre, ni l'inverse. -->
     <script>
@@ -19,6 +30,10 @@
         try {
           d.dataset.theme = localStorage.getItem('nv-theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
         } catch (e) {}
+        // Langue : choix mémorisé, sinon celle du navigateur (src/i18n la reprend).
+        var lang;
+        try { lang = localStorage.getItem('nv-lang'); } catch (e) {}
+        d.lang = lang === 'fr' || lang === 'en' ? lang : /^fr/i.test(navigator.language || 'fr') ? 'fr' : 'en';
         d.classList.add('nv-js', 'nv-loading');
         // Filet de sécurité : si l'appli ne démarre pas, l'écran de chargement se retire quand même.
         setTimeout(function () {
@@ -89,7 +104,11 @@
     </div>
     <div id="app"></div>
     <noscript>
-      <p style="padding: 24px; font-family: system-ui, sans-serif">Ce portfolio a besoin de JavaScript pour s'afficher.</p>
+      <div style="padding: 24px; font-family: system-ui, sans-serif">
+        <h1>NevennIT</h1>
+        <p>Applications de bureau et outils sur mesure : Lost Desktop, MyLegArk, Gantt-V, Digitabulo.</p>
+        <p>Ce portfolio a besoin de JavaScript pour s'afficher. Contact : <a href="https://github.com/NevennIT">github.com/NevennIT</a></p>
+      </div>
     </noscript>
     <script type="module" src="/src/main.js"></script>
   </body>

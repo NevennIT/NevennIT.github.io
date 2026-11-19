@@ -2,6 +2,7 @@
 import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import AppIcon from './AppIcon.vue'
 import { reducedMotion } from '../lib/motion'
+import { t } from '../i18n'
 import '../styles/carousel.css'
 
 // Média d'une fiche projet : motif d'attente (aucune image), image fixe (une) ou carrousel (plusieurs).
@@ -91,7 +92,7 @@ onBeforeUnmount(() => {
   <!-- Une image au plus : média simple, comme avant. -->
   <div v-if="count < 2" class="nv-card__media">
     <img v-if="count" :src="images[0]" alt="" loading="lazy" width="1600" height="1000" />
-    <div v-else class="nv-card__placeholder"><span class="label">Capture 16:10</span></div>
+    <div v-else class="nv-card__placeholder"><span class="label">{{ t('carousel.placeholder') }}</span></div>
   </div>
 
   <!-- Plusieurs images : le média reste sur lift-1, les commandes passent devant la zone cliquable de la carte. -->
@@ -100,8 +101,8 @@ onBeforeUnmount(() => {
     ref="root"
     class="nv-carousel"
     role="group"
-    aria-roledescription="carrousel"
-    :aria-label="`Captures du projet ${title}`"
+    :aria-roledescription="t('carousel.roledesc')"
+    :aria-label="t('carousel.group', { title })"
     @focusin="onFocusIn"
     @focusout="onFocusOut"
   >
@@ -115,7 +116,7 @@ onBeforeUnmount(() => {
         >
           <img
             :src="src"
-            :alt="`Capture ${i + 1} du projet ${title}`"
+            :alt="t('carousel.slide', { n: i + 1, title })"
             :loading="warm.has(i) ? 'eager' : 'lazy'"
             width="1600"
             height="1000"
@@ -124,10 +125,10 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <div class="nv-carousel__ui">
-      <button type="button" class="nv-carousel__nav nv-carousel__nav--prev" aria-label="Image précédente" @click.stop.prevent="prev">
+      <button type="button" class="nv-carousel__nav nv-carousel__nav--prev" :aria-label="t('carousel.prev')" @click.stop.prevent="prev">
         <AppIcon name="chevron-left" />
       </button>
-      <button type="button" class="nv-carousel__nav nv-carousel__nav--next" aria-label="Image suivante" @click.stop.prevent="next">
+      <button type="button" class="nv-carousel__nav nv-carousel__nav--next" :aria-label="t('carousel.next')" @click.stop.prevent="next">
         <AppIcon name="chevron-right" />
       </button>
       <div class="nv-carousel__dots">
@@ -136,7 +137,7 @@ onBeforeUnmount(() => {
           :key="'dot-' + src + i"
           type="button"
           class="nv-carousel__dot"
-          :aria-label="`Image ${i + 1} sur ${count}`"
+          :aria-label="t('carousel.dot', { n: i + 1, total: count })"
           :aria-current="i === current ? 'true' : undefined"
           @click.stop.prevent="go(i)"
         />
