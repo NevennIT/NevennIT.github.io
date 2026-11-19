@@ -1,0 +1,186 @@
+{
+  "generatedAt": "2026-11-19T21:05:23.528Z",
+  "repos": {
+    "NevennIT/MyLegArk": [
+      {
+        "tag": "v0.5.2",
+        "name": "MyLegArk 0.5.2",
+        "published_at": "2026-11-18T23:42:00Z",
+        "prerelease": false,
+        "body": "## Nouveautés depuis la 0.5.1\n\n### Documents plus légers\n- **Photos et scans allégés à l'ajout** : une photo lourde (JPEG, PNG, WebP, AVIF de plus de 400 Ko) est redessinée en WebP, à 2000 pixels sur le grand côté ; un **PDF scanné** lourd est redessiné page par page et reste un PDF. Toujours lisibles, souvent 5 à 10 fois plus légers : le coffre, ses sauvegardes et la copie du téléphone restent petits. Un message indique le gain. La copie n'est gardée que si elle est nettement plus légère.\n- Jamais touchés : les PDF de texte (factures et avis téléchargés), les PDF signés électroniquement, ceux protégés par un mot de passe, les GIF et les fichiers déjà légers. Les documents déjà rangés ne changent pas.\n- Se coupe dans Préférences › « Alléger les photos et les scans ajoutés ».\n- **Images AVIF** acceptées.\n\n### Sauvegardes\n- **Correction** : une sauvegarde n'emporte plus les documents que tu viens de retirer d'une fiche (gardés sur le PC jusqu'au déverrouillage suivant pour que Ctrl+Z puisse les rendre). Remplacer des documents par des versions plus légères rend la sauvegarde plus légère tout de suite.\n\n### Véhicules\n- Dans le tableau de bord des véhicules, le passage de la souris sur une échéance affiche son texte complet.\n\n## Installation\nLance `MyLegArk_0.5.2_x64-setup.exe` par-dessus la version installée : le coffre et les préférences restent en place. Installateur non signé : « Informations complémentaires » puis « Exécuter quand même ».\n\nEmpreinte SHA-256 : `1297450768DDFFE77DB5582CD93EA757B904C91485BBF061299655F27C2C3A21`\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n",
+        "assets": [
+          {
+            "name": "Manuel-MyLegArk.pdf",
+            "size": 1718014
+          },
+          {
+            "name": "MyLegArk_0.5.2_x64-setup.exe",
+            "size": 3714436
+          },
+          {
+            "name": "MyLegArk_0.5.2_x64-setup.exe.sha256.txt",
+            "size": 95
+          }
+        ]
+      },
+      {
+        "tag": "v0.5.1",
+        "name": "MyLegArk 0.5.1",
+        "published_at": "2026-11-18T18:21:49Z",
+        "prerelease": false,
+        "body": "## Nouveautés depuis la 0.5.0\n\n### Véhicules et entretien\n- **Modifier un entretien ou un contrôle déjà noté** : le crayon d'une ligne de l'historique rouvre sa fenêtre déjà remplie. Corrige la date ou le kilométrage, ajoute la facture, le procès-verbal reçu plus tard, une note ou le garage oublié. Ctrl+Z annule.\n- **Plan d'entretien plus lisible** : les opérations sont repliées sur leur icône et leur nom, avec une pastille orange ou rouge quand elles arrivent ou sont en retard ; un clic en déplie une (rythme, jauge, Fait, menu, historique).\n- **Onglets de la fiche** : l'onglet choisi est surligné en couleur, et « Contrôle technique » devient « CT » pour que tous les onglets tiennent sur la largeur.\n- **L'onglet Entretien ne montre que les entretiens** : sa frise et son coût de l'année ne reprennent plus les contrôles techniques, qui ont leur propre onglet (ils comptent toujours dans la santé du véhicule, l'onglet Coût et le tableau de bord).\n\n### Aide\n- La couverture du manuel affiche la bonne version.\n\n## Installation\nLance `MyLegArk_0.5.1_x64-setup.exe` par-dessus la version installée : le coffre et les préférences restent en place. Installateur non signé : « Informations complémentaires » puis « Exécuter quand même ».\n\nEmpreinte SHA-256 : `C7091B2621D6BFA7A46FF5724196AB8F2216039542755907061136233D407077`\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n",
+        "assets": [
+          {
+            "name": "Manuel-MyLegArk.pdf",
+            "size": 1702033
+          },
+          {
+            "name": "MyLegArk_0.5.1_x64-setup.exe",
+            "size": 3695553
+          },
+          {
+            "name": "MyLegArk_0.5.1_x64-setup.exe.sha256.txt",
+            "size": 95
+          }
+        ]
+      },
+      {
+        "tag": "v0.5.0",
+        "name": "MyLegArk 0.5.0",
+        "published_at": "2026-11-18T12:30:23Z",
+        "prerelease": false,
+        "body": "## Nouveautés depuis la 0.4.0\n\n### Véhicules et entretien\n- **Plan d'entretien** : choisis un plan type (essence, diesel, hybride, électrique, moto, vélo), ajuste-le d'après ton carnet, et suis chaque opération avec sa jauge (« dans 1 800 km ou 2 mois », « en retard de 3 semaines »). « Fait » note la date, le kilométrage, le coût, le garage, la facture et une note. La vidange et le filtre à huile sont deux opérations séparées.\n- **Carnet d'entretien du constructeur** : joins son scan (PDF ou photo, chiffré) au plan, jusqu'à 5 pages.\n- **Relevé du compteur** : MyLegArk en déduit ton rythme et prévoit quand un entretien au kilométrage arrivera.\n- **Contrôle technique** : la règle se déduit de la catégorie (voiture : 4 ans puis tous les 2 ans ; moto : 5 ans puis tous les 3 ans), avec le résultat, la contre-visite sous 2 mois et le procès-verbal.\n- **Santé du véhicule** sur 100, **carnet d'entretien en frise** (fait, maintenant, à venir), coûts de l'année, et quelques confettis quand tu notes un entretien.\n- **Carnet de carburant** : les pleins (compteur, litres, prix), la consommation en L/100 km, la courbe des derniers pleins, le prix moyen du litre et le coût au kilomètre.\n- **Coût du véhicule** : ce qu'il te coûte par mois et par km sur 12 mois (carburant, entretiens, contrôles, assurance et crédit liés, frais ajoutés à la main).\n- **La fiche d'un véhicule en onglets** : Infos, Entretien, Contrôle technique, Carburant, Coût, avec une pastille orange ou rouge quand une échéance approche ou est dépassée.\n- **Tableau de bord** de la rubrique : une tuile par véhicule (santé, kilométrage, coût par mois, consommation, prochaines échéances) et le résumé de tous tes véhicules ; un clic sur une échéance ouvre la fiche sur le bon onglet.\n- Les entretiens et contrôles proches ou en retard arrivent dans la cloche et sur l'accueil ; « Noter » ouvre directement la bonne fenêtre.\n\n### Rubriques\n- **Champs par catégorie** : dans Personnaliser, un tableau montre quels champs s'affichent pour chaque catégorie, et chaque catégorie peut avoir sa propre disposition des champs.\n\n### Agenda\n- **Heure des rendez-vous**, **texte du titre** envoyé à l'agenda (modèle + retouche), fenêtre de relecture avant l'envoi, et choix d'**Outlook classique** sur PC.\n\n### Divers\n- **L'apparence (thème, couleurs, zoom) est gardée dans le coffre** : une sauvegarde restaurée ramène tes couleurs.\n- L'accueil ne parle plus des fiches masquées.\n\n## Installation\nLance `MyLegArk_0.5.0_x64-setup.exe` par-dessus la version installée : le coffre et les préférences restent en place. Installateur non signé : « Informations complémentaires » puis « Exécuter quand même ».\n\nEmpreinte SHA-256 : `B2A791B5818C7C66776B2F317A737E1B77A2BD1D46933C0594FB21C7ACD8B356`\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n",
+        "assets": [
+          {
+            "name": "Manuel-MyLegArk.pdf",
+            "size": 1696598
+          },
+          {
+            "name": "MyLegArk_0.5.0_x64-setup.exe",
+            "size": 3691503
+          },
+          {
+            "name": "MyLegArk_0.5.0_x64-setup.exe.sha256.txt",
+            "size": 95
+          }
+        ]
+      },
+      {
+        "tag": "v0.4.0",
+        "name": "MyLegArk 0.4.0",
+        "published_at": "2026-11-16T22:44:13Z",
+        "prerelease": false,
+        "body": "## Nouveautés depuis la 0.3.1\n\n- **Nouveau logo** : celui de la page de garde du manuel, pour l'appli, la barre des tâches et le menu Démarrer.\n- **Ajouter à mon agenda** (📅 sur une date) : Outlook / l'agenda du PC par défaut, ou Outlook.com / Google Agenda au choix dans les Préférences.\n- **Voir sur la carte** (📍 sur une adresse) : Google Maps ou OpenStreetMap, au choix.\n- **Recherche tolérante** : une faute de frappe dans la recherche d'une rubrique ne fait plus tout disparaître.\n- **Clic droit sur une carte ou une rubrique** : ouvrir, fiches liées, documents, liens web, agenda, épingler, masquer, filigrane, copier le titre, dupliquer, supprimer.\n- **Clic droit dans une zone de saisie** : un menu aux couleurs de l'appli (annuler, rétablir, couper, copier, coller, tout sélectionner). Maj + clic droit pour les suggestions d'orthographe. Le menu du navigateur (Actualiser, Enregistrer sous, Imprimer…) n'apparaît plus.\n- **Copies discrètes** : ce que tu copies dans MyLegArk n'entre pas dans l'historique du presse-papiers de Windows (Win + V) ni dans sa synchronisation cloud ; un mot de passe, une clé de secours ou un code de transfert copié s'efface au bout de 30 s.\n- **Fenêtre étroite** : menu ☰ pour les boutons de la barre du haut ; colonne de gauche redimensionnable, ou réduite aux icônes (double-clic sur son bord).\n- **Filigrane** plus grand, dans la couleur de la rubrique.\n- Corrections : « Sommaire » de l'aide, barre de défilement sur l'ombre d'une fiche ouverte.\n\n## Installation\nLance `MyLegArk_0.4.0_x64-setup.exe` par-dessus la version installée : le coffre et les préférences restent en place. Installateur non signé : « Informations complémentaires » puis « Exécuter quand même ».\n\nEmpreinte SHA-256 : `15F5E41C034167AF65B1F0510F1D0182339F21043C2519F648B955A0F773EE27`\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n",
+        "assets": [
+          {
+            "name": "Manuel-MyLegArk.pdf",
+            "size": 1568585
+          },
+          {
+            "name": "MyLegArk_0.4.0_x64-setup.exe",
+            "size": 3561897
+          },
+          {
+            "name": "MyLegArk_0.4.0_x64-setup.exe.sha256.txt",
+            "size": 95
+          }
+        ]
+      },
+      {
+        "tag": "v0.3.1",
+        "name": "MyLegArk 0.3.1",
+        "published_at": "2026-11-16T11:34:33Z",
+        "prerelease": false,
+        "body": "## Nouveautés depuis la 0.3.0\n\n- **Tri des fiches** par n'importe quel champ (montant, date, liste de choix…), croissant ou décroissant, retenu par rubrique.\n- **Fiches masquées** : automatiquement une fois leurs rendez-vous passés (option « Date de rendez-vous » d'une date), ou à la main avec l'œil de la fiche (vieux documents…). Le bouton « Masquées » les réaffiche, grisées, à la fin.\n- **Filigrane** au centre de la carte : « Passé » / « Masquée » par défaut, ou le texte de ton choix (« RÉSILIÉ », « ARCHIVE »…), même sur une fiche visible.\n- **Liens dans les deux sens** : une fiche citée par un champ « Lien vers des fiches » (conseiller, vétérinaire…) montre dans ses Fiches liées celles qui la citent (« via … »). Les fiches liées masquées ne sont pas comptées.\n- **Détail des coûts par catégorie** : un clic sur le coût annuel d'une rubrique à catégories déplie la répartition (par an, par mois, part). Les fiches masquées ne comptent plus dans les totaux.\n\n## Installation\nLance `MyLegArk_0.3.1_x64-setup.exe` par-dessus la version installée : le coffre et les préférences restent en place. Installateur non signé : « Informations complémentaires » puis « Exécuter quand même ».\n\nEmpreinte SHA-256 : `E6B5458B79507CB742F18B872AA8DECDD9583280B03ADEC06CA9DFC994B7D537`\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n",
+        "assets": [
+          {
+            "name": "Manuel-MyLegArk.pdf",
+            "size": 1467339
+          },
+          {
+            "name": "MyLegArk_0.3.1_x64-setup.exe",
+            "size": 3507190
+          },
+          {
+            "name": "MyLegArk_0.3.1_x64-setup.exe.sha256.txt",
+            "size": 95
+          }
+        ]
+      }
+    ],
+    "NevennIT/lost-desktop": [
+      {
+        "tag": "v0.4.0",
+        "name": "Lost Desktop v0.4.0",
+        "published_at": "2026-11-11T22:14:22Z",
+        "prerelease": false,
+        "body": "Installateur Windows de Lost Desktop.\n\nTéléchargez le fichier `*_x64-setup.exe` ci-dessous et lancez-le.\nL'application n'étant pas signée, Windows SmartScreen peut afficher\nun avertissement : cliquez sur « Informations complémentaires » puis\n« Exécuter quand même ».",
+        "assets": [
+          {
+            "name": "Lost.Desktop_0.4.0_x64-setup.exe",
+            "size": 1908408
+          }
+        ]
+      },
+      {
+        "tag": "v0.3.0",
+        "name": "Lost Desktop v0.3.0",
+        "published_at": "2026-11-08T18:10:29Z",
+        "prerelease": false,
+        "body": "Installateur Windows de Lost Desktop.\n\nTéléchargez le fichier `*_x64-setup.exe` ci-dessous et lancez-le.\nL'application n'étant pas signée, Windows SmartScreen peut afficher\nun avertissement : cliquez sur « Informations complémentaires » puis\n« Exécuter quand même ».",
+        "assets": [
+          {
+            "name": "Lost.Desktop_0.3.0_x64-setup.exe",
+            "size": 1788326
+          }
+        ]
+      },
+      {
+        "tag": "v0.2.0",
+        "name": "Lost Desktop v0.2.0",
+        "published_at": "2026-10-25T18:31:56Z",
+        "prerelease": false,
+        "body": "Installateur Windows de Lost Desktop.\n\nTéléchargez le fichier `*_x64-setup.exe` ci-dessous et lancez-le.\nL'application n'étant pas signée, Windows SmartScreen peut afficher\nun avertissement : cliquez sur « Informations complémentaires » puis\n« Exécuter quand même ».",
+        "assets": [
+          {
+            "name": "Lost.Desktop_0.2.0_x64-setup.exe",
+            "size": 1786349
+          }
+        ]
+      },
+      {
+        "tag": "v0.1.0",
+        "name": "Lost Desktop v0.1.0",
+        "published_at": "2026-10-24T18:35:09Z",
+        "prerelease": false,
+        "body": "Installateur Windows de Lost Desktop.\r\n\r\nTéléchargez le fichier `*_x64-setup.exe` ci-dessous et lancez-le.\r\nL'application n'étant pas signée, Windows SmartScreen peut afficher\r\nun avertissement : cliquez sur « Informations complémentaires » puis\r\n« Exécuter quand même ».",
+        "assets": [
+          {
+            "name": "Lost.Desktop_0.1.0_x64-setup.exe",
+            "size": 1710009
+          }
+        ]
+      }
+    ],
+    "NevennIT/lost-desktop-releases": [
+      {
+        "tag": "v0.4.0",
+        "name": "Lost Desktop v0.4.0",
+        "published_at": "2026-11-19T21:01:24Z",
+        "prerelease": false,
+        "body": "Installateur Windows de Lost Desktop.\n\nTéléchargez le fichier `*_x64-setup.exe` ci-dessous et lancez-le.\nL'application n'étant pas signée, Windows SmartScreen peut afficher\nun avertissement : cliquez sur « Informations complémentaires » puis\n« Exécuter quand même ».\n",
+        "html_url": "https://github.com/NevennIT/lost-desktop-releases/releases/tag/v0.4.0",
+        "assets": [
+          {
+            "name": "Lost.Desktop_0.4.0_x64-setup.exe",
+            "size": 1908408,
+            "browser_download_url": "https://github.com/NevennIT/lost-desktop-releases/releases/download/v0.4.0/Lost.Desktop_0.4.0_x64-setup.exe"
+          }
+        ]
+      }
+    ],
+    "NevennIT/ScheduleExcel": [],
+    "NevennIT/digitabulo": [],
+    "NevennIT/NevennIT.github.io": []
+  }
+}

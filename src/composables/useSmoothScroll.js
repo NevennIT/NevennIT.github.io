@@ -3,6 +3,10 @@ import Lenis from 'lenis'
 import { reducedMotion } from '../lib/motion'
 import { pageReady } from '../lib/loader'
 
+// Instance Lenis active (null au tactile et en mouvement réduit) : la fiche projet l'arrête pendant son ouverture.
+let shared = null
+export const getLenis = () => shared
+
 // Défilement fluide Lenis (natif au tactile et en mouvement réduit), ancres internes, --nv-scroll (0 → 1) sur <html>.
 export function useSmoothScroll(options = {}) {
   const root = document.documentElement
@@ -17,7 +21,9 @@ export function useSmoothScroll(options = {}) {
     const a = e.target.closest && e.target.closest('a[href^="#"]')
     if (!a) return
     const id = a.getAttribute('href')
-    const target = id.length > 1 ? document.querySelector(id) : null
+    // Ancres de section seulement (#projets) ; les routes (#/projet/…) sont laissées au routeur des fiches.
+    if (!/^#[\w-]+$/.test(id)) return
+    const target = document.getElementById(id.slice(1))
     if (!target) return
     e.preventDefault()
     if (lenis) lenis.scrollTo(target, { duration: 1.4 })
@@ -28,9 +34,9 @@ export function useSmoothScroll(options = {}) {
   onMounted(() => {
     // Chaque visite commence en haut, sur l'accueil (sauf lien direct vers une section).
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
-    if (!location.hash) scrollTo(0, 0)
+    if (!location.hash || location.hash.startsWith('#/')) scrollTo(0, 0)
     if (!reducedMotion) {
-      lenis = new Lenis({ lerp: 0.05, wheelMultiplier: 0.4, smoothWheel: true, ...options })
+      lenis = shared = new Lenis({ lerp: 0.05, wheelMultiplier: 0.4, smoothWheel: true, ...options })
       const tick = (t) => { lenis.raf(t); raf = requestAnimationFrame(tick) }
       raf = requestAnimationFrame(tick)
       lenis.on('scroll', onScroll)
@@ -48,6 +54,7 @@ export function useSmoothScroll(options = {}) {
   onBeforeUnmount(() => {
     cancelAnimationFrame(raf)
     if (lenis) lenis.destroy()
+    shared = null
     removeEventListener('scroll', onScroll)
     removeEventListener('resize', onScroll)
     document.removeEventListener('click', onClick)

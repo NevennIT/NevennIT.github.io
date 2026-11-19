@@ -1,11 +1,18 @@
-# Construit le site (Vite) et le publie sur GitHub Pages à chaque push sur main.
-# Prérequis, une seule fois : Settings → Pages → Build and deployment → Source : « GitHub Actions ».
+# Construit le site (Vite) et le publie sur GitHub Pages à chaque push sur main, et chaque jour pour rafraîchir les versions.
+# Prérequis, une seule fois :
+#   - Settings → Pages → Build and deployment → Source : « GitHub Actions ».
+#   - Settings → Secrets and variables → Actions : secret RELEASES_TOKEN = token fine-grained en lecture seule
+#     (« Contents: read ») sur les dépôts des projets, pour lire leurs releases (dépôts privés compris).
+#     Sans ce secret, le build garde src/data/releases.json tel qu'il est dans le dépôt.
 name: Déploiement GitHub Pages
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Versions des projets (src/data/releases.json) relues chaque jour, 5 h 17 UTC.
+  schedule:
+    - cron: '17 5 * * *'
 
 permissions:
   contents: read
@@ -26,6 +33,10 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      # Dernières releases de chaque projet ; n'échoue jamais (avertissement et fichier existant conservé).
+      - run: npm run releases
+        env:
+          GH_TOKEN: ${{ secrets.RELEASES_TOKEN }}
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

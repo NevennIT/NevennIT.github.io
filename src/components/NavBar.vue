@@ -2,6 +2,8 @@
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import TriskellMark from './TriskellMark.vue'
 import ThemeToggle from './ThemeToggle.vue'
+import LangToggle from './LangToggle.vue'
+import { t } from '../i18n'
 import { navLinks } from '../config'
 
 // Nav flottante : ombre après défilement, repli en descendant, retour en remontant, lien de la section visible actif.
@@ -34,14 +36,17 @@ onBeforeUnmount(() => { removeEventListener('scroll', onScroll); if (io) io.disc
 
 <template>
   <header class="nv-nav" :class="{ 'is-scrolled': scrolled, 'is-hidden': hidden }" @focusin="hidden = false">
-    <a class="nv-wordmark" href="#accueil" aria-label="NevennIT, retour à l'accueil">
+    <a class="nv-wordmark" href="#accueil" :aria-label="t('a11y.home')">
       <TriskellMark /><span class="nv-wordmark__text">Nevenn<span class="nv-wordmark__it">IT</span></span>
     </a>
-    <nav class="nv-nav__links small" aria-label="Sections">
+    <nav class="nv-nav__links small" :aria-label="t('a11y.sections')">
       <a v-for="link in navLinks" :key="link.href" :href="link.href" :aria-current="active === link.href ? 'true' : undefined">
-        {{ link.label }}
+        {{ t('nav.' + link.key) }}
       </a>
     </nav>
-    <ThemeToggle />
+    <div class="nv-nav__tools">
+      <LangToggle />
+      <ThemeToggle />
+    </div>
   </header>
 </template>
