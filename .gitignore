@@ -3,3 +3,6 @@ dist/
 .vite/
 *.log
 .DS_Store
+
+# Empreinte des releases, générée au déploiement (voir .github/workflows/deploy.yml)
+public/releases-signature.txt

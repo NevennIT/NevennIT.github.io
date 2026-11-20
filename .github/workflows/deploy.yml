@@ -1,4 +1,5 @@
-# Construit le site (Vite) et le publie sur GitHub Pages à chaque push sur main, et chaque jour pour rafraîchir les versions.
+# Construit le site (Vite) et le publie sur GitHub Pages : à chaque push sur main, à la demande, et dès qu'une
+# application publie une nouvelle version (vérification toutes les heures, redéploiement seulement si ça a changé).
 # Prérequis, une seule fois :
 #   - Settings → Pages → Build and deployment → Source : « GitHub Actions ».
 #   - Settings → Secrets and variables → Actions : secret RELEASES_TOKEN = token fine-grained en lecture seule
@@ -10,21 +11,49 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-  # Versions des projets (src/data/releases.json) relues chaque jour, 5 h 17 UTC.
+  # Versions des projets relues toutes les heures (à la 23e minute ; GitHub peut décaler un peu).
   schedule:
-    - cron: '17 5 * * *'
+    - cron: '23 * * * *'
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Un déploiement à la fois ; les suivants attendent (une vérification horaire n'annule jamais un déploiement en cours).
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
+  # Passage programmé : compare l'empreinte des releases à celle du site en ligne (releases-signature.txt).
+  # Identiques → rien à faire ; différentes (nouvelle version, notes modifiées) → build et déploiement.
+  check:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.compare.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # Le script n'a pas de dépendance npm : pas besoin de npm ci ici.
+      - run: node scripts/fetch-releases.mjs
+        env:
+          GH_TOKEN: ${{ secrets.RELEASES_TOKEN }}
+      - id: compare
+        run: |
+          now=$(jq -S .repos src/data/releases.json | sha256sum | cut -d' ' -f1)
+          live=$(curl -fsSL https://nevennit.github.io/releases-signature.txt || echo absent)
+          echo "En ligne : $live"
+          echo "Actuel   : $now"
+          if [ "$now" = "$live" ]; then echo "changed=false" >> "$GITHUB_OUTPUT"; else echo "changed=true" >> "$GITHUB_OUTPUT"; fi
+
   build:
+    needs: check
+    # Toujours pour un push ou un lancement manuel ; pour le passage programmé, seulement si les versions ont changé.
+    if: ${{ !cancelled() && (github.event_name != 'schedule' || needs.check.outputs.changed == 'true') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,6 +66,8 @@ jobs:
       - run: npm run releases
         env:
           GH_TOKEN: ${{ secrets.RELEASES_TOKEN }}
+      # Empreinte des releases publiée avec le site : la vérification horaire la compare.
+      - run: jq -S .repos src/data/releases.json | sha256sum | cut -d' ' -f1 > public/releases-signature.txt
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -44,6 +75,7 @@ jobs:
 
   deploy:
     needs: build
+    if: ${{ !cancelled() && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages

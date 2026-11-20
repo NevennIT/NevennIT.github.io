@@ -37,7 +37,7 @@ Avec « réduire les animations » activé dans le système, Lenis, les inclinai
 
 ## Versions et téléchargements
 
-Les dépôts des applications sont privés : `npm run releases` (lancé par le déploiement) lit leurs dernières releases avec un token et les écrit dans `src/data/releases.json` (versions, dates, notes ; aucune URL de fichier privé). À faire une fois : créer un token GitHub *fine-grained* en lecture seule (**Contents : Read**) sur les dépôts des projets et l'enregistrer dans ce dépôt comme secret Actions `RELEASES_TOKEN`. Sans lui, le fichier commité est gardé tel quel. En local : `GH_TOKEN=$(gh auth token) npm run releases`.
+Les dépôts des applications sont privés : `npm run releases` (lancé par le déploiement) lit leurs dernières releases avec un token et les écrit dans `src/data/releases.json` (versions, dates, notes ; aucune URL de fichier privé). À faire une fois : créer un token GitHub *fine-grained* en lecture seule (**Contents : Read**) sur les dépôts des projets et l'enregistrer dans ce dépôt comme secret Actions `RELEASES_TOKEN`. Sans lui, le fichier commité est gardé tel quel. Une nouvelle version publiée dans un dépôt apparaît sur le site dans l'heure : le déploiement vérifie les releases toutes les heures et ne republie le site que si elles ont changé. En local : `GH_TOKEN=$(gh auth token) npm run releases`.
 
 Les téléchargements gratuits passent par un dépôt **public** qui ne contient que les installateurs (ex. [NevennIT/lost-desktop-releases](https://github.com/NevennIT/lost-desktop-releases)), alimenté par la CI du dépôt privé. Dans `projects.js`, `download: { soon: true }` affiche « Bientôt disponible » et `download: { buy: 'https://…' }` un bouton d'achat.
 
