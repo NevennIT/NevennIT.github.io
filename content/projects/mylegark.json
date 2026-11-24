@@ -1,0 +1,30 @@
+{
+  "id": "mylegark",
+  "order": 10,
+  "title": "MyLegArk",
+  "year": "2026",
+  "type": "desktop",
+  "status": "in-progress",
+  "feature": true,
+  "description": {
+    "fr": "Coffre-fort chiffré pour la vie administrative d'un foyer : patrimoine, assurances, papiers et rappels. Tout reste sur le PC, sans compte ni cloud.",
+    "en": "Encrypted vault for a household's paperwork: assets, insurance, documents and reminders. Everything stays on the PC, with no account and no cloud."
+  },
+  "tags": [
+    "Rust",
+    "Tauri",
+    "Vue.js",
+    "TypeScript"
+  ],
+  "images": [
+    "/projects/mylegark-1.webp",
+    "/projects/mylegark-2.webp",
+    "/projects/mylegark-3.webp",
+    "/projects/mylegark-4.webp"
+  ],
+  "repo": "NevennIT/MyLegArk",
+  "publicRepo": false,
+  "download": {
+    "mode": "soon"
+  }
+}

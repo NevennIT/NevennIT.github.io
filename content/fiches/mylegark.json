@@ -1,0 +1,313 @@
+{
+  "id": "mylegark",
+  "tagline": {
+    "fr": "Le patrimoine, les assurances et les papiers d'un foyer, chiffrés sur le PC, sans compte ni cloud.",
+    "en": "A household's assets, insurance and paperwork, encrypted on the PC, with no account and no cloud."
+  },
+  "platforms": [
+    "Windows"
+  ],
+  "overview": {
+    "fr": [
+      "La vie administrative d'un foyer est éparpillée : contrats d'assurance, papiers d'identité, comptes, crédits, garanties, échéances à ne pas rater. Les services qui centralisent tout ça demandent en général de confier ces données à un serveur. MyLegArk prend le parti inverse : une application de bureau, un coffre chiffré par installation, et aucune connexion réseau.",
+      "Le contenu est rangé en rubriques. Quatre sont fournies (Patrimoine, Assurances, Papiers, Contacts) et chacun peut en ajouter, vides ou à partir d'une bibliothèque de quinze modèles (banque, abonnements, santé, véhicules…). Toutes les dates alimentent un même moteur de rappels, les documents PDF et images sont chiffrés un par un, et une sauvegarde complète tient dans un seul fichier, lui aussi chiffré.",
+      "L'application vise des personnes qui ne sont pas informaticiennes : un assistant au premier lancement, un enregistrement automatique, un Kit de secours à imprimer en cas d'oubli du mot de passe et un manuel d'utilisation de 36 pages. L'installateur peut être donné tel quel : chaque installation crée son propre coffre et l'exécutable ne contient rien de personnel.",
+      "La version 0.5.2 est sortie en novembre 2026, avec un installateur Windows et le manuel en PDF. Une application Android est en cours : elle ne permet que la consultation, en ouvrant la dernière sauvegarde du PC."
+    ],
+    "en": [
+      "A household's paperwork is scattered everywhere: insurance contracts, ID documents, bank accounts, loans, warranties, deadlines you should not miss. Services that gather all of it usually ask you to hand that data over to a server. MyLegArk goes the other way: a desktop app, one encrypted vault per installation, and no network access at all.",
+      "Content is organised in sections. Four come built in (Assets, Insurance, Papers, Contacts), and you can add your own, either empty or from a library of fifteen templates (bank, subscriptions, health, vehicles and so on). Every date feeds the same reminder engine, PDF and image documents are encrypted one by one, and a full backup fits in a single file that is encrypted as well.",
+      "The app is aimed at people who are not tech-savvy: a setup wizard on first launch, automatic saving, a printable recovery kit in case the password is forgotten, and a 36-page user manual. The installer can be handed to someone else as is: each installation creates its own vault, and the executable holds nothing personal.",
+      "Version 0.5.2 came out in November 2026, with a Windows installer and the PDF manual. An Android app is in progress: it is read-only and opens the latest backup made on the PC."
+    ]
+  },
+  "features": [
+    {
+      "title": {
+        "fr": "Coffre chiffré et déverrouillage",
+        "en": "Encrypted vault and unlocking"
+      },
+      "text": {
+        "fr": "Mot de passe maître avec jauge de robustesse et générateur de phrase de passe, clé de récupération imprimable, Windows Hello en option. Verrouillage automatique après inactivité (avec compte à rebours) ou par Ctrl+L, et délais croissants après cinq essais ratés.",
+        "en": "Master password with a strength meter and a passphrase generator, a printable recovery key, optional Windows Hello. Automatic lock after inactivity (with a countdown) or with Ctrl+L, and growing delays after five failed attempts."
+      }
+    },
+    {
+      "title": {
+        "fr": "Rubriques et fiches sur mesure",
+        "en": "Custom sections and records"
+      },
+      "text": {
+        "fr": "Un moteur de fiches commun : montants, dates avec rappel, périodes, membres du foyer, téléphones, adresses, liens web, fichiers joints, liens vers d'autres fiches, champs calculés. Catégories, champs affichés selon la catégorie, séparateurs, dispositions par catégorie. Un champ dont le libellé évoque un code PIN ou un mot de passe est refusé.",
+        "en": "One record engine for everything: amounts, dates with reminders, periods, household members, phone numbers, addresses, web links, attached files, links to other records, computed fields. Categories, fields shown per category, separators, per-category layouts. A field whose label looks like a PIN or a password is refused."
+      }
+    },
+    {
+      "title": {
+        "fr": "Bibliothèque de modèles",
+        "en": "Template library"
+      },
+      "text": {
+        "fr": "Quinze modèles de rubriques livrés avec l'application (Banque, Crédits, Abonnements, Garanties, Santé, Véhicules, Si je ne suis plus là…), avec choix des champs avant l'installation. Une rubrique peut être enregistrée comme modèle et partagée en fichier .mlarkmodel, qui ne contient que sa structure, jamais de données.",
+        "en": "Fifteen section templates ship with the app (Bank, Loans, Subscriptions, Warranties, Health, Vehicles, If I am no longer here…), and you pick the fields before installing one. Any section can be saved as a template and shared as a .mlarkmodel file, which holds its structure only, never any data."
+      }
+    },
+    {
+      "title": {
+        "fr": "Patrimoine et assurances",
+        "en": "Assets and insurance"
+      },
+      "text": {
+        "fr": "Historique de valeur daté pour chaque bien, total consolidé, variation sur un an, répartition par catégorie et par membre. Pour les contrats d'assurance, la date limite de résiliation est calculée à partir de l'échéance et du préavis.",
+        "en": "Dated value history for each asset, consolidated total, one-year change, breakdown by category and by member. For insurance contracts, the cancellation deadline is computed from the renewal date and the notice period."
+      }
+    },
+    {
+      "title": {
+        "fr": "Rappels et accueil",
+        "en": "Reminders and home screen"
+      },
+      "text": {
+        "fr": "Toute date avec rappel, dans n'importe quelle rubrique, remonte sur l'accueil et dans la cloche de la barre du haut : échéances des douze prochains mois, papiers à renouveler, dépenses récurrentes. Un rappel se reporte ou se marque comme fait ; une date annuelle passe seule à l'occurrence suivante.",
+        "en": "Any date with a reminder, in any section, shows up on the home screen and in the bell of the top bar: deadlines for the next twelve months, documents to renew, recurring expenses. A reminder can be snoozed or marked as done; a yearly date moves on to its next occurrence by itself."
+      }
+    },
+    {
+      "title": {
+        "fr": "Documents chiffrés",
+        "en": "Encrypted documents"
+      },
+      "text": {
+        "fr": "PDF et images glissés n'importe où sur la fenêtre, chiffrés un par un, affichés déchiffrés en mémoire seulement, avec miniature. Les photos lourdes et les PDF scannés sont allégés à l'ajout (redessinés en WebP ou en JPEG), et la copie n'est gardée que si elle est nettement plus légère.",
+        "en": "PDFs and images dropped anywhere on the window, encrypted one by one, shown decrypted in memory only, with a thumbnail. Heavy photos and scanned PDFs are slimmed down on import (redrawn as WebP or JPEG), and the copy is only kept when it is clearly smaller."
+      }
+    },
+    {
+      "title": {
+        "fr": "Recherche dans tout le coffre",
+        "en": "Search across the vault"
+      },
+      "text": {
+        "fr": "Ctrl+F cherche dans les titres, les notes et tous les champs tels qu'ils s'affichent, accents et majuscules ignorés, avec des filtres par rubrique, catégorie, membre et période. La recherche d'une rubrique pardonne les fautes de frappe.",
+        "en": "Ctrl+F searches titles, notes and every field as it is displayed, ignoring accents and case, with filters by section, category, member and period. The search inside a section forgives typos."
+      }
+    },
+    {
+      "title": {
+        "fr": "Sauvegarde et restauration",
+        "en": "Backup and restore"
+      },
+      "text": {
+        "fr": "Une sauvegarde .mlarkbak contient le coffre et les documents tels qu'ils sont sur le disque, donc déjà chiffrés. Sauvegarde automatique facultative à chaque verrouillage, par exemple dans OneDrive, avec un nombre de copies gardées réglable. Une restauration vérifie tout avant de toucher au dossier et met de côté le coffre existant au lieu de le supprimer.",
+        "en": "A .mlarkbak backup holds the vault and the documents exactly as they are stored on disk, so already encrypted. Optional automatic backup on every lock, for example into OneDrive, with a configurable number of copies kept. A restore checks everything before touching the folder, and sets the existing vault aside instead of deleting it."
+      }
+    },
+    {
+      "title": {
+        "fr": "Transmettre des fiches",
+        "en": "Handing records over"
+      },
+      "text": {
+        "fr": "Pour un enfant qui part avec son propre coffre ou un proche qui partage un contrat : les fiches choisies partent avec leurs documents dans un paquet .mlarkpack, chiffré avec un code de six mots à usage unique. À l'import, les rubriques et les personnes sont rapprochées de celles du coffre qui reçoit, sans rien remplacer.",
+        "en": "For a child leaving with their own vault, or a relative who shares a contract: the selected records travel with their documents in a .mlarkpack package, encrypted with a one-time six-word code. On import, sections and people are matched with those of the receiving vault, and nothing is overwritten."
+      }
+    },
+    {
+      "title": {
+        "fr": "Synthèse PDF et Excel",
+        "en": "PDF and Excel summary"
+      },
+      "text": {
+        "fr": "Ctrl+P produit une synthèse imprimable ou un classeur Excel (un onglet par rubrique, échéances, montants et dates typés). L'application prévient avant de la produire : ces fichiers ne sont pas chiffrés.",
+        "en": "Ctrl+P produces a printable summary or an Excel workbook (one sheet per section, deadlines, typed amounts and dates). The app warns before producing it: those files are not encrypted."
+      }
+    },
+    {
+      "title": {
+        "fr": "Suivi des véhicules",
+        "en": "Vehicle tracking"
+      },
+      "text": {
+        "fr": "Plan d'entretien avec jauges au kilométrage et au temps, relevés du compteur et rythme estimé, contrôle technique avec contre-visite, carnet de carburant (consommation, prix au litre), coût mensuel et au kilomètre, et un tableau de bord avec une tuile par véhicule.",
+        "en": "Maintenance plan with mileage and time gauges, odometer readings and an estimated pace, roadworthiness tests with re-inspections, a fuel log (consumption, price per litre), monthly and per-kilometre cost, and a dashboard with one tile per vehicle."
+      }
+    },
+    {
+      "title": {
+        "fr": "Agenda, carte et apparence",
+        "en": "Calendar, map and appearance"
+      },
+      "text": {
+        "fr": "Une date peut être envoyée à l'agenda (fichier .ics, Outlook classique, Outlook.com ou Google Agenda) et une adresse ouverte sur une carte : seulement au clic, par le navigateur ou par Windows. Sept thèmes de couleur et un éditeur de thème, avec des contrastes vérifiés.",
+        "en": "A date can be sent to a calendar (.ics file, classic Outlook, Outlook.com or Google Calendar) and an address opened on a map: only on click, through the browser or Windows. Seven colour themes and a theme editor, with checked contrast ratios."
+      }
+    }
+  ],
+  "roadmap": [
+    {
+      "fr": "Terminer l'application Android en consultation seule (ouverture de la dernière sauvegarde, déverrouillage par empreinte).",
+      "en": "Finish the read-only Android app (opening the latest backup, fingerprint unlock)."
+    },
+    {
+      "fr": "Traduire en anglais les textes des quinze modèles de rubriques (l'interface, elle, est déjà bilingue).",
+      "en": "Translate the fifteen section templates into English (the interface itself is already bilingual)."
+    }
+  ],
+  "tech": {
+    "stack": [
+      {
+        "name": "Tauri 2",
+        "role": {
+          "fr": "fenêtre de bureau (WebView2) et application Android à partir du même code",
+          "en": "desktop window (WebView2) and Android app from the same code"
+        }
+      },
+      {
+        "name": "Rust",
+        "role": {
+          "fr": "coffre, chiffrement, fichiers, sauvegardes, Windows Hello, presse-papiers",
+          "en": "vault, encryption, files, backups, Windows Hello, clipboard"
+        }
+      },
+      {
+        "name": "RustCrypto",
+        "role": {
+          "fr": "argon2, chacha20poly1305 et zeroize",
+          "en": "argon2, chacha20poly1305 and zeroize"
+        }
+      },
+      {
+        "name": "Vue 3 + TypeScript",
+        "role": {
+          "fr": "interface et logique métier (TypeScript strict)",
+          "en": "interface and business logic (strict TypeScript)"
+        }
+      },
+      {
+        "name": "Pinia",
+        "role": {
+          "fr": "état de l'interface",
+          "en": "interface state"
+        }
+      },
+      {
+        "name": "Naive UI",
+        "role": {
+          "fr": "composants, avec une couche de design maison",
+          "en": "components, with a custom design layer on top"
+        }
+      },
+      {
+        "name": "vue-i18n",
+        "role": {
+          "fr": "interface en français et en anglais",
+          "en": "French and English interface"
+        }
+      },
+      {
+        "name": "pdf.js",
+        "role": {
+          "fr": "miniatures, allègement des scans, lecture des PDF sur Android",
+          "en": "thumbnails, scan slimming, PDF reading on Android"
+        }
+      },
+      {
+        "name": "Vitest, cargo test",
+        "role": {
+          "fr": "tests du noyau TypeScript et du backend Rust",
+          "en": "tests for the TypeScript core and the Rust backend"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "title": {
+          "fr": "Architecture",
+          "en": "Architecture"
+        },
+        "text": {
+          "fr": [
+            "Le front sépare un noyau de logique pure (dossier core, sans dépendance à Vue ni à Tauri) de l'interface. Le noyau reçoit ses dépendances par des interfaces (stockage, chiffrement, horloge, documents), ce qui permet de le tester seul.",
+            "Côté Rust, le service du coffre est construit sur des traits pour la dérivation de clé, le stockage et le temps : tout le cycle de vie (création, déverrouillage, récupération, délais après échec) est testé en mémoire avec des paramètres Argon2 allégés. Les erreurs remontent sous forme de code et de paramètres, traduits côté interface, et un test vérifie que ce contrat ne bouge pas.",
+            "Pour travailler sur l'interface sans Tauri, un mock navigateur respecte le même contrat de commandes et chiffre lui aussi ce qu'il range (PBKDF2 et AES-GCM via WebCrypto), avec un coffre de démonstration fictif."
+          ],
+          "en": [
+            "The front end keeps a pure logic core (the core folder, with no dependency on Vue or Tauri) apart from the interface. The core gets its dependencies through interfaces (storage, encryption, clock, documents), so it can be tested on its own.",
+            "On the Rust side, the vault service is built on traits for key derivation, storage and time: the whole lifecycle (creation, unlocking, recovery, delays after failures) is tested in memory with lighter Argon2 parameters. Errors travel as a code plus parameters and are translated by the interface, and a test makes sure that contract does not drift.",
+            "To work on the interface without Tauri, a browser mock follows the same command contract and also encrypts what it stores (PBKDF2 and AES-GCM through WebCrypto), with a fictitious demo vault."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Le chiffrement",
+          "en": "Encryption"
+        },
+        "text": {
+          "fr": [
+            "Une clé de données aléatoire de 256 bits chiffre le coffre et chaque document (XChaCha20-Poly1305, nonce aléatoire de 192 bits à chaque écriture). Elle est enveloppée deux fois : par une clé dérivée du mot de passe maître et par une clé dérivée de la clé de récupération (Argon2id, 64 Mio, 3 passes). Changer de mot de passe revient donc à ré-envelopper la clé, sans rien rechiffrer.",
+            "Chaque usage a ses propres données associées (enveloppe du mot de passe, de la récupération, données, document avec son identifiant) : un bloc chiffré ne peut pas être déplacé d'un usage à l'autre, et un document renommé ou échangé ne s'ouvre pas. Les paramètres Argon2 sont stockés dans l'en-tête pour pouvoir être renforcés plus tard, et bornés à la lecture pour qu'un en-tête modifié ne puisse pas faire allouer des gigaoctets.",
+            "La clé ne quitte jamais le processus Rust. Elle vit dans un type qui n'est ni copiable ni affichable et qui efface sa mémoire (zeroize) au verrouillage."
+          ],
+          "en": [
+            "A random 256-bit data key encrypts the vault and every document (XChaCha20-Poly1305, a fresh random 192-bit nonce on every write). It is wrapped twice: by a key derived from the master password and by a key derived from the recovery key (Argon2id, 64 MiB, 3 passes). Changing the password therefore means re-wrapping the key, with nothing re-encrypted.",
+            "Each use has its own associated data (password wrap, recovery wrap, data, document with its id): an encrypted block cannot be moved from one use to another, and a renamed or swapped document will not open. Argon2 parameters are stored in the header so they can be raised later, and bounded on read so that a tampered header cannot make the app allocate gigabytes.",
+            "The key never leaves the Rust process. It lives in a type that can be neither copied nor printed, and that wipes its memory (zeroize) when the vault locks."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Ne rien laisser fuiter en clair",
+          "en": "Leaking nothing in clear text"
+        },
+        "text": {
+          "fr": [
+            "Chiffrer le fichier ne suffit pas : il faut aussi fermer les sorties de la WebView. Le menu clic droit de WebView2 est désactivé (son « Enregistrer sous » écrirait en clair ce qui est affiché) et remplacé dans les champs par un menu propre à l'application. Les copies passent par Rust pour rester hors de l'historique du presse-papiers de Windows et de sa synchronisation cloud, et un secret copié est effacé au bout de 30 secondes.",
+            "Un fichier ajouté est lu par le backend depuis son chemin : son contenu en clair ne transite pas par l'interface, et son type est vérifié sur le contenu, pas sur l'extension. La CSP interdit toute ressource distante. Les liens téléphone, e-mail et web sont vérifiés deux fois (interface puis Rust) avant d'être confiés à Windows. Seule exception assumée : le fichier .ics d'un rendez-vous, écrit dans le cache privé de l'application et supprimé deux minutes plus tard."
+          ],
+          "en": [
+            "Encrypting the file is not enough: the web view's own exits have to be closed too. WebView2's right-click menu is turned off (its Save as would write what is displayed in clear text) and replaced in text fields by the app's own menu. Copies go through Rust so they stay out of the Windows clipboard history and its cloud sync, and a copied secret is wiped after 30 seconds.",
+            "An added file is read by the backend from its path: its clear content never travels through the interface, and its type is checked on the content, not the extension. The CSP forbids any remote resource. Phone, e-mail and web links are checked twice (interface, then Rust) before being handed to Windows. The one deliberate exception: the .ics file of an appointment, written to the app's private cache and deleted two minutes later."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Fichiers, sauvegardes et biométrie",
+          "en": "Files, backups and biometrics"
+        },
+        "text": {
+          "fr": [
+            "Chaque écriture est atomique (fichier temporaire, fsync, renommage) et la version précédente du coffre est gardée : si le fichier est endommagé, elle est utilisée et remise en place. La version de développement utilise un coffre et des préférences à part, pour qu'un coffre de test ne se retrouve jamais à la place du vrai.",
+            "Une sauvegarde est faite sans rien déchiffrer : les enregistrements sont copiés tels quels, accompagnés d'un manifeste scellé avec la clé de données. Une restauration vérifie que le coffre s'ouvre, que chaque document s'authentifie et que le manifeste correspond exactement, avant de toucher au dossier.",
+            "Windows Hello crée une clé dans le TPM du PC et signe un défi ; cette signature enveloppe une copie de la clé de données, rangée hors du coffre et de ses sauvegardes, donc utilisable sur ce PC seulement. Sur Android, le même principe repose sur l'Android Keystore avec une biométrie forte exigée à chaque usage."
+          ],
+          "en": [
+            "Every write is atomic (temporary file, fsync, rename) and the previous version of the vault is kept: if the file is damaged, that version is used and put back. The development build uses its own vault and preferences, so a test vault never ends up where the real one lives.",
+            "A backup is made without decrypting anything: records are copied as they are, along with a manifest sealed with the data key. A restore checks that the vault opens, that every document authenticates and that the manifest matches exactly, before touching the folder.",
+            "Windows Hello creates a key in the PC's TPM and signs a challenge; that signature wraps a copy of the data key, stored outside the vault and its backups, so it only works on that PC. On Android, the same idea relies on the Android Keystore, with strong biometrics required on every use."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Tests, build et distribution",
+          "en": "Tests, build and distribution"
+        },
+        "text": {
+          "fr": [
+            "Le noyau TypeScript est couvert par plus de quarante fichiers de tests Vitest (champs, rappels, recherche, transmission, véhicules, migration du coffre…), le backend par cargo test, et vue-tsc vérifie les types.",
+            "L'installateur Windows (NSIS) s'installe pour l'utilisateur seul, sans droits administrateur. Il n'est pas signé, faute de certificat : chaque release publie l'empreinte SHA-256 de l'exécutable, et le README explique comment passer l'avertissement de Windows. Le manuel est écrit en HTML, converti en PDF avec Edge en mode headless, et livré aussi dans l'application (touche F1)."
+          ],
+          "en": [
+            "The TypeScript core is covered by more than forty Vitest test files (fields, reminders, search, handover, vehicles, vault migration…), the backend by cargo test, and vue-tsc checks the types.",
+            "The Windows installer (NSIS) installs for the current user only, with no admin rights. It is not code-signed, for lack of a certificate: each release publishes the SHA-256 hash of the executable, and the README explains how to get past the Windows warning. The manual is written in HTML, turned into a PDF with headless Edge, and also ships inside the app (F1 key)."
+          ]
+        }
+      }
+    ]
+  },
+  "history": [],
+  "media": []
+}

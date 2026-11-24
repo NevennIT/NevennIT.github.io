@@ -6,3 +6,4 @@ dist/
 
 # Empreinte des releases, générée au déploiement (voir .github/workflows/deploy.yml)
 public/releases-signature.txt
+public/versions.json

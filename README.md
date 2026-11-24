@@ -13,17 +13,22 @@ npm run dev
 
 ## Modifier le contenu
 
+Le plus simple : **Pages CMS** (https://app.pagescms.org, connexion avec GitHub), des formulaires pour les projets, les fiches détaillées, le parcours et les textes. Chaque enregistrement met le site à jour tout seul. Mode d'emploi pas à pas : [docs/guide-portfolio.pdf](docs/guide-portfolio.pdf).
+
+À la main, tout le contenu est en JSON dans `content/` (détail dans [content/README.md](content/README.md)) :
+
 | Quoi | Où |
 | --- | --- |
-| Projets (titre, phrase, type, statut, stack, captures, téléchargement) | `src/data/projects.js` — captures dans `public/projects/` |
-| Captures : conversion en WebP 1600 × 1000 | `npm run images` (PNG/JPG de `public/projects/` → `.webp`) |
-| Textes de l'interface, en français et en anglais | `src/i18n/messages/` |
-| Liens, e-mail, service du formulaire, sections affichées | `src/config.js` |
-| Fiches détaillées (modal : aperçu, fonctionnalités, technique, médias, vidéos) | `src/data/details/<id>.js` — schéma dans `src/data/details/README.md` |
-| Parcours (expériences, formation, compétences) | `src/data/parcours.js` ; affiché en ligne quand `sections.parcours` vaut `true` |
-| Liens de la navigation | `navLinks` dans `src/config.js` |
+| Projets (cartes de la grille) | `content/projects/<id>.json` — captures dans `public/projects/` |
+| Fiches détaillées (aperçu, fonctionnalités, technique, vidéos) | `content/fiches/<id>.json` |
+| Parcours | `content/parcours.json` (`visible` : affiché sur le site publié) |
+| E-mail, formulaire, phrases d'accueil | `content/site.json` |
+| Autres textes de l'interface (FR/EN) | `src/i18n/messages/` |
+| Captures : conversion en WebP 1600 × 1000 | `npm run images` (aussi fait au déploiement) |
 
-Le formulaire de contact poste vers un service tiers (GitHub Pages ne sait pas envoyer de mail) : créer un formulaire sur [Formspree](https://formspree.io), puis coller son URL dans `formEndpoint`. Tant que ce champ est vide, le formulaire indique qu'il n'est pas encore relié.
+## Suivi
+
+Page privée, absente du menu : [nevennit.github.io/#/suivi](https://nevennit.github.io/#/suivi) — versions affichées, téléchargements, déploiements et historique du site. Chaque nouvelle version en ligne ouvre (et referme) un ticket dans ce dépôt : GitHub l'envoie par e-mail si le dépôt est suivi (**Watch → All Activity**).
 
 ## Design system
 

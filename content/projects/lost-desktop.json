@@ -1,0 +1,30 @@
+{
+  "id": "lost-desktop",
+  "order": 20,
+  "title": "Lost Desktop",
+  "year": "2026",
+  "type": "desktop",
+  "status": "available",
+  "feature": false,
+  "description": {
+    "fr": "Rapatrie les fenêtres perdues sur un écran débranché ou éteint, et restaure la disposition de vos fenêtres, applications fermées comprises.",
+    "en": "Brings back windows lost on an unplugged or turned-off monitor, and restores your window layout, closed apps included."
+  },
+  "tags": [
+    "Rust",
+    "Tauri",
+    "Vue.js",
+    "Win32"
+  ],
+  "images": [
+    "/projects/lost-desktop-1.webp",
+    "/projects/lost-desktop-2.webp"
+  ],
+  "repo": "NevennIT/lost-desktop",
+  "publicRepo": false,
+  "download": {
+    "mode": "free",
+    "releases": "NevennIT/lost-desktop-releases",
+    "asset": "_x64-setup\\.exe$"
+  }
+}

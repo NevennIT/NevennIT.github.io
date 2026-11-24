@@ -19,6 +19,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  issues: write # notification « nouvelle version en ligne » (ticket ouvert puis fermé : GitHub envoie l'e-mail)
 
 # Un déploiement à la fois ; les suivants attendent (une vérification horaire n'annule jamais un déploiement en cours).
 concurrency:
@@ -52,6 +53,8 @@ jobs:
 
   build:
     needs: check
+    outputs:
+      new: ${{ steps.versions.outputs.new }}
     # Toujours pour un push ou un lancement manuel ; pour le passage programmé, seulement si les versions ont changé.
     if: ${{ !cancelled() && (github.event_name != 'schedule' || needs.check.outputs.changed == 'true') }}
     runs-on: ubuntu-latest
@@ -68,6 +71,13 @@ jobs:
           GH_TOKEN: ${{ secrets.RELEASES_TOKEN }}
       # Empreinte des releases publiée avec le site : la vérification horaire la compare.
       - run: jq -S .repos src/data/releases.json | sha256sum | cut -d' ' -f1 > public/releases-signature.txt
+      # Versions publiées (public/versions.json) et liste des nouvelles depuis le site en ligne, pour la notification.
+      - id: versions
+        run: |
+          curl -fsSL https://nevennit.github.io/versions.json -o "$RUNNER_TEMP/live-versions.json" || true
+          node scripts/version-diff.mjs "$RUNNER_TEMP/live-versions.json"
+      # Captures envoyées depuis Pages CMS en PNG/JPG : converties en WebP (références mises à jour pour ce build).
+      - run: npm run images
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -83,3 +93,23 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Une notification par nouvelle version en ligne : un ticket ouvert puis aussitôt fermé dans ce dépôt.
+  # GitHub l'envoie par e-mail (à condition de « suivre » le dépôt : Watch → All Activity, voir le guide).
+  notify:
+    needs: [build, deploy]
+    if: ${{ !cancelled() && needs.deploy.result == 'success' && needs.build.outputs.new != '' && needs.build.outputs.new != '[]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEW: ${{ needs.build.outputs.new }}
+        run: |
+          echo "$NEW" | jq -c '.[]' | while read -r v; do
+            title=$(echo "$v" | jq -r '.title'); tag=$(echo "$v" | jq -r '.tag'); id=$(echo "$v" | jq -r '.id')
+            body="La version **$tag** de **$title** est maintenant affichée sur le portfolio : https://nevennit.github.io/#/projet/$id
+
+          Suivi de toutes les versions : https://nevennit.github.io/#/suivi"
+            url=$(gh issue create -R "$GITHUB_REPOSITORY" --title "$title $tag en ligne" --body "$body")
+            gh issue close "$url" --reason completed
+          done

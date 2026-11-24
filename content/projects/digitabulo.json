@@ -1,0 +1,29 @@
+{
+  "id": "digitabulo",
+  "order": 40,
+  "title": "Digitabulo",
+  "year": "2026",
+  "type": "desktop",
+  "status": "in-progress",
+  "feature": false,
+  "description": {
+    "fr": "Inventaire d'une collection de dés à coudre : fiches, photos, import depuis Excel, recherche, catalogues HTML et PDF, et même un modèle 3D tiré des photos.",
+    "en": "Inventory for a thimble collection: records, photos, Excel import, search, HTML and PDF catalogues, and even a 3D model built from photos."
+  },
+  "tags": [
+    "Rust",
+    "Tauri",
+    "Vue.js"
+  ],
+  "images": [
+    "/projects/digitabulo-1.webp",
+    "/projects/digitabulo-2.webp",
+    "/projects/digitabulo-3.webp",
+    "/projects/digitabulo-4.webp"
+  ],
+  "repo": "NevennIT/digitabulo",
+  "publicRepo": false,
+  "download": {
+    "mode": "soon"
+  }
+}
