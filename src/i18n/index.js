@@ -4,6 +4,7 @@
 //   locale                       'fr' | 'en', réactif ; setLocale / toggleLocale le changent
 // Langue : choix mémorisé (localStorage nv-lang), sinon langue du navigateur ; posée sur <html lang> par index.html.
 import { ref, watch } from 'vue'
+import site from '/content/site.json'
 
 export const LOCALES = ['fr', 'en']
 const KEY = 'nv-lang'
@@ -13,6 +14,21 @@ const root = document.documentElement
 const files = import.meta.glob('./messages/*.js', { eager: true, import: 'default' })
 const dict = { fr: {}, en: {} }
 for (const file of Object.values(files)) for (const l of LOCALES) Object.assign(dict[l], flatten(file[l] || {}))
+
+// Textes modifiables depuis Pages CMS (content/site.json) : ils remplacent les messages correspondants s'ils sont remplis.
+const EDITABLE = {
+  heroTagline: 'hero.tagline',
+  projectsTitle: 'projects.title',
+  projectsLead: 'projects.lead',
+  parcoursTitle: 'parcours.title',
+  parcoursLead: 'parcours.lead',
+  contactTitle: 'contact.title',
+  contactLead: 'contact.lead',
+}
+for (const [field, key] of Object.entries(EDITABLE)) {
+  const v = site.texts && site.texts[field]
+  for (const l of LOCALES) if (v && v[l] && v[l].trim()) dict[l][key] = v[l]
+}
 
 function flatten(obj, prefix = '', out = {}) {
   for (const [k, v] of Object.entries(obj)) {

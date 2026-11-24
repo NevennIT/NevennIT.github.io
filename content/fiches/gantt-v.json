@@ -1,0 +1,337 @@
+{
+  "id": "gantt-v",
+  "tagline": {
+    "fr": "Transforme une extraction de tableur en planning de fabrication vertical, qu'on réorganise à la souris.",
+    "en": "Turns a spreadsheet export into a vertical production schedule that you rearrange with the mouse."
+  },
+  "platforms": [
+    "Windows"
+  ],
+  "overview": {
+    "fr": [
+      "Le projet part d'un outil Excel écrit en VBA en 2021 pour un atelier de fabrication : à partir d'une extraction de l'ERP (SAP), des macros dessinaient les ordres de fabrication en rectangles sur une feuille de planning, avec une ligne par jour et une colonne par ligne de production.",
+      "Gantt-V reprend cette idée dans une application de bureau qui n'est plus liée à un fichier précis. Elle lit une extraction quelconque (Excel, ODS ou CSV), devine quelles colonnes portent le groupe, le début, la fin et l'identifiant de chaque ligne, puis construit un Gantt vertical : le temps descend à gauche, chaque valeur du groupe devient une colonne, chaque ligne de l'extraction devient un bloc. Les chevauchements sont signalés en rouge.",
+      "Le planning se réorganise ensuite à la souris (déplacer, redimensionner, pousser les blocs suivants, verrouiller), accepte des blocs ajoutés à la main comme les arrêts ou les nettoyages, et se met à jour avec une nouvelle extraction sans perdre les modifications manuelles. Il s'exporte en PDF, en Excel, en image ou en page web autonome.",
+      "L'application est en développement, dans un contexte industriel, et n'a pas encore de version publiée."
+    ],
+    "en": [
+      "The project started as an Excel tool written in VBA in 2021 for a manufacturing workshop: from an ERP export (SAP), macros drew the production orders as rectangles on a schedule sheet, one row per day and one column per production line.",
+      "Gantt-V carries that idea over to a desktop app that is no longer tied to one specific file. It reads any export (Excel, ODS or CSV), guesses which columns hold the group, the start, the end and the id of each row, then builds a vertical Gantt chart: time runs down the left side, each group value becomes a column, each row of the export becomes a block. Overlaps are flagged in red.",
+      "The schedule can then be rearranged with the mouse (move, resize, push the following blocks, lock), takes blocks added by hand such as stops or cleanings, and can be updated with a new export without losing manual changes. It exports to PDF, Excel, an image or a standalone web page.",
+      "The app is under development, in an industrial setting, and has no published release yet."
+    ]
+  },
+  "features": [
+    {
+      "title": {
+        "fr": "Import et assistant de correspondance",
+        "en": "Import and mapping wizard"
+      },
+      "text": {
+        "fr": "Fichiers xlsx, xlsm, xlsb, xls, ods et csv, par glisser-déposer. La ligne d'en-têtes est détectée, les types devinés, et les colonnes groupe, début, fin et clé proposées automatiquement (en-têtes français ou anglais, date et heure dans deux colonnes séparées). La correspondance est mémorisée pour les fichiers qui ont les mêmes en-têtes et reste corrigeable à la main.",
+        "en": "xlsx, xlsm, xlsb, xls, ods and csv files, by drag and drop. The header row is detected, types are guessed, and the group, start, end and key columns are suggested automatically (French or English headers, date and time in two separate columns). The mapping is remembered for files with the same headers, and can always be fixed by hand."
+      }
+    },
+    {
+      "title": {
+        "fr": "Planning vertical",
+        "en": "Vertical schedule"
+      },
+      "text": {
+        "fr": "Axe du temps et en-têtes collants, zoom continu ancré sous le curseur, de l'heure à la semaine. Week-ends et jours fériés français colorés, ligne « maintenant », option de fond coloré par mois.",
+        "en": "Sticky time axis and headers, continuous zoom anchored under the cursor, from hours to weeks. Weekends and French public holidays are shaded, with a now line and an optional month-coloured background."
+      }
+    },
+    {
+      "title": {
+        "fr": "Chevauchements",
+        "en": "Overlaps"
+      },
+      "text": {
+        "fr": "Deux blocs d'une même colonne qui se recouvrent font apparaître une zone rouge hachurée sur l'intervalle commun. Un compteur et une liste cliquable mènent à chaque conflit. Une fin égale au début du bloc suivant n'est pas un chevauchement.",
+        "en": "Two blocks in the same column that overlap show a red hatched area over the shared interval. A counter and a clickable list lead to each conflict. An end equal to the start of the next block is not an overlap."
+      }
+    },
+    {
+      "title": {
+        "fr": "Édition à la souris",
+        "en": "Editing with the mouse"
+      },
+      "text": {
+        "fr": "Glisser un bloc dans le temps ou vers une autre colonne, le redimensionner par ses bords, avec un magnétisme réglable (Alt pour s'en passer). Maj + glisser pousse les blocs gênés en cascade, avec un aperçu fantôme validé au relâchement. Verrouillage, sélection multiple au lasso, notes, annuler et rétablir avec historique.",
+        "en": "Drag a block in time or to another column, resize it by its edges, with adjustable snapping (hold Alt to bypass it). Shift + drag pushes the blocks in the way as a cascade, with a ghost preview applied on release. Locking, lasso multi-selection, notes, undo and redo with history."
+      }
+    },
+    {
+      "title": {
+        "fr": "Blocs manuels",
+        "en": "Manual blocks"
+      },
+      "text": {
+        "fr": "Arrêts, nettoyages, maintenances… créés d'un double-clic, avec des types configurables (nom, couleur, icône, durée par défaut). Ils suivent la même règle de chevauchement. Un bloc de l'extraction peut aussi être copié avec toutes ses données.",
+        "en": "Stops, cleanings, maintenance… created with a double-click, with configurable types (name, colour, icon, default duration). They follow the same overlap rule. A block from the export can also be copied along with all its data."
+      }
+    },
+    {
+      "title": {
+        "fr": "Mise à jour par une nouvelle extraction",
+        "en": "Updating from a new export"
+      },
+      "text": {
+        "fr": "Une nouvelle extraction est fusionnée avec le planning par l'identifiant de chaque ligne, avec un rapport : lignes ajoutées, supprimées, modifiées, et en conflit avec une modification manuelle. Un ordre peut être archivé, puis restauré.",
+        "en": "A new export is merged into the schedule using each row’s id, with a report: rows added, removed, changed, and in conflict with a manual edit. An order can be archived, then restored."
+      }
+    },
+    {
+      "title": {
+        "fr": "Disposition et vues enregistrées",
+        "en": "Layout and saved views"
+      },
+      "text": {
+        "fr": "Ordre, couleur et largeur des colonnes, séparateurs, groupes nommés repliables, colonnes repliées en bande étroite. Une disposition et le contenu des blocs s'enregistrent comme profil, dans le planning ou dans une bibliothèque de l'application, et s'appliquent à d'autres données.",
+        "en": "Column order, colour and width, separators, named collapsible groups, columns folded into a narrow strip. A layout and the block content can be saved as a profile, in the schedule or in an app-wide library, and applied to other data."
+      }
+    },
+    {
+      "title": {
+        "fr": "Contenu des blocs",
+        "en": "Block content"
+      },
+      "text": {
+        "fr": "Choix des champs affichés et de leurs libellés, titre, alignement, conversion d'unités par champ (kilogrammes en tonnes, durées…), surbrillance animée, pinceau pour reproduire la mise en forme d'un bloc sur d'autres.",
+        "en": "Choice of the displayed fields and their labels, title, alignment, per-field unit conversion (kilograms to tonnes, durations…), animated highlighting, and a format painter to copy one block’s look onto others."
+      }
+    },
+    {
+      "title": {
+        "fr": "Recherche avancée",
+        "en": "Advanced search"
+      },
+      "text": {
+        "fr": "Ctrl+F dans les blocs, puis des filtres combinés en ET / OU (texte, nombres dans l'unité affichée, dates, période du bloc, durée, type, colonne, état), avec une couleur par filtre, une synthèse des résultats et des recherches enregistrées.",
+        "en": "Ctrl+F across blocks, then filters combined with AND / OR (text, numbers in the displayed unit, dates, block period, duration, type, column, state), with one colour per filter, a summary of the results and saved searches."
+      }
+    },
+    {
+      "title": {
+        "fr": "Exports et impression",
+        "en": "Exports and printing"
+      },
+      "text": {
+        "fr": "PDF vectoriel avec texte sélectionnable, vue d'impression (format, découpage par jour, semaine ou mois, légende, niveaux de gris, choix des pages), image PNG, classeur Excel avec le planning dessiné en formes et une feuille de données reliées par des liens, et page HTML autonome avec zoom, recherche et détail des blocs.",
+        "en": "Vector PDF with selectable text, a print view (paper size, split by day, week or month, legend, greyscale, page selection), PNG image, an Excel workbook with the schedule drawn as shapes plus a data sheet linked to it, and a standalone HTML page with zoom, search and block details."
+      }
+    }
+  ],
+  "roadmap": [
+    {
+      "fr": "Tables de référence jointes à l’extraction et modèles de texte avec calculs dans les blocs.",
+      "en": "Reference tables joined to the export, and text templates with calculations inside blocks."
+    },
+    {
+      "fr": "Cadences par ligne : durée recalculée quand un bloc change de colonne.",
+      "en": "Rates per line: duration recomputed when a block moves to another column."
+    },
+    {
+      "fr": "Comparaison de deux extractions, avec les décalages mis en évidence.",
+      "en": "Comparing two exports, with the shifts highlighted."
+    },
+    {
+      "fr": "Indicateurs de charge (par jour, semaine, ligne) et mini-carte de navigation.",
+      "en": "Load indicators (per day, week, line) and a navigation minimap."
+    }
+  ],
+  "tech": {
+    "stack": [
+      {
+        "name": "Rust",
+        "role": {
+          "fr": "lecture des classeurs, détection des en-têtes, fichiers projet, export Excel",
+          "en": "reading workbooks, header detection, project files, Excel export"
+        }
+      },
+      {
+        "name": "calamine",
+        "role": {
+          "fr": "lecture xlsx, xlsm, xlsb, xls et ods",
+          "en": "reading xlsx, xlsm, xlsb, xls and ods"
+        }
+      },
+      {
+        "name": "csv + encoding_rs",
+        "role": {
+          "fr": "fichiers texte : encodage et séparateur détectés",
+          "en": "text files: detected encoding and delimiter"
+        }
+      },
+      {
+        "name": "rust_xlsxwriter",
+        "role": {
+          "fr": "classeur exporté (formes, liens, cellules typées)",
+          "en": "exported workbook (shapes, links, typed cells)"
+        }
+      },
+      {
+        "name": "Tauri 2",
+        "role": {
+          "fr": "fenêtre de bureau sans bordure native, dialogues",
+          "en": "desktop window without native frame, dialogs"
+        }
+      },
+      {
+        "name": "Vue 3 + TypeScript",
+        "role": {
+          "fr": "grille du planning et noyau de logique testé",
+          "en": "schedule grid and tested logic core"
+        }
+      },
+      {
+        "name": "Pinia, Naive UI, vue-i18n",
+        "role": {
+          "fr": "état, composants, français et anglais",
+          "en": "state, components, French and English"
+        }
+      },
+      {
+        "name": "jsPDF",
+        "role": {
+          "fr": "PDF vectoriel",
+          "en": "vector PDF"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "title": {
+          "fr": "Architecture",
+          "en": "Architecture"
+        },
+        "text": {
+          "fr": [
+            "Le backend Rust s'occupe de tout ce qui touche aux fichiers : lecture des classeurs et des CSV, détection de la ligne d'en-têtes, fichier projet (JSON), préférences et export Excel. Toutes les écritures sont atomiques (fichier temporaire, vidage sur disque, renommage) : un plantage ou un export raté ne laisse jamais de fichier à moitié écrit.",
+            "Côté interface, un noyau TypeScript pur concentre la logique (temps, jours fériés, chevauchements, correspondance des colonnes, construction des blocs, cascade, filtres, unités) et il est testé avec Vitest. Un mode navigateur, alimenté par des fichiers de test, permet de travailler sur l'interface sans lancer Tauri."
+          ],
+          "en": [
+            "The Rust backend handles everything that touches files: reading workbooks and CSVs, detecting the header row, the project file (JSON), preferences and the Excel export. Every write is atomic (temporary file, flush to disk, rename): a crash or a failed export never leaves a half-written file behind.",
+            "On the interface side, a pure TypeScript core holds the logic (time, public holidays, overlaps, column mapping, block building, cascade, filters, units), and it is tested with Vitest. A browser mode fed with test files makes it possible to work on the interface without running Tauri."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Lire des extractions imparfaites",
+          "en": "Reading imperfect exports"
+        },
+        "text": {
+          "fr": [
+            "Les extractions réelles sont rarement propres. La ligne d'en-têtes n'est pas toujours la première : elle est choisie par une heuristique (beaucoup de textes distincts, suivis de lignes de données de largeur comparable). La correspondance des colonnes s'appuie sur des mots-clés français et anglais, avec des mots qui disqualifient certains en-têtes (une « unité de mesure » n'est pas un groupe, une « quantité commandée » n'est pas une clé).",
+            "Les dates arrivent en numéros de série Excel, en texte dans plusieurs formats ou en date et heure séparées. Certains exports d'ERP produisent des fichiers .xls qui sont en réalité du texte délimité : ils sont reconnus. Pour les CSV, l'encodage (BOM, UTF-8, sinon Windows-1252) et le séparateur le plus régulier sont détectés."
+          ],
+          "en": [
+            "Real exports are rarely clean. The header row is not always the first one: it is picked by a heuristic (many distinct text cells, followed by data rows of similar width). Column mapping relies on French and English keywords, with words that rule some headers out (a unit of measure is not a group, an ordered quantity is not a key).",
+            "Dates come as Excel serial numbers, as text in several formats, or as separate date and time columns. Some ERP exports produce .xls files that are actually delimited text: those are recognised. For CSVs, the encoding (BOM, UTF-8, otherwise Windows-1252) and the most consistent delimiter are detected."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Le temps sans fuseau",
+          "en": "Time without time zones"
+        },
+        "text": {
+          "fr": [
+            "Un planning raisonne en heure murale : un ordre prévu à 6 h doit rester à 6 h, en heure d'été comme en heure d'hiver. Chaque instant est donc stocké comme un nombre de millisecondes traité comme s'il était en UTC, à partir du jour zéro des dates Excel, et tous les calculs passent par les fonctions UTC. Résultat : jamais de journée de 23 ou 25 heures lors des changements d'heure.",
+            "Les jours fériés français sont calculés, y compris ceux qui dépendent de Pâques, au lieu d'être stockés dans une table."
+          ],
+          "en": [
+            "A schedule thinks in wall-clock time: an order planned at 6 am has to stay at 6 am, in summer time as in winter time. Every instant is therefore stored as a number of milliseconds treated as if it were UTC, counted from day zero of Excel dates, and every calculation uses the UTC functions. As a result, there is never a 23- or 25-hour day when the clocks change.",
+            "French public holidays are computed, including those that depend on Easter, rather than stored in a table."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Une grille fluide",
+          "en": "A smooth grid"
+        },
+        "text": {
+          "fr": [
+            "Les chevauchements sont calculés par un balayage des blocs triés de chaque colonne, ce qui permet de ne recalculer que la colonne touchée pendant un déplacement. Au-delà d'un certain nombre de blocs, la grille n'affiche que ceux de la fenêtre de temps visible, découpée en tranches pour que les listes ne changent qu'en franchissant une limite. Le défilement, le zoom et le suivi du pointeur passent par requestAnimationFrame."
+          ],
+          "en": [
+            "Overlaps are computed by sweeping the sorted blocks of each column, so only the touched column needs recomputing during a drag. Past a certain number of blocks, the grid only renders those in the visible time window, cut into chunks so the lists only change when a boundary is crossed. Scrolling, zooming and pointer tracking go through requestAnimationFrame."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Un seul code de dessin pour les exports",
+          "en": "One drawing code for every export"
+        },
+        "text": {
+          "fr": [
+            "Les exports image, impression et PDF partagent le même code de rendu, écrit pour l'API Canvas 2D. Pour le PDF, une petite couche réimplémente le sous-ensemble de cette API utilisé par le rendu et le traduit en tracés vectoriels et en vrai texte dans jsPDF : le même dessin donne une image pour le PNG et l'aperçu, et un PDF net à tous les zooms dont le texte se sélectionne et se recherche.",
+            "Le classeur Excel est construit en mémoire avant d'être écrit : une feuille dessine le planning en formes, comme l'outil d'origine, et une feuille de données liste les lignes replanifiées, avec des liens dans les deux sens. L'export HTML est une page autonome dont le script est assemblé à partir de fonctions sérialisées ; les textes venus des données n'y passent que par textContent."
+          ],
+          "en": [
+            "The image, print and PDF exports share the same rendering code, written for the Canvas 2D API. For PDF, a thin layer reimplements the subset of that API the renderer uses and turns it into vector paths and real text in jsPDF: the same drawing gives an image for the PNG and the preview, and a PDF that stays sharp at any zoom, with text you can select and search.",
+            "The Excel workbook is built in memory before being written: one sheet draws the schedule as shapes, like the original tool, and a data sheet lists the rescheduled rows, with links both ways. The HTML export is a standalone page whose script is assembled from serialised functions; text coming from the data only ever goes through textContent."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Tests et données",
+          "en": "Tests and data"
+        },
+        "text": {
+          "fr": [
+            "Le noyau, les stores et les exports (PDF vectoriel, impression, Excel, HTML) sont couverts par Vitest ; le backend par cargo test, dont un contrat des codes d'erreur et des tests d'export qui inspectent le classeur produit. Le dépôt ne contient que des fichiers d'exemple synthétiques, dont un avec des chevauchements volontaires : aucune donnée de production."
+          ],
+          "en": [
+            "The core, the stores and the exports (vector PDF, printing, Excel, HTML) are covered by Vitest; the backend by cargo test, including an error-code contract and export tests that inspect the produced workbook. The repository only holds synthetic sample files, one of them with deliberate overlaps: no production data."
+          ]
+        }
+      }
+    ]
+  },
+  "history": [
+    {
+      "year": "2021",
+      "title": {
+        "fr": "Excel Schedule, add-in VBA",
+        "en": "Excel Schedule, a VBA add-in"
+      },
+      "text": {
+        "fr": "Première version dans Excel : à partir d'une extraction SAP, des macros VBA dessinent les ordres de fabrication en rectangles sur une feuille où chaque ligne est un jour et chaque colonne une ligne de production.",
+        "en": "First version inside Excel: from a SAP export, VBA macros draw the production orders as rectangles on a sheet where each row is a day and each column a production line."
+      },
+      "image": ""
+    },
+    {
+      "year": "2026",
+      "title": {
+        "fr": "Gantt-V, application de bureau",
+        "en": "Gantt-V, a desktop app"
+      },
+      "text": {
+        "fr": "Refonte avec Tauri, Rust et Vue : n'importe quelle extraction, édition à la souris, mise à jour sans perdre les modifications manuelles, recherche avancée et exports PDF, Excel, PNG et HTML.",
+        "en": "Rewrite with Tauri, Rust and Vue: any export, mouse editing, updates that keep manual changes, advanced search, and PDF, Excel, PNG and HTML exports."
+      },
+      "image": ""
+    }
+  ],
+  "media": [
+    {
+      "type": "image",
+      "image": "/projects/Excel-Schedule-1.webp",
+      "video": "",
+      "poster": "",
+      "id": "",
+      "caption": {
+        "fr": "Excel Schedule (2021), la version VBA d'origine.",
+        "en": "Excel Schedule (2021), the original VBA version."
+      }
+    }
+  ]
+}

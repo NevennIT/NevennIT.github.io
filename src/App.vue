@@ -1,4 +1,5 @@
 <script setup>
+import { ref, onMounted, onBeforeUnmount, defineAsyncComponent } from 'vue'
 import NavBar from './components/NavBar.vue'
 import HeroSection from './components/HeroSection.vue'
 import ProjectsSection from './components/ProjectsSection.vue'
@@ -11,6 +12,13 @@ import { sections } from './config'
 import { useSmoothScroll } from './composables/useSmoothScroll'
 
 useSmoothScroll()
+
+// Page de suivi (#/suivi) : chargée seulement quand on l'ouvre.
+const SuiviPage = defineAsyncComponent(() => import('./components/SuiviPage.vue'))
+const suivi = ref(location.hash === '#/suivi')
+const onHash = () => { suivi.value = location.hash === '#/suivi' }
+onMounted(() => addEventListener('hashchange', onHash))
+onBeforeUnmount(() => removeEventListener('hashchange', onHash))
 </script>
 
 <template>
@@ -28,4 +36,5 @@ useSmoothScroll()
   <TriskellFlight />
   <!-- Fiche projet détaillée : s'ouvre sur #/projet/<id>. -->
   <ProjectModal />
+  <SuiviPage v-if="suivi" />
 </template>

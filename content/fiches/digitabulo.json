@@ -1,0 +1,300 @@
+{
+  "id": "digitabulo",
+  "tagline": {
+    "fr": "L'inventaire d'une collection de dés à coudre : fiches, photos, recherche, imports et catalogues à partager.",
+    "en": "An inventory for a thimble collection: records, photos, search, imports and shareable catalogues."
+  },
+  "platforms": [
+    "Windows"
+  ],
+  "overview": {
+    "fr": [
+      "Digitabulo gère une collection de dés à coudre. Il a été conçu pour une vraie collection de plus d'un millier de pièces, jusque-là suivie dans un tableur Excel.",
+      "Chaque dé a sa fiche : numéro d'inventaire, dimensions, fabricant ou poinçon, pays, ville et région d'origine, époque, matières, décors, provenance, prix payé, valeur estimée, état, emplacement, photos et historique des changements. La collection s'affiche en grille, en tableau ou en liste, avec une recherche plein texte, des filtres à facettes et des tris rapides.",
+      "Une base est un dossier autonome (une base SQLite, les photos et les sauvegardes), facile à copier ou à sauvegarder. Il n'y a pas de chiffrement : seulement un verrou par mot de passe, facultatif, pour éviter les modifications par mégarde.",
+      "La version 0.2.0 est construite (installateurs NSIS et MSI). Depuis, un visualiseur 3D reconstitue la forme et l'aspect d'un dé à partir de photos prises en tournant autour. L'interface n'existe qu'en français pour l'instant."
+    ],
+    "en": [
+      "Digitabulo manages a collection of sewing thimbles. It was built for a real collection of more than a thousand pieces that had been kept in an Excel spreadsheet until then.",
+      "Each thimble has its record: inventory number, dimensions, maker or hallmark, country, city and region of origin, era, materials, decorations, provenance, price paid, estimated value, condition, storage place, photos and a history of changes. The collection is shown as a grid, a table or a list, with full-text search, faceted filters and quick sorts.",
+      "A database is a self-contained folder (a SQLite database, the photos and the backups), easy to copy or back up. There is no encryption: only an optional password lock, to prevent accidental changes.",
+      "Version 0.2.0 is built (NSIS and MSI installers). Since then, a 3D viewer rebuilds the shape and look of a thimble from photos taken all around it. The interface is French only for now."
+    ]
+  },
+  "features": [
+    {
+      "title": {
+        "fr": "Fiches des dés",
+        "en": "Thimble records"
+      },
+      "text": {
+        "fr": "Listes de valeurs modifiables (catégories, matières, décors, provenances, états, emplacements), pays pré-remplis, villes en saisie semi-automatique, étiquettes, brouillon enregistré pendant la saisie, corbeille. Un doublon probable (même nom ou presque, même ville, mêmes matières) est signalé pendant qu'on tape, sans bloquer.",
+        "en": "Editable value lists (categories, materials, decorations, provenances, conditions, storage places), pre-filled countries, cities with autocompletion, tags, a draft saved while typing, a trash bin. A probable duplicate (same or nearly the same name, same city, same materials) is flagged as you type, without blocking."
+      }
+    },
+    {
+      "title": {
+        "fr": "Photos",
+        "en": "Photos"
+      },
+      "text": {
+        "fr": "Import par glisser-déposer, étiquettes (face, dessus, intérieur, marques), photo principale, vignettes WebP générées en parallèle et visionneuse avec zoom. Les photos d'un tour complet forment une vue en rotation à 360°.",
+        "en": "Drag-and-drop import, labels (front, top, inside, marks), main photo, WebP thumbnails generated in parallel, and a viewer with zoom. Photos of a full turn make up a 360° spinning view."
+      }
+    },
+    {
+      "title": {
+        "fr": "Modèle 3D",
+        "en": "3D model"
+      },
+      "text": {
+        "fr": "À partir des photos du tour, l'application mesure la silhouette du dé, en déduit son profil, peint sa surface avec les photos et ajoute le relief (alvéoles des dés de couture, détails lus dans les ombres et lumières). Le modèle se manipule à la souris.",
+        "en": "From the turn photos, the app measures the thimble’s silhouette, derives its profile, paints its surface with the photos and adds relief (the dimples of sewing thimbles, details read from light and shade). The model can be handled with the mouse."
+      }
+    },
+    {
+      "title": {
+        "fr": "Parcourir la collection",
+        "en": "Browsing the collection"
+      },
+      "text": {
+        "fr": "Grille, tableau ou liste, avec une bascule animée où les photos glissent vers leur nouvelle place. Recherche plein texte qui ignore les accents, filtres à facettes avec compteurs, filtres enregistrés, tris rapides configurables (Alt+1 à Alt+9), champs affichés réglables.",
+        "en": "Grid, table or list, with an animated switch where photos glide to their new place. Accent-insensitive full-text search, faceted filters with counts, saved filters, configurable quick sorts (Alt+1 to Alt+9), adjustable visible fields."
+      }
+    },
+    {
+      "title": {
+        "fr": "Import depuis un tableur",
+        "en": "Importing from a spreadsheet"
+      },
+      "text": {
+        "fr": "Plusieurs fichiers à la fois (CSV, Excel, JSON ou une autre base Digitabulo), correspondance des colonnes enregistrable en modèle, traitement des doublons (ignorer, fusionner ou créer, ligne par ligne ou en masse), rapport détaillé et possibilité d'annuler un import entier.",
+        "en": "Several files at once (CSV, Excel, JSON or another Digitabulo database), column mappings that can be saved as templates, duplicate handling (skip, merge or create, row by row or in bulk), a detailed report and the option to undo a whole import."
+      }
+    },
+    {
+      "title": {
+        "fr": "Saisie en série et comparaison",
+        "en": "Batch entry and comparison"
+      },
+      "text": {
+        "fr": "Le mode série garde les champs épinglés d'un dé à l'autre pour enchaîner les saisies. Deux dés peuvent être comparés côte à côte, différences surlignées.",
+        "en": "Batch mode keeps pinned fields from one thimble to the next, to enter many in a row. Two thimbles can be compared side by side, with differences highlighted."
+      }
+    },
+    {
+      "title": {
+        "fr": "Tableau de bord",
+        "en": "Dashboard"
+      },
+      "text": {
+        "fr": "Nombre de dés, part avec photo, total payé, valeur estimée et plus-value, répartitions par pays, régions, villes, matières, époques et états, acquisitions par année et derniers ajouts. Un clic ouvre la collection filtrée.",
+        "en": "Number of thimbles, share with a photo, total paid, estimated value and gain, breakdowns by country, region, city, material, era and condition, acquisitions per year and latest additions. A click opens the collection filtered accordingly."
+      }
+    },
+    {
+      "title": {
+        "fr": "Liste de souhaits",
+        "en": "Wishlist"
+      },
+      "text": {
+        "fr": "Les dés recherchés, avec budget et priorité. « Marquer comme acquis » ouvre une fiche de dé pré-remplie.",
+        "en": "Wanted thimbles, with a budget and a priority. Marking one as acquired opens a pre-filled thimble record."
+      }
+    },
+    {
+      "title": {
+        "fr": "Exports et catalogues",
+        "en": "Exports and catalogues"
+      },
+      "text": {
+        "fr": "Tableur Excel ou CSV réimportable, catalogue imprimable ou en PDF (fiches avec photo ou liste compacte, prix masquables) et catalogue HTML en un seul fichier, qui s'ouvre sans Internet avec recherche, filtres et fiches. Sa taille est estimée en direct, et seules les informations cochées sont écrites dans le fichier.",
+        "en": "Re-importable Excel or CSV spreadsheet, a printable or PDF catalogue (cards with photos or a compact list, prices can be hidden), and a single-file HTML catalogue that opens offline with search, filters and records. Its size is estimated live, and only the ticked fields are written into the file."
+      }
+    },
+    {
+      "title": {
+        "fr": "Sauvegardes",
+        "en": "Backups"
+      },
+      "text": {
+        "fr": "Sauvegardes ZIP manuelles ou automatiques avec rotation, restauration dans un nouveau dossier, copie de sécurité avant toute migration de la base.",
+        "en": "Manual or automatic ZIP backups with rotation, restore into a new folder, and a safety copy before any database migration."
+      }
+    },
+    {
+      "title": {
+        "fr": "Confort",
+        "en": "Everyday comfort"
+      },
+      "text": {
+        "fr": "Annuler et rétablir, palette de commandes (Ctrl+K), aide des raccourcis (F1), navigation entre les fiches au clavier, assistant de bienvenue et visite guidée, plusieurs bases avec une liste des bases récentes, thème clair ou sombre avec couleur d'accent.",
+        "en": "Undo and redo, a command palette (Ctrl+K), a shortcut help screen (F1), keyboard navigation between records, a welcome wizard and a guided tour, several databases with a recent list, light or dark theme with an accent colour."
+      }
+    }
+  ],
+  "roadmap": [],
+  "tech": {
+    "stack": [
+      {
+        "name": "Rust",
+        "role": {
+          "fr": "workspace en couches : domaine, cas d’usage, infrastructure",
+          "en": "layered workspace: domain, use cases, infrastructure"
+        }
+      },
+      {
+        "name": "SQLite (rusqlite)",
+        "role": {
+          "fr": "base embarquée, recherche plein texte FTS5, migrations",
+          "en": "embedded database, FTS5 full-text search, migrations"
+        }
+      },
+      {
+        "name": "Tauri 2 + tauri-specta",
+        "role": {
+          "fr": "application de bureau et commandes typées générées en TypeScript",
+          "en": "desktop app and typed commands generated as TypeScript"
+        }
+      },
+      {
+        "name": "image, webp, rayon",
+        "role": {
+          "fr": "vignettes WebP en parallèle, modèle 3D",
+          "en": "parallel WebP thumbnails, 3D model"
+        }
+      },
+      {
+        "name": "calamine, csv, rust_xlsxwriter",
+        "role": {
+          "fr": "imports et exports de tableurs",
+          "en": "spreadsheet import and export"
+        }
+      },
+      {
+        "name": "Vue 3 + TypeScript",
+        "role": {
+          "fr": "interface, en TypeScript strict",
+          "en": "interface, in strict TypeScript"
+        }
+      },
+      {
+        "name": "Naive UI, Pinia, vue-router",
+        "role": {
+          "fr": "composants, état, navigation",
+          "en": "components, state, navigation"
+        }
+      },
+      {
+        "name": "TanStack Virtual",
+        "role": {
+          "fr": "grille et liste virtualisées",
+          "en": "virtualised grid and list"
+        }
+      },
+      {
+        "name": "three.js",
+        "role": {
+          "fr": "visualiseur 3D, chargé à la demande",
+          "en": "3D viewer, loaded on demand"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "title": {
+          "fr": "Architecture",
+          "en": "Architecture"
+        },
+        "text": {
+          "fr": [
+            "Le Rust est un workspace de trois crates : domain (règles pures, sans entrée-sortie), application (cas d'usage et ports, sous forme de traits) et infrastructure (SQLite, fichiers, images, imports, exports). Le sens des dépendances est garanti par le compilateur. La couche Tauri reste mince : des commandes qui appellent les services, et une seule racine de composition qui assemble le tout à l'ouverture d'une base.",
+            "L'interface suit le même découpage : domaine en TypeScript (miroir testé des règles Rust), services, et passerelles injectées. Il existe deux jeux de passerelles, l'un vers Tauri, l'autre en mémoire : le second fait tourner l'interface dans un simple navigateur, avec une base de démonstration ou une base synthétique de plus de mille dés pour mesurer le rendu."
+          ],
+          "en": [
+            "The Rust side is a workspace of three crates: domain (pure rules, no I/O), application (use cases and ports, as traits) and infrastructure (SQLite, files, images, imports, exports). The direction of dependencies is enforced by the compiler. The Tauri layer stays thin: commands that call the services, and a single composition root that wires everything together when a database is opened.",
+            "The interface follows the same split: a TypeScript domain (a tested mirror of the Rust rules), services, and injected gateways. There are two sets of gateways, one talking to Tauri and one in memory: the latter runs the interface in a plain browser, with a demo database or a synthetic one of over a thousand thimbles to measure rendering."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Un contrat typé de bout en bout",
+          "en": "A typed contract end to end"
+        },
+        "text": {
+          "fr": [
+            "Les types échangés et les fonctions d'appel des commandes sont générés depuis Rust par tauri-specta : aucun nom de commande n'est écrit à la main côté interface, et un changement de signature se voit à la compilation TypeScript. Les erreurs remontent sous forme de codes traduits par l'interface."
+          ],
+          "en": [
+            "The exchanged types and the functions that call the commands are generated from Rust by tauri-specta: no command name is ever typed by hand on the interface side, and a signature change shows up when TypeScript compiles. Errors come back as codes that the interface translates."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Les données",
+          "en": "The data"
+        },
+        "text": {
+          "fr": [
+            "Une base est un dossier : la base SQLite, les photos (originaux, vignettes de 320 px, copies de 1 600 px pour la visionneuse) et les sauvegardes. Les chemins enregistrés sont relatifs, donc le dossier se déplace sans casse. Les montants sont stockés en centimes, les suppressions sont logiques (corbeille), et chaque dé a un identifiant stable pour pouvoir être reconnu lors d'un réimport.",
+            "Le schéma évolue par migrations numérotées, précédées d'une copie de sécurité. Les photos sont servies à l'interface par un protocole personnalisé plutôt qu'encodées dans les réponses. Le modèle 3D est une donnée dérivée, recalculée quand les photos ou les dimensions changent et laissée hors des sauvegardes."
+          ],
+          "en": [
+            "A database is a folder: the SQLite database, the photos (originals, 320 px thumbnails, 1600 px copies for the viewer) and the backups. Stored paths are relative, so the folder can be moved without breaking anything. Amounts are stored in cents, deletions are soft (trash bin), and each thimble has a stable id so it can be recognised on re-import.",
+            "The schema evolves through numbered migrations, each preceded by a safety copy. Photos reach the interface through a custom protocol rather than being encoded into responses. The 3D model is derived data, rebuilt when the photos or dimensions change, and left out of backups."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Reconstituer un dé en 3D",
+          "en": "Rebuilding a thimble in 3D"
+        },
+        "text": {
+          "fr": [
+            "Un dé est presque un solide de révolution : sa forme se résume à un profil, le rayon à chaque hauteur. Ce profil est mesuré sur la silhouette du dé dans chaque photo du tour. La surface est ensuite peinte en reprojetant chaque photo sur le côté qui faisait face à l'appareil, les vues les plus frontales pesant le plus.",
+            "Le relief est ajouté par une carte de normales : les alvéoles des dés de couture, disposées en rangées qui se resserrent vers le sommet, et les détails lus dans la lumière des photos (un filtre passe-haut sur la luminosité). Sans photos du tour, un dé standard est construit à partir des dimensions de la fiche."
+          ],
+          "en": [
+            "A thimble is almost a solid of revolution: its shape boils down to a profile, the radius at each height. That profile is measured on the thimble’s silhouette in every photo of the turn. The surface is then painted by projecting each photo back onto the side that faced the camera, with the most head-on views weighing the most.",
+            "Relief is added through a normal map: the dimples of sewing thimbles, laid out in rows that close in towards the top, and details read from the light in the photos (a high-pass filter on brightness). Without turn photos, a standard thimble is built from the dimensions in the record."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Rapidité et accessibilité",
+          "en": "Speed and accessibility"
+        },
+        "text": {
+          "fr": [
+            "Les temps ont été mesurés sur une copie d'une vraie base d'environ 1 200 dés : recherche, tris et facettes en moins de 5 ms, tableau de bord en moins de 10 ms. Côté interface, les listes sont remplacées en bloc plutôt que modifiées en place, et le tableau a perdu ses infobulles par cellule, qui coûtaient une centaine de millisecondes à chaque tri.",
+            "Les contrastes de toutes les couleurs d'accent sont vérifiés par des tests (au moins 4,5:1 pour le texte), le focus est toujours visible, le tableau se parcourt au clavier, et la bascule animée entre les vues s'efface quand le système demande de réduire les animations."
+          ],
+          "en": [
+            "Timings were measured on a copy of a real database of about 1,200 thimbles: search, sorts and facets in under 5 ms, dashboard in under 10 ms. On the interface side, lists are replaced as a whole rather than modified in place, and the table lost its per-cell tooltips, which cost about a hundred milliseconds on every sort.",
+            "Contrast ratios for every accent colour are checked by tests (at least 4.5:1 for text), focus is always visible, the table can be navigated with the keyboard, and the animated view switch steps aside when the system asks for reduced motion."
+          ]
+        }
+      },
+      {
+        "title": {
+          "fr": "Tests et distribution",
+          "en": "Tests and distribution"
+        },
+        "text": {
+          "fr": [
+            "Les règles du domaine, les services (avec des dépôts factices en mémoire) et l'infrastructure (migrations, imports, catalogue HTML, sauvegardes, images, modèle 3D) ont leurs tests Rust ; l'interface a plus de deux cents tests Vitest. Les installateurs NSIS et MSI s'installent pour l'utilisateur courant et embarquent WebView2. Il n'y a pas de mise à jour automatique : une nouvelle version s'installe par-dessus l'ancienne, les données restent en place."
+          ],
+          "en": [
+            "Domain rules, services (with in-memory fake repositories) and infrastructure (migrations, imports, HTML catalogue, backups, images, 3D model) have their Rust tests; the interface has more than two hundred Vitest tests. The NSIS and MSI installers install for the current user and bundle WebView2. There is no automatic update: a new version installs over the old one, and the data stays in place."
+          ]
+        }
+      }
+    ]
+  },
+  "history": [],
+  "media": []
+}

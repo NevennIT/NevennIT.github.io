@@ -1,0 +1,294 @@
+# Configuration de Pages CMS (https://app.pagescms.org) : les formulaires pour modifier le portfolio depuis un navigateur.
+# Chaque « Enregistrer » crée un commit sur main, et le site se met à jour tout seul (environ 2 minutes).
+# Mode d'emploi : docs/guide-portfolio.pdf. Les fichiers modifiés sont dans content/ ; les images dans public/projects/.
+
+media:
+  - name: images
+    label: Captures et images
+    input: public/projects
+    output: /projects
+    rename: safe
+    extensions: [png, jpg, jpeg, webp]
+  - name: videos
+    label: Vidéos
+    input: public/projects/videos
+    output: /projects/videos
+    rename: safe
+    extensions: [mp4, webm]
+
+# Briques réutilisées : textes en français et en anglais.
+components:
+  bi:
+    type: object
+    fields:
+      - { name: fr, label: Français, type: string }
+      - { name: en, label: English, type: string }
+  bitext:
+    type: object
+    fields:
+      - { name: fr, label: Français, type: text }
+      - { name: en, label: English, type: text }
+  biparas:
+    type: object
+    description: Un bloc par paragraphe.
+    fields:
+      - { name: fr, label: Français, type: text, list: true }
+      - { name: en, label: English, type: text, list: true }
+
+content:
+  # ---------------------------------------------------------------- Projets (cartes de la grille)
+  - name: projects
+    label: Projets
+    type: collection
+    path: content/projects
+    format: json
+    filename:
+      template: "{fields.id}.json"
+      field: false
+    view:
+      fields: [title, year, status, order]
+      primary: title
+      sort: [order, title, year]
+      default: { sort: order, order: asc }
+    fields:
+      - name: id
+        label: Identifiant
+        type: string
+        required: true
+        pattern: { regex: "^[a-z0-9-]+$", message: "Minuscules, chiffres et tirets seulement (ex. mon-appli)." }
+        description: "Court, sans espace ni accent (ex. mon-appli). Sert dans l'adresse de la fiche (#/projet/mon-appli) et doit être le même que celui de sa fiche détaillée. Ne plus le changer une fois publié."
+      - name: title
+        label: Nom du projet
+        type: string
+        required: true
+      - name: order
+        label: Ordre d'affichage
+        type: number
+        description: "Plus petit = plus haut dans la grille (10, 20, 30… ; 15 pour en glisser un entre deux)."
+      - name: year
+        label: Année
+        type: string
+      - name: type
+        label: Type
+        type: select
+        required: true
+        options:
+          values:
+            - { name: desktop, label: Application de bureau }
+            - { name: web, label: Site web }
+            - { name: addin, label: Add-in Excel }
+      - name: status
+        label: Statut
+        type: select
+        required: true
+        description: "« En cours » affiche le badge animé sur la carte."
+        options:
+          values:
+            - { name: available, label: Disponible }
+            - { name: in-progress, label: En cours }
+            - { name: archived, label: Archivé }
+      - name: feature
+        label: À la une (carte pleine largeur en tête)
+        type: boolean
+        description: Un seul projet à la fois.
+      - name: description
+        label: Phrase de la carte
+        component: bitext
+        description: Une ou deux phrases, 180 caractères au plus.
+      - name: tags
+        label: Technologies
+        type: string
+        list: true
+        description: "Une par ligne (ex. Rust, Vue.js). Elles servent aussi au filtre « Technologie »."
+      - name: images
+        label: Captures
+        type: image
+        options: { media: images, multiple: { max: 8 } }
+        description: "Captures 16:10 (idéalement 1600 × 1000). Plusieurs = carrousel, dans cet ordre. Les PNG/JPG sont convertis en WebP au déploiement."
+      - name: repo
+        label: Dépôt GitHub
+        type: string
+        description: "NevennIT/nom-du-depot : la version et les notes de version sont lues dedans (même privé)."
+      - name: publicRepo
+        label: Dépôt public (afficher « Voir le code »)
+        type: boolean
+      - name: download
+        label: Téléchargement
+        type: object
+        fields:
+          - name: mode
+            label: Bouton
+            type: select
+            options:
+              values:
+                - { name: none, label: Aucun }
+                - { name: free, label: Téléchargement gratuit }
+                - { name: soon, label: Bientôt disponible }
+                - { name: buy, label: Lien d'achat }
+          - name: releases
+            label: Dépôt public des installateurs (si gratuit)
+            type: string
+            description: "Ex. NevennIT/lost-desktop-releases"
+          - name: asset
+            label: Fichier à proposer (si gratuit)
+            type: string
+            description: "Fin du nom du fichier, en expression régulière. Ex. _x64-setup\\.exe$"
+          - name: buy
+            label: Adresse de la page d'achat (si payant)
+            type: string
+
+  # ---------------------------------------------------------------- Fiches détaillées (la fenêtre qui s'ouvre au clic)
+  - name: fiches
+    label: Fiches détaillées
+    type: collection
+    path: content/fiches
+    format: json
+    filename:
+      template: "{fields.id}.json"
+      field: false
+    view:
+      fields: [id]
+      primary: id
+    fields:
+      - name: id
+        label: Identifiant du projet
+        type: string
+        required: true
+        description: Exactement le même que dans « Projets ».
+      - name: tagline
+        label: Accroche (sous le titre)
+        component: bitext
+      - name: platforms
+        label: Plateformes
+        type: string
+        list: true
+        description: "Ex. Windows, Android, Web"
+      - name: overview
+        label: Onglet Aperçu
+        component: biparas
+        description: "2 à 4 paragraphes : le problème, la réponse, pour qui, l'état actuel."
+      - name: features
+        label: Onglet Fonctionnalités
+        type: object
+        list: true
+        description: Laisser vide si ce n'est pas une application (l'onglet disparaît).
+        fields:
+          - { name: title, label: Titre, component: bi }
+          - { name: text, label: Description, component: bitext }
+      - name: roadmap
+        label: Prévu (pas encore fait)
+        component: bitext
+        list: true
+      - name: tech
+        label: Onglet Technique
+        type: object
+        fields:
+          - name: stack
+            label: Technologies et leur rôle
+            type: object
+            list: true
+            fields:
+              - { name: name, label: Technologie, type: string }
+              - { name: role, label: Rôle, component: bi }
+          - name: sections
+            label: Sections (architecture, choix, difficultés…)
+            type: object
+            list: true
+            fields:
+              - { name: title, label: Titre, component: bi }
+              - { name: text, label: Texte, component: biparas }
+      - name: history
+        label: Historique
+        type: object
+        list: true
+        fields:
+          - { name: year, label: Année, type: string }
+          - { name: title, label: Titre, component: bi }
+          - { name: text, label: Texte, component: bitext }
+          - { name: image, label: Image (facultative), type: image, options: { media: images } }
+      - name: media
+        label: Médias en plus des captures (vidéos…)
+        type: object
+        list: true
+        description: "Affichés après les captures de la carte, dans le diaporama de la fiche."
+        fields:
+          - name: type
+            label: Type
+            type: select
+            options:
+              values:
+                - { name: image, label: Image }
+                - { name: video, label: Vidéo (fichier MP4/WebM) }
+                - { name: youtube, label: Vidéo YouTube }
+                - { name: vimeo, label: Vidéo Vimeo }
+          - { name: image, label: Image (si type Image), type: image, options: { media: images } }
+          - { name: video, label: Fichier vidéo (si type Vidéo, 20 Mo au plus), type: file, options: { media: videos } }
+          - { name: poster, label: Vignette de la vidéo (facultative), type: image, options: { media: images } }
+          - { name: id, label: "Identifiant YouTube ou Vimeo (ex. dQw4w9WgXcQ, la fin de l'adresse)", type: string }
+          - { name: caption, label: Légende, component: bi }
+
+  # ---------------------------------------------------------------- Parcours
+  - name: parcours
+    label: Parcours
+    type: file
+    path: content/parcours.json
+    format: json
+    fields:
+      - name: visible
+        label: Afficher la section sur le site publié
+        type: boolean
+        description: "Tant que c'est décoché, la section n'apparaît qu'en local (npm run dev)."
+      - name: experiences
+        label: Expériences (la plus récente en premier)
+        type: object
+        list: true
+        fields:
+          - { name: period, label: "Période (ex. 2022 — aujourd'hui)", component: bi }
+          - { name: role, label: Poste, component: bi }
+          - { name: org, label: Entreprise, type: string }
+          - { name: place, label: Lieu, component: bi }
+          - { name: text, label: Missions, component: bitext }
+          - { name: tags, label: Outils, type: string, list: true }
+          - { name: todo, label: "Exemple à remplacer (pointillés)", type: boolean }
+      - name: education
+        label: Formation
+        type: object
+        list: true
+        fields:
+          - { name: period, label: Année, type: string }
+          - { name: title, label: Diplôme ou certification, component: bi }
+          - { name: org, label: École ou organisme, type: string }
+          - { name: todo, label: "Exemple à remplacer (pointillés)", type: boolean }
+      - name: skills
+        label: Compétences
+        type: object
+        list: true
+        fields:
+          - { name: group, label: Famille, component: bi }
+          - { name: items, label: Compétences, type: string, list: true }
+
+  # ---------------------------------------------------------------- Textes et réglages
+  - name: site
+    label: Textes et réglages
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: email
+        label: E-mail de contact affiché
+        type: string
+      - name: formEndpoint
+        label: Adresse Formspree du formulaire de contact
+        type: string
+        description: "Ex. https://formspree.io/f/abcdwxyz. Vide = formulaire désactivé."
+      - name: texts
+        label: Textes du site (vides = texte par défaut)
+        type: object
+        fields:
+          - { name: heroTagline, label: Phrase d'accueil, component: bitext }
+          - { name: projectsTitle, label: Titre de la section Projets, component: bi }
+          - { name: projectsLead, label: Chapeau de la section Projets, component: bitext }
+          - { name: parcoursTitle, label: Titre de la section Parcours, component: bi }
+          - { name: parcoursLead, label: Chapeau de la section Parcours, component: bitext }
+          - { name: contactTitle, label: Titre de la section Contact, component: bi }
+          - { name: contactLead, label: Chapeau de la section Contact, component: bitext }

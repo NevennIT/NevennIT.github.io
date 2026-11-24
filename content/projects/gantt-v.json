@@ -1,0 +1,30 @@
+{
+  "id": "gantt-v",
+  "order": 30,
+  "title": "Gantt-V",
+  "year": "2026",
+  "type": "desktop",
+  "status": "in-progress",
+  "feature": false,
+  "description": {
+    "fr": "Planning de fabrication en Gantt vertical : importe une extraction de tableur, signale les chevauchements, se réorganise à la souris et s'exporte en PDF ou Excel.",
+    "en": "Vertical Gantt production schedule: imports a spreadsheet export, flags overlaps, can be rearranged with the mouse and exports to PDF or Excel."
+  },
+  "tags": [
+    "Rust",
+    "Tauri",
+    "Vue.js",
+    "TypeScript"
+  ],
+  "images": [
+    "/projects/gantt-v-1.webp",
+    "/projects/gantt-v-2.webp",
+    "/projects/gantt-v-3.webp",
+    "/projects/gantt-v-4.webp"
+  ],
+  "repo": "NevennIT/ScheduleExcel",
+  "publicRepo": false,
+  "download": {
+    "mode": "soon"
+  }
+}

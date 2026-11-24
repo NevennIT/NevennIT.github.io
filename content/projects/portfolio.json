@@ -1,0 +1,29 @@
+{
+  "id": "portfolio",
+  "order": 50,
+  "title": "Portfolio NevennIT",
+  "year": "2026",
+  "type": "web",
+  "status": "available",
+  "feature": false,
+  "description": {
+    "fr": "Ce site : une page Vue 3 avec une sphère de particules en Canvas, un triskell qui traverse la page en éclatant, et un défilement Lenis.",
+    "en": "This site: a single Vue 3 page with a Canvas particle sphere, a triskelion that shatters its way down the page, and Lenis smooth scrolling."
+  },
+  "tags": [
+    "Vue.js",
+    "Vite",
+    "Canvas",
+    "GitHub Pages"
+  ],
+  "images": [
+    "/projects/portfolio-preview.webp",
+    "/projects/portfolio-preview-project.webp",
+    "/projects/portfolio-preview-contact.webp"
+  ],
+  "repo": "NevennIT/NevennIT.github.io",
+  "publicRepo": true,
+  "download": {
+    "mode": "none"
+  }
+}

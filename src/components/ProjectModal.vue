@@ -21,12 +21,22 @@ import '../styles/modal.css'
 const { projectId, closeProject } = useProjectRoute()
 
 // Fiches détaillées (src/data/details/<id>.js), chargées à la demande ; fichier absent → null.
-const detailFiles = import.meta.glob('../data/details/*.js', { import: 'default' })
+// Fiches détaillées : content/fiches/<id>.json (Pages CMS), chargées à la demande.
+const detailFiles = import.meta.glob('/content/fiches/*.json', { import: 'default' })
 const detailCache = new Map()
+// Médias saisis dans Pages CMS : { type, image | video, poster, id, caption } → { type, src, poster, id, caption }.
+function normalizeDetails(d) {
+  if (!d) return null
+  const media = (d.media || [])
+    .map((x) => ({ ...x, src: x.src || x.image || x.video || '' }))
+    .filter((x) => (x.type === 'youtube' || x.type === 'vimeo' ? x.id : x.src))
+  const history = (d.history || []).map((h) => ({ ...h, image: h.image || undefined }))
+  return { ...d, media, history }
+}
 function loadDetails(id) {
   if (!detailCache.has(id)) {
-    const load = detailFiles['../data/details/' + id + '.js']
-    detailCache.set(id, load ? load().catch(() => null) : Promise.resolve(null))
+    const load = detailFiles['/content/fiches/' + id + '.json']
+    detailCache.set(id, load ? load().then(normalizeDetails).catch(() => null) : Promise.resolve(null))
   }
   return detailCache.get(id)
 }

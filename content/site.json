@@ -1,0 +1,34 @@
+{
+  "email": "daniel.hamet@outlook.com",
+  "formEndpoint": "https://formspree.io/f/xkjjjwaa",
+  "texts": {
+    "heroTagline": {
+      "fr": "Applications de bureau et outils sur mesure, de l'idée à la mise en ligne.",
+      "en": "Desktop apps and custom tools, from idea to release."
+    },
+    "projectsTitle": {
+      "fr": "Projets réalisés",
+      "en": "Selected projects"
+    },
+    "projectsLead": {
+      "fr": "Des applications pensées pour un vrai besoin, du prototype à la version publiée.",
+      "en": "Apps built for a real need, from prototype to published release."
+    },
+    "parcoursTitle": {
+      "fr": "Mon parcours",
+      "en": "My background"
+    },
+    "parcoursLead": {
+      "fr": "Expériences, formation et outils du quotidien.",
+      "en": "Experience, education and everyday tools."
+    },
+    "contactTitle": {
+      "fr": "Parlons de votre projet",
+      "en": "Let's talk about your project"
+    },
+    "contactLead": {
+      "fr": "Une idée, un besoin, une question : écrivez-moi, je réponds personnellement.",
+      "en": "An idea, a need, a question: write to me, I answer personally."
+    }
+  }
+}

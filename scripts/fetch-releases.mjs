@@ -3,9 +3,15 @@
 // Dépôts lus : le `repo` de chaque projet (privés compris) et chaque `download.releases` (dépôt public de téléchargement).
 // Dépôt privé : ni lien vers la release ni URL de fichier (elles exigent une authentification), seulement nom et taille.
 // Sans token, ou si GitHub ne répond pas, le fichier existant est gardé : le build n'échoue jamais pour ça.
-import { readFile, writeFile } from 'node:fs/promises'
+import { readFile, writeFile, readdir } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
-import { projects } from '../src/data/projects.js'
+
+// Projets : content/projects/*.json (même source que le site).
+const DIR = fileURLToPath(new URL('../content/projects/', import.meta.url))
+const projects = await Promise.all((await readdir(DIR)).filter((f) => f.endsWith('.json')).map(async (f) => {
+  const p = JSON.parse(await readFile(DIR + f, 'utf8'))
+  return { ...p, download: p.download && p.download.mode === 'free' ? { releases: p.download.releases } : null }
+}))
 
 const OUT = fileURLToPath(new URL('../src/data/releases.json', import.meta.url))
 const API = 'https://api.github.com'
