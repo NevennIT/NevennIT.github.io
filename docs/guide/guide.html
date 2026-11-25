@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>Guide du portfolio NevennIT</title>
+<!-- Source du guide PDF : `npm run guide` le convertit en docs/guide-portfolio.pdf (Edge installé requis).
+     Captures dans img/ ; les cadres numérotés sont positionnés en % de l'image (--x, --y, --w, --h). -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@400;600;700;800&family=Syne:wght@700;800&display=swap" />
+<style>
+  @page { size: A4; margin: 16mm 16mm 18mm; }
+  :root {
+    --flare: #f04a0f; --flare-soft: #fff0e9; --ink: #16181d; --muted: #5b606a; --line: #e3e1dc;
+    --paper: #ffffff; --code-bg: #12141a; --code-ink: #e8e6e1; --ion: #066a8e; --ion-soft: #e6f6fb; --ok: #1f7a4d; --warn: #b4530b;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 10.5pt/1.55 Manrope, "Segoe UI", sans-serif; }
+  h1, h2, h3 { font-family: Syne, Manrope, sans-serif; line-height: 1.15; margin: 0; }
+  h2 { font-size: 21pt; margin: 0 0 4mm; break-before: page; display: flex; align-items: baseline; gap: 4mm; }
+  h2 .n { color: var(--flare); font-size: 14pt; font-family: "JetBrains Mono", monospace; }
+  h3 { font-size: 12.5pt; margin: 6mm 0 2mm; }
+  p { margin: 0 0 2.5mm; }
+  .lead { color: var(--muted); font-size: 11.5pt; margin-bottom: 5mm; }
+  a { color: var(--ion); text-decoration: none; }
+  code, kbd { font-family: "JetBrains Mono", Consolas, monospace; font-size: 9pt; }
+  p code, li code, td code { background: #f3f1ec; padding: 0.3mm 1.2mm; border-radius: 1mm; }
+  kbd { border: 1px solid #c9c6bf; border-bottom-width: 2px; border-radius: 1.2mm; padding: 0 1.2mm; background: #faf9f6; }
+  pre { margin: 2mm 0 4mm; padding: 3.5mm 4mm; background: var(--code-bg); color: var(--code-ink); border-radius: 2.5mm; font: 8.6pt/1.5 "JetBrains Mono", Consolas, monospace; white-space: pre-wrap; break-inside: avoid; }
+  pre .k { color: #7cc7e8; } pre .s { color: #ffb48f; } pre .c { color: #8a8f99; } pre .h { background: #3a2116; color: #ffd2bd; border-radius: 1mm; }
+  ol, ul { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1.5mm; }
+  ol.steps { list-style: none; padding: 0; counter-reset: s; }
+  ol.steps > li { counter-increment: s; position: relative; padding-left: 10mm; margin-bottom: 3mm; break-inside: avoid; }
+  ol.steps > li::before { content: counter(s); position: absolute; left: 0; top: -0.3mm; width: 6.5mm; height: 6.5mm; border-radius: 50%; background: var(--flare); color: #fff; font: 700 9pt/6.5mm Manrope, sans-serif; text-align: center; }
+  table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 9.5pt; break-inside: avoid; }
+  th, td { text-align: left; vertical-align: top; padding: 2mm 2.5mm; border-bottom: 1px solid var(--line); }
+  th { font: 600 8pt/1.2 "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); border-bottom: 1.5px solid var(--ink); }
+  .box { border-radius: 2.5mm; padding: 3.5mm 4.5mm; margin: 3mm 0 4mm; break-inside: avoid; }
+  .box p:last-child, .box ul:last-child { margin-bottom: 0; }
+  .tip { background: var(--ion-soft); border-left: 1.2mm solid var(--ion); }
+  .warn { background: var(--flare-soft); border-left: 1.2mm solid var(--flare); }
+  .box b.t { display: block; margin-bottom: 1mm; font-family: Syne, sans-serif; }
+  .check { list-style: none; padding: 0; }
+  .check li { padding-left: 7mm; position: relative; }
+  .check li::before { content: ""; position: absolute; left: 0; top: 0.8mm; width: 3.8mm; height: 3.8mm; border: 1.5px solid var(--ink); border-radius: 0.8mm; }
+  /* Captures annotées */
+  figure { margin: 3mm 0 4mm; break-inside: avoid; }
+  .shot { position: relative; border-radius: 2mm; overflow: hidden; border: 1px solid #2b2e36; }
+  .shot img { display: block; width: 100%; }
+  .shot.crop { aspect-ratio: 1440 / 700; }
+  .shot.crop img { height: 100%; object-fit: cover; object-position: top; }
+  .mk { position: absolute; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); width: calc(var(--w) * 1%); height: calc(var(--h) * 1%);
+        border: 2px solid var(--flare); border-radius: 1.5mm; box-shadow: 0 0 0 2px rgba(240, 74, 15, 0.25); }
+  .crop .mk { top: calc(var(--y) * 900 / 700 * 1%); height: calc(var(--h) * 900 / 700 * 1%); }
+  .mk::before { content: attr(data-n); position: absolute; left: -3.4mm; top: -3.4mm; width: 6mm; height: 6mm; border-radius: 50%;
+                background: var(--flare); color: #fff; font: 700 9pt/6mm Manrope, sans-serif; text-align: center; box-shadow: 0 0 0 1.5px #fff; }
+  figcaption { margin-top: 2mm; font-size: 9pt; color: var(--muted); }
+  .legend { list-style: none; padding: 0; display: grid; gap: 1.5mm; }
+  .legend li { display: flex; gap: 2.5mm; }
+  .legend b.n { flex: none; width: 5.5mm; height: 5.5mm; border-radius: 50%; background: var(--flare); color: #fff; font: 700 8.5pt/5.5mm Manrope; text-align: center; }
+  /* Schéma « comment ça marche » */
+  .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; gap: 2mm; margin: 4mm 0 2mm; break-inside: avoid; }
+  .flow .st { border: 1.5px solid var(--ink); border-radius: 2.5mm; padding: 3mm; min-height: 24mm; font-size: 9pt; }
+  .flow .st b { display: block; font-family: Syne, sans-serif; font-size: 10.5pt; margin-bottom: 1mm; }
+  .flow .st.hot { border-color: var(--flare); background: var(--flare-soft); }
+  .flow .ar { color: var(--flare); font: 700 14pt Manrope; }
+  .flow-note { font-size: 9pt; color: var(--muted); margin-bottom: 5mm; }
+  /* Couverture */
+  .cover { height: 263mm; display: flex; flex-direction: column; justify-content: space-between; padding: 6mm 0 0; }
+  .cover .brand { font: 800 15pt Syne, sans-serif; } .cover .brand i { color: var(--flare); font-style: normal; }
+  .cover h1 { font-size: 40pt; letter-spacing: -0.02em; margin: 0 0 6mm; }
+  .cover h1 span { color: var(--flare); }
+  .cover .sub { font-size: 14pt; color: var(--muted); max-width: 140mm; }
+  .cover .toc { border-top: 1.5px solid var(--ink); padding-top: 4mm; columns: 2; column-gap: 10mm; font-size: 10.5pt; }
+  .cover .toc div { break-inside: avoid; margin-bottom: 2mm; } .cover .toc b { color: var(--flare); font-family: "JetBrains Mono", monospace; margin-right: 2mm; }
+  .cover .meta { font-size: 9pt; color: var(--muted); margin-top: 6mm; }
+  .tri { width: 34mm; height: 34mm; }
+  .two { display: grid; grid-template-columns: 1.15fr 1fr; gap: 6mm; }
+  .memo h3 { margin-top: 3mm; }
+  .memo table { font-size: 9pt; } .memo td code { white-space: nowrap; } .memo td, .memo th { padding: 1.4mm 2mm; }
+</style>
+</head>
+<body>
+
+<!-- ===================================================================== Couverture -->
+<section class="cover">
+  <div>
+    <div class="brand">Nevenn<i>IT</i></div>
+  </div>
+  <div>
+    <img class="tri" src="../../public/favicon.svg" alt="" />
+    <h1>Guide du <span>portfolio</span></h1>
+    <p class="sub">Ajouter un projet, changer une image ou un texte, sortir une nouvelle version d'une application et suivre que tout est bien en ligne. Pas à pas, sans jargon.</p>
+  </div>
+  <div>
+    <div class="toc">
+      <div><b>1</b>Comment ça marche</div>
+      <div><b>2</b>Préparer VS Code</div>
+      <div><b>3</b>Publier une modification</div>
+      <div><b>4</b>Ajouter un projet</div>
+      <div><b>5</b>Changer les captures</div>
+      <div><b>6</b>Ajouter une vidéo</div>
+      <div><b>7</b>Textes et parcours</div>
+      <div><b>8</b>Sortir une nouvelle version</div>
+      <div><b>9</b>La page de suivi</div>
+      <div><b>10</b>En cas de souci</div>
+      <div><b>11</b>Fiche mémo</div>
+    </div>
+    <p class="meta">nevennit.github.io · Version de novembre 2026 · Source : docs/guide/guide.html (régénérer : <code>npm run guide</code>)</p>
+  </div>
+</section>
+
+<!-- ===================================================================== 1 -->
+<h2><span class="n">01</span>Comment ça marche</h2>
+<p class="lead">Le site se met à jour tout seul. Tu ne fais que modifier des fichiers et les envoyer sur GitHub.</p>
+
+<h3>Quand tu modifies le site</h3>
+<div class="flow">
+  <div class="st hot"><b>Toi</b>Tu modifies un fichier du dossier <code>content/</code> dans VS Code.</div>
+  <div class="ar">→</div>
+  <div class="st"><b>GitHub</b>Tu « valides » puis « synchronises » : le fichier part sur la branche <code>main</code>.</div>
+  <div class="ar">→</div>
+  <div class="st"><b>Déploiement</b>GitHub reconstruit le site tout seul (environ 2 minutes).</div>
+  <div class="ar">→</div>
+  <div class="st"><b>En ligne</b>nevennit.github.io affiche la nouvelle version.</div>
+</div>
+<p class="flow-note">Si le site n'a pas changé après 2 minutes : actualise la page avec <kbd>Ctrl</kbd> + <kbd>F5</kbd> (le navigateur garde parfois l'ancienne en mémoire).</p>
+
+<h3>Quand tu publies une nouvelle version d'une application</h3>
+<div class="flow">
+  <div class="st hot"><b>Toi</b>Tu publies une release (v0.9.0…) dans le dépôt de l'appli.</div>
+  <div class="ar">→</div>
+  <div class="st"><b>Vérification</b>Toutes les heures, le portfolio relit les releases de tes applis.</div>
+  <div class="ar">→</div>
+  <div class="st"><b>En ligne</b>La fiche affiche la nouvelle version et ses notes.</div>
+  <div class="ar">→</div>
+  <div class="st"><b>E-mail</b>GitHub t'envoie « MyLegArk v0.9.0 en ligne ».</div>
+</div>
+<p class="flow-note">Tu n'as rien à faire côté portfolio : la version ne se saisit jamais à la main.</p>
+
+<h3>Ce que tu modifies, ce qui est automatique</h3>
+<table>
+  <tr><th>À la main (dossier <code>content/</code>)</th><th>Automatique</th></tr>
+  <tr><td>Les projets : nom, phrase, type, statut, technos, captures, bouton de téléchargement</td><td>Version affichée, date et notes de version (lues dans tes releases)</td></tr>
+  <tr><td>Les fiches détaillées : aperçu, fonctionnalités, technique, historique, vidéos</td><td>Conversion des captures PNG/JPG en WebP léger</td></tr>
+  <tr><td>Le parcours, l'e-mail, les phrases d'accueil</td><td>Déploiement du site, e-mails de nouvelle version, page de suivi</td></tr>
+</table>
+
+<div class="box tip"><b class="t">Le site est bilingue</b><p>Chaque texte s'écrit deux fois : <code>"fr": "…"</code> et <code>"en": "…"</code>. Si tu laisses l'anglais vide, le français s'affiche aussi pour les visiteurs anglophones. Tu peux demander à Claude de traduire.</p></div>
+
+<!-- ===================================================================== 2 -->
+<h2><span class="n">02</span>Préparer VS Code</h2>
+<p class="lead">À faire à chaque fois que tu t'y mets, avant de modifier quoi que ce soit.</p>
+
+<ol class="steps">
+  <li><b>Ouvrir le projet.</b> Dans VS Code : <i>Fichier → Ouvrir le dossier</i> → <code>C:\Users\Daniel\.dev\NevennIT.github.io</code>.</li>
+  <li><b>Se mettre sur la branche <code>main</code>.</b> En bas à gauche de VS Code s'affiche le nom de la branche. S'il n'indique pas <code>main</code>, clique dessus et choisis <code>main</code> dans la liste.
+    <div class="box warn"><b class="t">Pourquoi ?</b><p>C'est la branche <code>main</code> qui est publiée. Claude travaille parfois sur une autre branche (<code>feat/portfolio-vue</code>) : tes modifications faites là-dessus n'arriveraient pas en ligne.</p></div></li>
+  <li><b>Récupérer les dernières modifications.</b> Clique sur l'icône de synchronisation (deux flèches en cercle) juste à côté du nom de la branche. VS Code télécharge ce qui a changé sur GitHub depuis la dernière fois.</li>
+  <li><b>Lancer le site en local</b> pour voir tes changements avant de les publier. Ouvre un terminal (<kbd>Ctrl</kbd> + <kbd>ù</kbd>) et tape :
+<pre>npm run dev</pre>
+    Puis <kbd>Ctrl</kbd> + clic sur l'adresse affichée (en général <code>http://localhost:5173</code>). La page s'actualise toute seule à chaque fois que tu enregistres un fichier (<kbd>Ctrl</kbd> + <kbd>S</kbd>). Pour arrêter : <kbd>Ctrl</kbd> + <kbd>C</kbd> dans le terminal.</li>
+</ol>
+
+<div class="box tip"><b class="t">La première fois seulement</b><p>Si <code>npm run dev</code> affiche une erreur « Cannot find package », tape d'abord <code>npm install</code> (installe les outils du site), puis relance.</p></div>
+
+<!-- ===================================================================== 3 -->
+<h2><span class="n">03</span>Publier une modification</h2>
+<p class="lead">Une fois que ce que tu vois en local te convient, tu l'envoies sur GitHub. Deux clics.</p>
+
+<ol class="steps">
+  <li><b>Ouvre le panneau « Contrôle de code source »</b> : <kbd>Ctrl</kbd> + <kbd>Maj</kbd> + <kbd>G</kbd> (ou l'icône de branche dans la barre de gauche). La liste des fichiers modifiés s'affiche ; un clic sur un fichier montre ce qui a changé (rouge = retiré, vert = ajouté).</li>
+  <li><b>Écris un message court</b> dans la zone au-dessus du bouton, qui dit ce que tu as fait. Il apparaîtra tel quel dans l'historique de la page de suivi. Exemples :
+    <ul><li><code>Ajout du projet Mon Appli</code></li><li><code>Nouvelles captures de Digitabulo</code></li><li><code>Correction d'une faute dans l'accueil</code></li></ul></li>
+  <li><b>Clique sur « Valider »</b> (<i>Commit</i> en anglais). Si VS Code demande d'inclure tous les fichiers (« stage all »), réponds <b>Oui</b>.</li>
+  <li><b>Clique sur « Synchroniser les modifications »</b> (<i>Sync Changes</i>). Tes fichiers partent sur GitHub.</li>
+  <li><b>Patiente environ 2 minutes</b>, puis ouvre <a href="https://nevennit.github.io">nevennit.github.io</a> (et <kbd>Ctrl</kbd> + <kbd>F5</kbd>). Pour suivre le déploiement en direct : la carte <i>Dernier déploiement</i> de la page de suivi (chapitre 9).</li>
+</ol>
+
+<figure>
+  <div class="shot crop"><img src="img/github-actions.webp" alt="Liste des déploiements dans GitHub Actions" /></div>
+  <figcaption>GitHub Actions (onglet <i>Actions</i> du dépôt) : chaque ligne est un déploiement ou une vérification horaire. Coche verte = réussi, croix rouge = échec (voir chapitre 10).</figcaption>
+</figure>
+
+<!-- ===================================================================== 4 -->
+<h2><span class="n">04</span>Ajouter un projet</h2>
+<p class="lead">Un projet = un fichier dans <code>content/projects/</code>. Le plus simple est de copier un projet existant et de le modifier.</p>
+
+<ol class="steps">
+  <li><b>Copie un projet qui ressemble au tien.</b> Dans l'explorateur de VS Code, ouvre <code>content/projects/</code>, clic droit sur <code>digitabulo.json</code> → <i>Copier</i>, puis clic droit sur le dossier → <i>Coller</i>. Renomme la copie avec l'identifiant de ton projet : <code>mon-appli.json</code> (minuscules, chiffres et tirets, sans accent ni espace).</li>
+  <li><b>Remplis les champs</b> (tableau ci-dessous). Garde bien les guillemets <code>"…"</code> et les virgules en fin de ligne : c'est l'erreur la plus fréquente.</li>
+  <li><b>Ajoute tes captures</b> dans <code>public/projects/</code> (chapitre 5).</li>
+  <li><b>Vérifie en local</b> (<code>npm run dev</code>) : la carte apparaît dans la grille. Puis publie (chapitre 3).</li>
+</ol>
+
+<pre>{
+  <span class="k">"id"</span>: <span class="s h">"mon-appli"</span>,              <span class="c">← le même que le nom du fichier</span>
+  <span class="k">"order"</span>: 35,                       <span class="c">← place dans la grille (10, 20, 30…)</span>
+  <span class="k">"title"</span>: <span class="s">"Mon Appli"</span>,
+  <span class="k">"year"</span>: <span class="s">"2027"</span>,
+  <span class="k">"type"</span>: <span class="s">"desktop"</span>,                <span class="c">← desktop, web ou addin</span>
+  <span class="k">"status"</span>: <span class="s">"in-progress"</span>,          <span class="c">← available, in-progress ou archived</span>
+  <span class="k">"feature"</span>: false,                  <span class="c">← true = grande carte en tête (un seul projet)</span>
+  <span class="k">"description"</span>: {
+    <span class="k">"fr"</span>: <span class="s">"Une ou deux phrases pour la carte."</span>,
+    <span class="k">"en"</span>: <span class="s">"One or two sentences for the card."</span>
+  },
+  <span class="k">"tags"</span>: [<span class="s">"Rust"</span>, <span class="s">"Tauri"</span>, <span class="s">"Vue.js"</span>],
+  <span class="k">"images"</span>: [<span class="s">"/projects/mon-appli-1.png"</span>, <span class="s">"/projects/mon-appli-2.png"</span>],
+  <span class="k">"repo"</span>: <span class="s">"NevennIT/mon-appli"</span>,     <span class="c">← dépôt GitHub : la version y est lue</span>
+  <span class="k">"publicRepo"</span>: false,               <span class="c">← true seulement si le code est public</span>
+  <span class="k">"download"</span>: { <span class="k">"mode"</span>: <span class="s">"soon"</span> }   <span class="c">← voir le tableau</span>
+}</pre>
+
+<table>
+  <tr><th>Champ</th><th>Ce qu'il fait</th></tr>
+  <tr><td><code>order</code></td><td>Plus petit = plus haut. Pour glisser un projet entre le 30 et le 40, mets 35.</td></tr>
+  <tr><td><code>status</code></td><td><code>in-progress</code> ajoute le badge animé « en cours ». Sert aussi au filtre « Statut ».</td></tr>
+  <tr><td><code>download</code></td><td>Le bouton de la fiche : <code>none</code> (aucun), <code>soon</code> (« Bientôt disponible »), <code>buy</code> + <code>"buy": "https://…"</code> (lien d'achat), <code>free</code> (téléchargement gratuit, chapitre 8).</td></tr>
+</table>
+
+<h3>Et sa fiche détaillée (la fenêtre qui s'ouvre au clic)</h3>
+<p>Même principe dans <code>content/fiches/</code> : copie une fiche, renomme-la <code>mon-appli.json</code> (le <b>même nom</b> que le projet) et remplace les textes. Sans fiche, la fenêtre s'ouvre quand même, avec seulement les captures et la phrase de la carte. Les onglets se créent tout seuls : <i>Fonctionnalités</i> n'apparaît que si la liste <code>features</code> n'est pas vide, <i>Versions</i> que s'il existe au moins une release. Astuce : tu peux demander à Claude de préparer la fiche complète (en français et en anglais) à partir du dépôt de l'appli, puis la relire.</p>
+
+<!-- ===================================================================== 5 -->
+<h2><span class="n">05</span>Changer les captures</h2>
+<p class="lead">Les images des cartes et des fiches sont dans <code>public/projects/</code>.</p>
+
+<ol class="steps">
+  <li><b>Fais tes captures au format 16:10</b>, idéalement 1600 × 1000 pixels (sinon elles sont recadrées par le haut). PNG ou JPG, peu importe.</li>
+  <li><b>Dépose-les</b> dans <code>public/projects/</code> avec un nom simple : <code>mon-appli-1.png</code>, <code>mon-appli-2.png</code>…</li>
+  <li><b>Indique-les dans le projet</b>, dans l'ordre d'affichage, champ <code>images</code> : <code>"/projects/mon-appli-1.png"</code>. Plusieurs images = un carrousel qui défile tout seul.</li>
+  <li><b>Publie.</b> Au déploiement, les PNG/JPG sont convertis automatiquement en WebP (5 à 30 fois plus léger).</li>
+</ol>
+
+<div class="box tip"><b class="t">Convertir toi-même (facultatif)</b><p>Dans le terminal : <code>npm run images</code>. Les PNG/JPG de <code>public/projects/</code> deviennent des <code>.webp</code>, les références dans <code>content/</code> sont corrigées, et les originaux sont supprimés. Pratique pour garder le dépôt léger.</p></div>
+
+<div class="box warn"><b class="t">Pas de données réelles sur les captures</b><p>Utilise les modes « démo » de tes applis (coffre « Famille Exemple » de MyLegArk, <code>?demo</code> de Digitabulo…). Pour Gantt-V, jamais de nom d'entreprise, de ligne de production ou de code article réels : les exemples fournis dans son dépôt en contiennent.</p></div>
+
+<h3>Remplacer une capture</h3>
+<p>Le plus simple : garde le même nom de fichier (<code>mylegark-1.webp</code>) et remplace-le. Rien d'autre à changer.</p>
+
+<h3>Où apparaît quoi dans la fiche</h3>
+<figure style="width:88%">
+  <div class="shot crop">
+    <img src="img/fiche.webp" alt="Fiche détaillée de Lost Desktop" />
+    <span class="mk" data-n="1" style="--x:11.8;--y:5.9;--w:43.0;--h:46.6"></span>
+    <span class="mk" data-n="2" style="--x:57.1;--y:42.8;--w:20.4;--h:6.7"></span>
+    <span class="mk" data-n="3" style="--x:14.1;--y:70.0;--w:70.8;--h:5.9"></span>
+  </div>
+  <figcaption><b>1</b> le diaporama : les captures du champ <code>images</code>, puis les médias de la fiche · <b>2</b> le bouton choisi par <code>download</code> · <b>3</b> les onglets, remplis par <code>content/fiches/&lt;projet&gt;.json</code>.</figcaption>
+</figure>
+
+<!-- ===================================================================== 6 -->
+<h2><span class="n">06</span>Ajouter une vidéo dans une fiche</h2>
+<p class="lead">Les vidéos s'affichent dans le diaporama de la fiche, après les captures. Elles se déclarent dans la liste <code>media</code> du fichier <code>content/fiches/&lt;projet&gt;.json</code>.</p>
+
+<h3>Une vidéo YouTube (le plus simple pour une vidéo longue)</h3>
+<p>Mets la vidéo en ligne sur YouTube (« non répertoriée » si tu veux qu'elle ne soit visible que via le portfolio). Son identifiant est la fin de l'adresse : <code>youtube.com/watch?v=<b>dQw4w9WgXcQ</b></code>.</p>
+<pre><span class="k">"media"</span>: [
+  {
+    <span class="k">"type"</span>: <span class="s">"youtube"</span>,
+    <span class="k">"id"</span>: <span class="s h">"dQw4w9WgXcQ"</span>,
+    <span class="k">"caption"</span>: { <span class="k">"fr"</span>: <span class="s">"Démonstration en 2 minutes"</span>, <span class="k">"en"</span>: <span class="s">"2-minute demo"</span> }
+  }
+]</pre>
+<p>Pour Vimeo, même chose avec <code>"type": "vimeo"</code>. La vidéo ne se charge qu'au clic du visiteur.</p>
+
+<h3>Un fichier vidéo (courte démo, 20 Mo au plus)</h3>
+<p>Dépose le fichier MP4 dans <code>public/projects/videos/</code>, puis :</p>
+<pre>{
+  <span class="k">"type"</span>: <span class="s">"video"</span>,
+  <span class="k">"video"</span>: <span class="s h">"/projects/videos/mon-appli-demo.mp4"</span>,
+  <span class="k">"poster"</span>: <span class="s">"/projects/mon-appli-1.webp"</span>,       <span class="c">← image affichée avant la lecture (facultatif)</span>
+  <span class="k">"caption"</span>: { <span class="k">"fr"</span>: <span class="s">"Restaurer une disposition"</span>, <span class="k">"en"</span>: <span class="s">"Restoring a layout"</span> }
+}</pre>
+<div class="box warn"><b class="t">Attention à la taille</b><p>GitHub refuse les fichiers de plus de 100 Mo et le site devient lent au-delà de quelques dizaines de Mo : au-delà de 20 Mo, préfère YouTube.</p></div>
+
+<h3>Une image supplémentaire avec légende</h3>
+<pre>{ <span class="k">"type"</span>: <span class="s">"image"</span>, <span class="k">"image"</span>: <span class="s">"/projects/ancienne-version.webp"</span>, <span class="k">"caption"</span>: { <span class="k">"fr"</span>: <span class="s">"La version de 2021"</span>, <span class="k">"en"</span>: <span class="s">"The 2021 version"</span> } }</pre>
+<p>Plusieurs médias : sépare-les par une virgule entre les accolades <code>}, {</code>.</p>
+
+<!-- ===================================================================== 7 -->
+<h2><span class="n">07</span>Textes et parcours</h2>
+<p class="lead">Deux fichiers : <code>content/site.json</code> pour les textes d'accueil et le contact, <code>content/parcours.json</code> pour la section Parcours.</p>
+
+<h3>Les textes d'accueil et le contact — <code>content/site.json</code></h3>
+<table>
+  <tr><th>Champ</th><th>Où il apparaît</th></tr>
+  <tr><td><code>email</code></td><td>Contact et pied de page</td></tr>
+  <tr><td><code>formEndpoint</code></td><td>Adresse Formspree du formulaire de contact (vide = formulaire désactivé)</td></tr>
+  <tr><td><code>texts.heroTagline</code></td><td>La phrase sous « NevennIT » en haut de la page</td></tr>
+  <tr><td><code>texts.projectsTitle</code> / <code>projectsLead</code></td><td>Titre et chapeau de la section Projets</td></tr>
+  <tr><td><code>texts.parcoursTitle</code> / <code>parcoursLead</code></td><td>Titre et chapeau de la section Parcours</td></tr>
+  <tr><td><code>texts.contactTitle</code> / <code>contactLead</code></td><td>Titre et chapeau de la section Contact</td></tr>
+</table>
+
+<h3>Le parcours — <code>content/parcours.json</code></h3>
+<ol class="steps">
+  <li><b>Remplace les entrées d'exemple</b> (celles marquées <code>"todo": true</code>, affichées en pointillés bleus en local) par tes expériences, la plus récente en premier. Mets <code>"todo": false</code> une fois l'entrée réelle.</li>
+  <li><b>Formation</b> (<code>education</code>) et <b>compétences</b> (<code>skills</code>, par familles) : même principe.</li>
+  <li><b>Pour l'afficher sur le site publié</b>, passe <code>"visible": false</code> à <code>"visible": true</code> en haut du fichier, puis publie. Tant que c'est <code>false</code>, la section n'apparaît qu'en local.</li>
+</ol>
+<pre>{
+  <span class="k">"todo"</span>: false,
+  <span class="k">"period"</span>: { <span class="k">"fr"</span>: <span class="s">"2022 — aujourd’hui"</span>, <span class="k">"en"</span>: <span class="s">"2022 — present"</span> },
+  <span class="k">"role"</span>: { <span class="k">"fr"</span>: <span class="s">"Intitulé du poste"</span>, <span class="k">"en"</span>: <span class="s">"Job title"</span> },
+  <span class="k">"org"</span>: <span class="s">"Entreprise"</span>,
+  <span class="k">"place"</span>: { <span class="k">"fr"</span>: <span class="s">"Ville"</span>, <span class="k">"en"</span>: <span class="s">"City"</span> },
+  <span class="k">"text"</span>: { <span class="k">"fr"</span>: <span class="s">"Deux lignes sur les missions."</span>, <span class="k">"en"</span>: <span class="s">"Two lines about the job."</span> },
+  <span class="k">"tags"</span>: [<span class="s">"VBA"</span>, <span class="s">"Excel"</span>]
+}</pre>
+
+<!-- ===================================================================== 8 -->
+<h2><span class="n">08</span>Sortir une nouvelle version</h2>
+<p class="lead">La checklist à suivre quand une application passe en v0.9.0, v1.0.0… Le portfolio suit tout seul.</p>
+
+<h3>Avant de publier</h3>
+<ul class="check">
+  <li>Le numéro de version est choisi, au format <code>vX.Y.Z</code> (ex. <code>v0.9.0</code>), et <b>plus grand</b> que le précédent.</li>
+  <li>Les notes de version sont prêtes : ce qui est nouveau, ce qui est corrigé. Elles seront affichées telles quelles dans l'onglet <i>Versions</i> du portfolio. On peut les mettre en forme : <code>## Titre</code>, <code>- élément de liste</code>, <code>**gras**</code>.</li>
+  <li>Les notes ne contiennent rien de privé (elles deviennent publiques sur le portfolio).</li>
+</ul>
+
+<h3>Lost Desktop (publication automatique)</h3>
+<ul class="check">
+  <li>Dans le dépôt <code>lost-desktop</code>, tout est fusionné sur <code>main</code>.</li>
+  <li>Dans le terminal du projet lost-desktop :
+<pre>git tag v0.5.0
+git push origin v0.5.0</pre></li>
+  <li>Environ 10 minutes plus tard, dans l'onglet <i>Actions</i> de lost-desktop, le workflow <i>Release</i> est vert, y compris l'étape « Publier l'installateur dans le dépôt public de téléchargement ».</li>
+  <li>La version apparaît dans <a href="https://github.com/NevennIT/lost-desktop-releases/releases">lost-desktop-releases</a> (c'est de là que les visiteurs téléchargent).</li>
+  <li>Si tu modifies les notes après coup : fais-le aussi dans <code>lost-desktop-releases</code>.</li>
+</ul>
+
+<h3>Les autres applis (MyLegArk, Gantt-V, Digitabulo…)</h3>
+<ul class="check">
+  <li>Crée la release comme d'habitude dans le dépôt de l'appli (page <i>Releases</i> → <i>Draft a new release</i> → tag → notes → installateur), et clique sur <b>Publish release</b> : un brouillon (<i>draft</i>) n'est pas lu par le portfolio.</li>
+</ul>
+
+<h3>Après (pour toutes les applis)</h3>
+<ul class="check">
+  <li>Dans l'heure, la fiche du portfolio affiche la nouvelle version (GitHub décale parfois la vérification : jusqu'à quelques heures).</li>
+  <li>Tu reçois l'e-mail « <i>Appli</i> v0.9.0 en ligne » de GitHub.</li>
+  <li>La page de suivi indique la nouvelle version (chapitre 9).</li>
+</ul>
+<div class="box tip"><b class="t">Pressé ? Forcer la mise à jour tout de suite</b><p>Sur GitHub, dépôt <code>NevennIT.github.io</code> → onglet <i>Actions</i> → <i>Déploiement GitHub Pages</i> → bouton <b>Run workflow</b> → <b>Run workflow</b>. Ou dans le terminal : <code>gh workflow run deploy.yml -R NevennIT/NevennIT.github.io</code>.</p></div>
+
+<h3>Rendre une appli téléchargeable gratuitement</h3>
+<p>Le code de tes applis est privé : les visiteurs ne peuvent pas télécharger depuis ces dépôts. Pour Lost Desktop, un dépôt <b>public</b> ne contient que les installateurs (<code>lost-desktop-releases</code>). Pour faire pareil avec une autre appli, demande à Claude : « rends MyLegArk téléchargeable comme Lost Desktop ». Il créera le dépôt public, la copie automatique, et passera le bouton du projet en <code>"mode": "free"</code>.</p>
+
+<!-- ===================================================================== 9 -->
+<h2><span class="n">09</span>La page de suivi</h2>
+<p class="lead"><a href="https://nevennit.github.io/#/suivi">nevennit.github.io/#/suivi</a> — absente du menu, à garder en favori. Elle ne montre que des informations déjà publiques.</p>
+
+<figure>
+  <div class="shot">
+    <img src="img/suivi.webp" alt="Page de suivi : état, applications" />
+    <span class="mk" data-n="1" style="--x:10.6;--y:19.6;--w:25.6;--h:17.5"></span>
+    <span class="mk" data-n="2" style="--x:37.2;--y:19.6;--w:25.6;--h:17.5"></span>
+    <span class="mk" data-n="3" style="--x:63.9;--y:19.6;--w:25.6;--h:17.5"></span>
+    <span class="mk" data-n="4" style="--x:10.6;--y:47.5;--w:78.9;--h:31.9"></span>
+  </div>
+</figure>
+<ul class="legend">
+  <li><b class="n">1</b><span><b>Dernier déploiement</b> : « Réussi » en bleu, ou « Échec » en rouge (voir chapitre 10). Avec sa date : c'est la dernière fois que le site a été republié.</span></li>
+  <li><b class="n">2</b><span><b>Versions vérifiées</b> : quand le site a lu tes releases pour la dernière fois, et quand a eu lieu la dernière vérification horaire.</span></li>
+  <li><b class="n">3</b><span><b>Raccourcis</b> : le dossier <code>content</code> sur GitHub, la liste des déploiements, et l'historique des e-mails « nouvelle version ».</span></li>
+  <li><b class="n">4</b><span><b>Applications</b> : pour chaque projet, la version affichée sur le site, sa date, le bouton proposé et le nombre de téléchargements (applis à téléchargement gratuit seulement). Une mention orange « dépôt public encore en v… » signale que la copie publique a une version de retard.</span></li>
+</ul>
+
+<figure>
+  <div class="shot crop">
+    <img src="img/suivi-historique.webp" alt="Page de suivi : historique et déploiements" />
+    <span class="mk" data-n="5" style="--x:10.6;--y:4.5;--w:45.3;--h:3.3"></span>
+    <span class="mk" data-n="6" style="--x:59.2;--y:4.5;--w:30.2;--h:3.3"></span>
+  </div>
+</figure>
+<ul class="legend">
+  <li><b class="n">5</b><span><b>Historique du site</b> : chaque modification envoyée sur GitHub, avec son message (d'où l'intérêt d'un message clair au chapitre 3). Un clic ouvre le détail sur GitHub.</span></li>
+  <li><b class="n">6</b><span><b>Déploiements et vérifications</b> : les republications du site. Les vérifications horaires sans incident ne sont pas listées ; un échec, lui, apparaît ici.</span></li>
+</ul>
+
+<h3>Les e-mails de nouvelle version</h3>
+<p>À chaque nouvelle version en ligne, le portfolio ouvre puis referme un « ticket » dans son dépôt : c'est ce qui déclenche l'e-mail de GitHub. Pour le recevoir, une seule fois : sur <a href="https://github.com/NevennIT/NevennIT.github.io">la page du dépôt</a>, bouton <b>Watch</b> → <b>All Activity</b>, et vérifie dans <i>GitHub → Settings → Notifications</i> que l'envoi par e-mail est coché.</p>
+
+<!-- ===================================================================== 10 -->
+<h2><span class="n">10</span>En cas de souci</h2>
+<p class="lead">Les situations les plus probables, et quoi faire. En cas de doute, Claude peut lire les journaux et corriger.</p>
+
+<table>
+  <tr><th style="width:30%">Ce que tu vois</th><th style="width:30%">Cause probable</th><th>Que faire</th></tr>
+  <tr><td>E-mail « Run failed », ou « Échec » sur la page de suivi</td><td>Souvent une virgule ou un guillemet en trop/en moins dans un fichier <code>content/…json</code></td><td>Dans VS Code, lance <code>npm run build</code> : l'erreur indique le fichier et la ligne. Corrige, puis publie de nouveau. Le site en ligne, lui, reste sur la version d'avant tant que l'erreur n'est pas corrigée.</td></tr>
+  <tr><td>Ma modification n'apparaît pas</td><td>Cache du navigateur, ou modification pas envoyée</td><td><kbd>Ctrl</kbd> + <kbd>F5</kbd>. Vérifie dans l'historique de la page de suivi que ton message y est ; sinon, as-tu bien cliqué « Synchroniser » ? Étais-tu sur <code>main</code> ?</td></tr>
+  <tr><td>La nouvelle version n'apparaît pas après plusieurs heures</td><td>Release encore en brouillon, vérification retardée, ou jeton expiré</td><td>1. Vérifie que la release est publiée (pas <i>draft</i>). 2. Force avec <b>Run workflow</b> (chapitre 8). 3. Si ça ne suffit pas : le jeton <code>RELEASES_TOKEN</code> a peut-être expiré (voir ci-dessous).</td></tr>
+  <tr><td>Plus aucune vérification horaire dans GitHub Actions</td><td>GitHub met en pause les tâches programmées d'un dépôt public après 60 jours sans activité (il prévient par e-mail)</td><td>Onglet <i>Actions</i> → <i>Déploiement GitHub Pages</i> → bouton <b>Enable workflow</b>. Ou publie n'importe quelle petite modification.</td></tr>
+  <tr><td>Pas d'e-mail de nouvelle version</td><td>Le dépôt n'est pas suivi</td><td><b>Watch → All Activity</b> sur le dépôt (chapitre 9).</td></tr>
+  <tr><td>Une modification ne me plaît pas</td><td>—</td><td>Demande à Claude de l'annuler, ou corrige le fichier et publie de nouveau. Rien n'est jamais perdu : GitHub garde tout l'historique.</td></tr>
+</table>
+
+<h3>Renouveler le jeton <code>RELEASES_TOKEN</code> (environ une fois par an)</h3>
+<p>Le portfolio lit les versions de tes dépôts privés grâce à un jeton GitHub, valable le temps que tu as choisi à sa création (GitHub prévient par e-mail avant l'expiration).</p>
+<ol class="steps">
+  <li>GitHub → ta photo → <i>Settings</i> → <i>Developer settings</i> → <i>Fine-grained tokens</i> → <code>portfolio-releases</code> → <b>Regenerate token</b> (ou créer un nouveau jeton : accès <i>Contents : Read-only</i> sur les dépôts des applis).</li>
+  <li>Copie le jeton, puis dépôt <code>NevennIT.github.io</code> → <i>Settings</i> → <i>Secrets and variables</i> → <i>Actions</i> → <code>RELEASES_TOKEN</code> → <b>Update</b> → colle → <b>Update secret</b>.</li>
+  <li>Une nouvelle appli privée ? Ajoute aussi son dépôt au jeton (<i>Repository access</i>), sinon sa version ne s'affichera pas.</li>
+</ol>
+<p>Même chose pour <code>PUBLIC_RELEASES_TOKEN</code> dans le dépôt <code>lost-desktop</code> (accès <i>Contents : Read and write</i> sur <code>lost-desktop-releases</code>).</p>
+
+<!-- ===================================================================== 11 -->
+<h2><span class="n">11</span>Fiche mémo</h2>
+<div class="memo">
+<div class="two">
+<div>
+<h3>Où modifier quoi</h3>
+<table>
+  <tr><th>Quoi</th><th>Fichier</th></tr>
+  <tr><td>Un projet (carte)</td><td><code>content/projects/&lt;id&gt;.json</code></td></tr>
+  <tr><td>Sa fiche détaillée</td><td><code>content/fiches/&lt;id&gt;.json</code></td></tr>
+  <tr><td>Captures</td><td><code>public/projects/</code></td></tr>
+  <tr><td>Vidéos (≤ 20 Mo)</td><td><code>public/projects/videos/</code></td></tr>
+  <tr><td>Parcours</td><td><code>content/parcours.json</code></td></tr>
+  <tr><td>E-mail, accueil</td><td><code>content/site.json</code></td></tr>
+  <tr><td>Autres textes FR/EN</td><td><code>src/i18n/messages/</code></td></tr>
+</table>
+<h3>Valeurs possibles</h3>
+<table>
+  <tr><td><code>type</code></td><td><code>desktop</code> · <code>web</code> · <code>addin</code></td></tr>
+  <tr><td><code>status</code></td><td><code>available</code> · <code>in-progress</code> · <code>archived</code></td></tr>
+  <tr><td><code>download.mode</code></td><td><code>none</code> · <code>soon</code> · <code>buy</code> · <code>free</code></td></tr>
+  <tr><td><code>media.type</code></td><td><code>image</code> · <code>video</code> · <code>youtube</code> · <code>vimeo</code></td></tr>
+</table>
+</div>
+<div>
+<h3>Commandes (terminal de VS Code)</h3>
+<table>
+  <tr><td><code>npm run dev</code></td><td>Voir le site en local</td></tr>
+  <tr><td><code>npm run build</code></td><td>Vérifier qu'il n'y a pas d'erreur</td></tr>
+  <tr><td><code>npm run images</code></td><td>Convertir les captures en WebP</td></tr>
+  <tr><td><code>npm run guide</code></td><td>Regénérer ce PDF</td></tr>
+  <tr><td><code>npm install</code></td><td>Réinstaller les outils (si erreur)</td></tr>
+</table>
+<h3>Publier en 4 gestes</h3>
+<ol>
+  <li>Branche <code>main</code> + synchroniser</li>
+  <li>Modifier, <kbd>Ctrl</kbd> + <kbd>S</kbd>, vérifier en local</li>
+  <li><kbd>Ctrl</kbd> + <kbd>Maj</kbd> + <kbd>G</kbd> → message → <b>Valider</b></li>
+  <li><b>Synchroniser</b> → 2 minutes → <kbd>Ctrl</kbd> + <kbd>F5</kbd></li>
+</ol>
+<h3>Liens</h3>
+<table>
+  <tr><td>Le site</td><td>nevennit.github.io</td></tr>
+  <tr><td>Page de suivi</td><td>nevennit.github.io/#/suivi</td></tr>
+  <tr><td>Déploiements</td><td>github.com/NevennIT/NevennIT.github.io/actions</td></tr>
+  <tr><td>Téléchargements publics</td><td>github.com/NevennIT/lost-desktop-releases</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+</body>
+</html>

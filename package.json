@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "images": "node scripts/optimize-images.mjs",
-    "releases": "node scripts/fetch-releases.mjs"
+    "releases": "node scripts/fetch-releases.mjs",
+    "guide": "node scripts/build-guide.mjs"
   },
   "dependencies": {
     "lenis": "1.1.13",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "5.2.1",
+    "playwright-core": "^1.65.1",
     "sharp": "^0.34.5",
     "vite": "6.0.7",
     "vite-plugin-vue-devtools": "^8.2.1"

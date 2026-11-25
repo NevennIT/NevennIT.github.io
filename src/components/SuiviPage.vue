@@ -152,6 +152,7 @@ onBeforeUnmount(() => {
           <ul class="nv-suivi__links small">
             <li><a class="nv-link" :href="site.repository + '/tree/main/content'" target="_blank" rel="noopener">Contenu du site (dossier content)</a></li>
             <li><a class="nv-link" :href="site.repository + '/actions'" target="_blank" rel="noopener">Déploiements (GitHub Actions)</a></li>
+            <li><a class="nv-link" :href="site.repository + '/blob/main/docs/guide-portfolio.pdf'" target="_blank" rel="noopener">Guide (PDF)</a></li>
             <li><a class="nv-link" :href="site.repository + '/issues?q=is%3Aissue+en+ligne'" target="_blank" rel="noopener">Notifications de versions</a></li>
           </ul>
         </article>

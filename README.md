@@ -13,6 +13,8 @@ npm run dev
 
 ## Modifier le contenu
 
+Mode d'emploi pas à pas, pour quelqu'un qui ne code pas : [docs/guide-portfolio.pdf](docs/guide-portfolio.pdf) (source : `docs/guide/guide.html`, régénérer avec `npm run guide`).
+
 Tout le contenu est en JSON dans `content/` (détail dans [content/README.md](content/README.md)) :
 
 | Quoi | Où |
