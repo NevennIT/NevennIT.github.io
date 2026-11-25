@@ -12,13 +12,13 @@
       "Avec plusieurs écrans, il arrive qu'une fenêtre reste bloquée sur un écran débranché ou éteint. Windows déplace normalement ses fenêtres, mais pas toujours : les fenêtres réduites et les applications qui mémorisent leur position se retrouvent à des coordonnées qui ne correspondent plus à aucun écran. On ne les voit plus et on ne peut plus les attraper.",
       "Lost Desktop liste toutes les fenêtres, ouvertes et réduites, repère celles qui sont hors de portée et les ramène : d'un clic, avec un raccourci clavier global, depuis la ligne de commande ou automatiquement quand un écran disparaît. Il sait aussi enregistrer la disposition de toutes les fenêtres dans un profil et la restaurer, en relançant au besoin les applications fermées.",
       "Il tourne discrètement dans la zone de notification. Il s'adresse à tous ceux qui branchent et débranchent des écrans : portable sur une station d'accueil, poste à plusieurs écrans, écran qu'on éteint le soir.",
-      "La version 0.4.0 (novembre 2026) est disponible sous forme d'installateur Windows. Elle a ajouté une page Lanceur, la fermeture des applications avant une restauration et la protection des réglages par mot de passe."
+      "Lost Desktop est disponible sous forme d'installateur Windows depuis la version 0.4.0 (novembre 2026), qui a ajouté une page Lanceur, la fermeture des applications avant une restauration et la protection des réglages par mot de passe."
     ],
     "en": [
       "With several monitors, a window sometimes gets stuck on a monitor that has been unplugged or turned off. Windows usually moves windows back, but not always: minimised windows and apps that remember their position end up at coordinates that no longer match any screen. You cannot see them, and you cannot grab them.",
       "Lost Desktop lists every window, open or minimised, spots the ones that are out of reach and brings them back: with a click, a global keyboard shortcut, from the command line, or automatically when a monitor goes away. It can also save the layout of all your windows in a profile and restore it, relaunching closed apps if needed.",
       "It runs quietly in the notification area. It is meant for anyone who plugs and unplugs monitors: a laptop on a docking station, a multi-monitor desk, a screen that gets switched off at night.",
-      "Version 0.4.0 (November 2026) is available as a Windows installer. It added a Launcher page, closing apps before a restore, and password protection for the settings."
+      "Lost Desktop has been available as a Windows installer since version 0.4.0 (November 2026), which added a Launcher page, closing apps before a restore, and password protection for the settings."
     ]
   },
   "features": [
