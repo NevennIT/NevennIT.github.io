@@ -1,5 +1,5 @@
-// Projets affichés dans « 01 — Projets » : un fichier par projet dans content/projects/<id>.json,
-// modifiable depuis Pages CMS (app.pagescms.org) ou à la main. Ici, on les lit et on les met en forme pour le site.
+// Projets affichés dans « 01 — Projets » : un fichier par projet dans content/projects/<id>.json.
+// Ici, on les lit et on les met en forme pour le site.
 //
 // Champs d'un projet (voir aussi content/README.md) :
 //   id           identifiant, aussi utilisé dans l'URL de la fiche (#/projet/<id>) et pour content/fiches/<id>.json

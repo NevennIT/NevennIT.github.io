@@ -13,9 +13,7 @@ npm run dev
 
 ## Modifier le contenu
 
-Le plus simple : **Pages CMS** (https://app.pagescms.org, connexion avec GitHub), des formulaires pour les projets, les fiches détaillées, le parcours et les textes. Chaque enregistrement met le site à jour tout seul. Mode d'emploi pas à pas : [docs/guide-portfolio.pdf](docs/guide-portfolio.pdf).
-
-À la main, tout le contenu est en JSON dans `content/` (détail dans [content/README.md](content/README.md)) :
+Tout le contenu est en JSON dans `content/` (détail dans [content/README.md](content/README.md)) :
 
 | Quoi | Où |
 | --- | --- |

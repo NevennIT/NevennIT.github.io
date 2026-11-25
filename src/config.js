@@ -1,5 +1,5 @@
 // Réglages du site. Les valeurs modifiables (e-mail, formulaire, textes d'accueil) sont dans content/site.json,
-// éditable depuis Pages CMS ; les autres textes de l'interface sont dans src/i18n/messages/ (français et anglais).
+// à modifier à la main ; les autres textes de l'interface sont dans src/i18n/messages/ (français et anglais).
 import data from '/content/site.json'
 import { visible as parcoursVisible } from './data/parcours'
 
@@ -16,7 +16,7 @@ export const site = {
 
 // Sections facultatives.
 //   parcours : « 02 — Parcours ». Toujours visible en développement (npm run dev) ; sur le site publié,
-//              seulement si « Afficher sur le site » est coché dans Pages CMS (visible dans content/parcours.json).
+//              seulement si `visible` vaut true dans content/parcours.json.
 export const sections = {
   parcours: import.meta.env.DEV || parcoursVisible,
 }

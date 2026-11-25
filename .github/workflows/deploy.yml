@@ -76,7 +76,7 @@ jobs:
         run: |
           curl -fsSL https://nevennit.github.io/versions.json -o "$RUNNER_TEMP/live-versions.json" || true
           node scripts/version-diff.mjs "$RUNNER_TEMP/live-versions.json"
-      # Captures envoyées depuis Pages CMS en PNG/JPG : converties en WebP (références mises à jour pour ce build).
+      # Captures ajoutées en PNG/JPG : converties en WebP (références mises à jour pour ce build).
       - run: npm run images
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3

@@ -21,10 +21,10 @@ import '../styles/modal.css'
 const { projectId, closeProject } = useProjectRoute()
 
 // Fiches détaillées (src/data/details/<id>.js), chargées à la demande ; fichier absent → null.
-// Fiches détaillées : content/fiches/<id>.json (Pages CMS), chargées à la demande.
+// Fiches détaillées : content/fiches/<id>.json, chargées à la demande.
 const detailFiles = import.meta.glob('/content/fiches/*.json', { import: 'default' })
 const detailCache = new Map()
-// Médias saisis dans Pages CMS : { type, image | video, poster, id, caption } → { type, src, poster, id, caption }.
+// Médias des fiches : { type, image | video, poster, id, caption } → { type, src, poster, id, caption }.
 function normalizeDetails(d) {
   if (!d) return null
   const media = (d.media || [])
