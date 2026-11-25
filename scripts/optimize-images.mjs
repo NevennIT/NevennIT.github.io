@@ -1,6 +1,6 @@
 // Convertit les images de public/projects/ (PNG, JPG) en WebP 1600 × 1000 (16:10), qualité 82,
 // met à jour leurs références dans content/**/*.json, puis supprime les originaux.
-// Lancé à chaque déploiement (les captures envoyées depuis Pages CMS en PNG/JPG sont donc optimisées en ligne),
+// Lancé à chaque déploiement (une capture poussée en PNG/JPG est donc optimisée en ligne),
 // et utilisable en local : npm run images
 // Une image qui n'est pas en 16:10 est recadrée sur son haut (là où sont les barres de titre et menus).
 import { readdir, readFile, writeFile, stat, unlink } from 'node:fs/promises'

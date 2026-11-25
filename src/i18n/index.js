@@ -15,7 +15,7 @@ const files = import.meta.glob('./messages/*.js', { eager: true, import: 'defaul
 const dict = { fr: {}, en: {} }
 for (const file of Object.values(files)) for (const l of LOCALES) Object.assign(dict[l], flatten(file[l] || {}))
 
-// Textes modifiables depuis Pages CMS (content/site.json) : ils remplacent les messages correspondants s'ils sont remplis.
+// Textes modifiables dans content/site.json : ils remplacent les messages correspondants s'ils sont remplis.
 const EDITABLE = {
   heroTagline: 'hero.tagline',
   projectsTitle: 'projects.title',

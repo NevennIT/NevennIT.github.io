@@ -38,7 +38,7 @@ const apps = computed(() => projects.map((p) => {
   }
 }))
 
-// Messages de commit lisibles : ceux de Pages CMS (« Update content/projects/x.json (via Pages CMS) ») sont traduits.
+// Messages de commit lisibles : les fusions de PR deviennent « Mise à jour du site ».
 const LABELS = [
   [/^content\/projects\/(.+)\.json$/, (m) => `projet « ${m[1]} »`],
   [/^content\/fiches\/(.+)\.json$/, (m) => `fiche détaillée « ${m[1]} »`],
@@ -50,15 +50,15 @@ const LABELS = [
 const ACTIONS = { create: 'Ajout :', update: 'Modification :', delete: 'Suppression :' }
 function human(message) {
   const first = message.split('\n')[0]
-  const cms = /^(create|update|delete)\s+(\S+)/i.exec(first)
-  if (cms) {
-    const path = cms[2]
+  const edit = /^(create|update|delete)\s+(\S+)/i.exec(first)
+  if (edit) {
+    const path = edit[2]
     const hit = LABELS.map(([re, f]) => [re.exec(path), f]).find(([m]) => m)
-    return { text: `${ACTIONS[cms[1].toLowerCase()]} ${hit ? hit[1](hit[0]) : path}`, cms: /pages cms/i.test(first) }
+    return { text: `${ACTIONS[edit[1].toLowerCase()]} ${hit ? hit[1](hit[0]) : path}` }
   }
   const pr = /^Merge pull request #(\d+)/.exec(first)
-  if (pr) return { text: `Mise à jour du site (PR #${pr[1]})`, cms: false }
-  return { text: first, cms: false }
+  if (pr) return { text: `Mise à jour du site (PR #${pr[1]})` }
+  return { text: first }
 }
 
 const EVENTS = { push: 'Modification du site', schedule: 'Vérification horaire', workflow_dispatch: 'Lancement manuel', repository_dispatch: 'Déclenché par une appli' }
@@ -150,9 +150,8 @@ onBeforeUnmount(() => {
         <article class="nv-suivi__card">
           <h2 class="label">Raccourcis</h2>
           <ul class="nv-suivi__links small">
-            <li><a class="nv-link" href="https://app.pagescms.org" target="_blank" rel="noopener">Modifier le site (Pages CMS)</a></li>
+            <li><a class="nv-link" :href="site.repository + '/tree/main/content'" target="_blank" rel="noopener">Contenu du site (dossier content)</a></li>
             <li><a class="nv-link" :href="site.repository + '/actions'" target="_blank" rel="noopener">Déploiements (GitHub Actions)</a></li>
-            <li><a class="nv-link" :href="site.repository + '/blob/main/docs/guide-portfolio.pdf'" target="_blank" rel="noopener">Guide (PDF)</a></li>
             <li><a class="nv-link" :href="site.repository + '/issues?q=is%3Aissue+en+ligne'" target="_blank" rel="noopener">Notifications de versions</a></li>
           </ul>
         </article>
@@ -195,7 +194,6 @@ onBeforeUnmount(() => {
             <li v-for="c in commits" :key="c.sha">
               <span class="label nv-suivi__date">{{ fmt(c.date) }}</span>
               <a :href="c.url" target="_blank" rel="noopener">{{ c.text }}</a>
-              <span v-if="c.cms" class="nv-tag label nv-tag--ion">Pages CMS</span>
             </li>
           </ol>
           <p v-else class="small">Chargement…</p>
