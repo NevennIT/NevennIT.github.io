@@ -16,7 +16,10 @@
     "Svelte",
     "Android"
   ],
-  "images": [],
+  "images": [
+    "/projects/fidcard-1.webp",
+    "/projects/fidcard-2.webp"
+  ],
   "repo": "NevennIT/FidCard2",
   "publicRepo": false,
   "download": {
