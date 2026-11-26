@@ -1,0 +1,171 @@
+{
+  "id": "fidcard",
+  "tagline": {
+    "fr": "Vos cartes de fidélité sur le téléphone et le PC, prêtes à être scannées en caisse, sans compte ni cloud.",
+    "en": "Your loyalty cards on your phone and PC, ready to be scanned at the checkout, with no account and no cloud."
+  },
+  "platforms": [
+    "Windows",
+    "Android"
+  ],
+  "overview": {
+    "fr": [
+      "On accumule les cartes de fidélité, et elles ne sont jamais dans le portefeuille au bon moment. FidCard les range toutes au même endroit : on enregistre une carte une fois, en scannant son code-barres avec l'appareil photo ou en tapant le numéro, puis on l'affiche en caisse d'une simple pression.",
+      "La fiche de la carte montre le code-barres ou le QR code en grand, sur fond blanc, avec les marges qu'exigent les lecteurs de caisse ; sur Android, l'écran passe au maximum de luminosité et reste allumé le temps du passage en caisse.",
+      "Rien ne quitte l'appareil : pas de compte, pas de publicité, pas de serveur. Une sauvegarde dans un simple fichier permet de garder ses cartes à l'abri ou de les copier entre le téléphone et le PC.",
+      "FidCard est disponible depuis la version 1.0.0 (novembre 2026), en installateur Windows et en APK Android."
+    ],
+    "en": [
+      "Loyalty cards pile up, and they are never in your wallet when you need them. FidCard keeps them all in one place: you add a card once, by scanning its barcode with the camera or typing the number, then show it at the checkout with a single tap.",
+      "The card page shows the barcode or QR code large, on a white background, with the margins checkout scanners need; on Android, the screen goes to full brightness and stays on while you pay.",
+      "Nothing leaves the device: no account, no ads, no server. A backup in a plain file keeps your cards safe and lets you copy them between your phone and your PC.",
+      "FidCard has been available since version 1.0.0 (November 2026), as a Windows installer and an Android APK."
+    ]
+  },
+  "features": [
+    {
+      "title": { "fr": "Code prêt pour la caisse", "en": "Checkout-ready code" },
+      "text": {
+        "fr": "Code 128, EAN-13, ITF, Code 39 ou QR code, dessiné en vectoriel pour rester net à toute taille, sur fond blanc et avec les zones blanches requises par les scanners.",
+        "en": "Code 128, EAN-13, ITF, Code 39 or QR code, drawn as vectors to stay sharp at any size, on a white background with the quiet zones scanners require."
+      }
+    },
+    {
+      "title": { "fr": "Scan à l'appareil photo", "en": "Camera scan" },
+      "text": {
+        "fr": "Sur Android, on vise la carte et le numéro se remplit tout seul, avec le bon type de code. La saisie au clavier reste toujours possible.",
+        "en": "On Android, point the camera at the card and the number fills in by itself, with the right code type. Typing it in is always possible."
+      }
+    },
+    {
+      "title": { "fr": "Luminosité maximale", "en": "Full brightness" },
+      "text": {
+        "fr": "Sur Android, l'écran passe au maximum et reste allumé tant que la carte est affichée, puis revient à la normale.",
+        "en": "On Android, the screen goes to full brightness and stays on while the card is shown, then goes back to normal."
+      }
+    },
+    {
+      "title": { "fr": "Grille de mini-cartes", "en": "Mini-card grid" },
+      "text": {
+        "fr": "Les cartes s'affichent en 2 ou 3 colonnes, avec leur photo ou leur couleur ; une recherche instantanée ignore accents et majuscules.",
+        "en": "Cards are shown in 2 or 3 columns, with their photo or colour; instant search ignores accents and capitals."
+      }
+    },
+    {
+      "title": { "fr": "Ordre libre", "en": "Your own order" },
+      "text": {
+        "fr": "Un mode « Organiser » permet de ranger les cartes par glisser-déposer, au doigt comme à la souris.",
+        "en": "An “Organise” mode lets you arrange the cards by drag and drop, with a finger or a mouse."
+      }
+    },
+    {
+      "title": { "fr": "Fiche complète", "en": "Full card details" },
+      "text": {
+        "fr": "Photo de la carte, couleur, titulaire, date de validité (signalée une fois dépassée), lien vers le compte en ligne et notes.",
+        "en": "Card photo, colour, holder, expiry date (flagged once past), link to the online account and notes."
+      }
+    },
+    {
+      "title": { "fr": "Verrouillage", "en": "App lock" },
+      "text": {
+        "fr": "Sur Android, l'appli peut demander l'empreinte ou le code du téléphone à l'ouverture, et se reverrouille après 30 secondes en arrière-plan.",
+        "en": "On Android, the app can ask for a fingerprint or the phone's PIN when it opens, and locks again after 30 seconds in the background."
+      }
+    },
+    {
+      "title": { "fr": "Sauvegarde", "en": "Backup" },
+      "text": {
+        "fr": "Export de toutes les cartes dans un fichier JSON, puis restauration en fusionnant ou en remplaçant ; chaque carte importée est revérifiée.",
+        "en": "Export every card to a JSON file, then restore it by merging or replacing; every imported card is checked again."
+      }
+    }
+  ],
+  "roadmap": [],
+  "tech": {
+    "stack": [
+      {
+        "name": "Tauri 2",
+        "role": {
+          "fr": "une seule base de code pour Windows et Android",
+          "en": "a single codebase for Windows and Android"
+        }
+      },
+      {
+        "name": "Rust",
+        "role": {
+          "fr": "backend : modèle de carte, validation, ordre, sauvegarde et réglages",
+          "en": "backend: card model, validation, ordering, backup and settings"
+        }
+      },
+      {
+        "name": "Svelte 5 + TypeScript",
+        "role": {
+          "fr": "interface mobile d'abord, qui s'adapte à la fenêtre Windows",
+          "en": "mobile-first interface that adapts to the Windows window"
+        }
+      },
+      {
+        "name": "JsBarcode et qrcode",
+        "role": {
+          "fr": "rendu des codes-barres et QR codes en SVG",
+          "en": "barcode and QR code rendering as SVG"
+        }
+      },
+      {
+        "name": "Plugins Tauri",
+        "role": {
+          "fr": "store (stockage local), barcode-scanner (caméra), biometric (empreinte), dialog et fs (sauvegarde)",
+          "en": "store (local storage), barcode-scanner (camera), biometric (fingerprint), dialog and fs (backup)"
+        }
+      },
+      {
+        "name": "Kotlin",
+        "role": {
+          "fr": "petit plugin Android pour la luminosité de l'écran",
+          "en": "small Android plugin for screen brightness"
+        }
+      }
+    ],
+    "sections": [
+      {
+        "title": { "fr": "Données validées côté Rust", "en": "Data validated in Rust" },
+        "text": {
+          "fr": [
+            "Toute la logique des données vit dans le backend Rust, indépendante de Tauri et couverte par des tests unitaires : normalisation et validation de chaque champ (clé de contrôle EAN-13, nombre pair de chiffres pour l'ITF, jeu de caractères du Code 39, dates, liens), ajout, modification, réorganisation et réglages.",
+            "L'interface ne fait qu'afficher et envoyer les saisies : les erreurs de validation reviennent champ par champ et s'affichent sous le bon champ du formulaire."
+          ],
+          "en": [
+            "All the data logic lives in the Rust backend, independent from Tauri and covered by unit tests: normalising and validating every field (EAN-13 check digit, even digit count for ITF, Code 39 character set, dates, links), adding, editing, reordering and settings.",
+            "The interface only displays and sends what the user types: validation errors come back field by field and show up under the right form field."
+          ]
+        }
+      },
+      {
+        "title": { "fr": "Sauvegarde versionnée", "en": "Versioned backup" },
+        "text": {
+          "fr": [
+            "Le fichier de sauvegarde porte un format et un numéro de version. À l'import, chaque carte est revalidée : un fichier abîmé ou modifié à la main est refusé sans rien changer aux cartes existantes. La fusion garde, pour une même carte, la version modifiée le plus récemment."
+          ],
+          "en": [
+            "The backup file carries a format name and a version number. On import, every card is validated again: a damaged or hand-edited file is rejected without changing the existing cards. Merging keeps the most recently edited version of each card."
+          ]
+        }
+      },
+      {
+        "title": { "fr": "Android natif quand il le faut", "en": "Native Android when needed" },
+        "text": {
+          "fr": [
+            "Le scan s'appuie sur le plugin officiel barcode-scanner (ML Kit) en mode fenêtré : l'interface devient transparente et affiche son propre cadre de visée et un bouton Annuler. Le verrouillage passe par le plugin officiel biometric, avec le code du téléphone en secours.",
+            "Aucun plugin ne réglant la luminosité, un petit plugin Kotlin local la pousse au maximum pour la seule fenêtre de l'appli, sans permission. L'APK de production est signé, et des règles R8 protègent les classes de ML Kit que l'optimisation supprimait."
+          ],
+          "en": [
+            "Scanning relies on the official barcode-scanner plugin (ML Kit) in windowed mode: the interface turns transparent and shows its own viewfinder and a Cancel button. The app lock uses the official biometric plugin, with the phone's PIN as a fallback.",
+            "As no plugin handles brightness, a small local Kotlin plugin raises it to the maximum for the app's window only, without any permission. The production APK is signed, and R8 rules protect the ML Kit classes the optimiser used to strip."
+          ]
+        }
+      }
+    ]
+  },
+  "history": [],
+  "media": []
+}

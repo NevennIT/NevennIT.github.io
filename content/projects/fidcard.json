@@ -1,0 +1,30 @@
+{
+  "id": "fidcard",
+  "order": 25,
+  "title": "FidCard",
+  "year": "2026",
+  "type": "desktop",
+  "status": "available",
+  "feature": false,
+  "description": {
+    "fr": "Toutes vos cartes de fidélité dans votre poche, sur Android et Windows : le code-barres s'affiche en grand pour la caisse. Tout reste sur l'appareil, sans compte ni cloud.",
+    "en": "All your loyalty cards in your pocket, on Android and Windows: the barcode shows up large at the checkout. Everything stays on the device, no account, no cloud."
+  },
+  "tags": [
+    "Rust",
+    "Tauri",
+    "Svelte",
+    "Android"
+  ],
+  "images": [
+    "/projects/fidcard-1.webp",
+    "/projects/fidcard-2.webp"
+  ],
+  "repo": "NevennIT/FidCard2",
+  "publicRepo": false,
+  "download": {
+    "mode": "free",
+    "releases": "NevennIT/fidcard-releases",
+    "asset": "_x64-setup\\.exe$"
+  }
+}
